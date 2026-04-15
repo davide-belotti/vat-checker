@@ -1,0 +1,209 @@
+import { runChecksum } from "./validate-vat.mjs";
+
+// Each country has three categories:
+//   correct:    valid format + valid checksum (should pass)
+//   formatOnly: valid format + wrong checksum (should fail checksum OR be format-only)
+//   invalid:    wrong format entirely (should fail format)
+
+const tests = {
+  AT: {
+    correct:    ["U13585627", "U10223006"],
+    formatOnly: ["U13585620", "U10223000"],
+    invalid:    ["12345", "UABCDEFGH", "U1234567"],
+  },
+  BE: {
+    correct:    ["0776091951", "0202239951"],
+    formatOnly: ["0776091900", "0202239900"],
+    invalid:    ["2123456789", "ABC", "07760919"],
+  },
+  BG: {
+    correct:    ["175074752", "831650349"],
+    formatOnly: ["175074750", "831650340"],
+    invalid:    ["12345", "ABCDEFGHI", "1234567890123"],
+  },
+  CY: {
+    correct:    ["10259033P", "00532445O"],
+    formatOnly: ["10259033A", "00532445A"],
+    invalid:    ["6234567A", "1234567", "ABCDEFGHI"],
+  },
+  CZ: {
+    correct:    ["25123891", "600000008", "6306150004"],
+    formatOnly: ["25123890", "699003450"],
+    invalid:    ["1234567", "ABCDEFGH", "12345678901"],
+  },
+  DE: {
+    correct:    ["136695976", "811191002"],
+    formatOnly: ["136695970", "811191000"],
+    invalid:    ["12345", "0ABCDEFGH", "1234567890"],
+  },
+  DK: {
+    correct:    ["13585628", "29403473"],
+    formatOnly: ["13585620", "29403470"],
+    invalid:    ["1234567", "ABCDEFGH", "012345678"],
+  },
+  EE: {
+    correct:    ["100931558", "100594102"],
+    formatOnly: ["100931550", "100594100"],
+    invalid:    ["200931558", "12345", "ABCDEFGHI"],
+  },
+  EL: {
+    correct:    ["090000045", "040127797"],
+    formatOnly: ["090000040", "040127790"],
+    invalid:    ["12345", "ABCDEFGHI", "1234567890"],
+  },
+  ES: {
+    correct:    ["B58378431", "X2482300W", "54387763P"],
+    formatOnly: ["B58378430", "X2482300A"],
+    invalid:    ["12345", "ABC"],
+  },
+  FI: {
+    correct:    ["09853608", "20774740"],
+    formatOnly: ["09853600", "20774741"],
+    invalid:    ["1234567", "ABCDEFGH", "123456789"],
+  },
+  FR: {
+    correct:    ["40303265045", "21012345678"],
+    formatOnly: ["41303265045", "01012345678"],
+    invalid:    ["12345", "OO123456789", "ABCDEFGHIJK"],
+  },
+  HR: {
+    correct:    ["33392005961"],
+    formatOnly: ["33392005960"],
+    invalid:    ["12345", "ABCDEFGHIJK", "123456789012"],
+  },
+  HU: {
+    correct:    ["10672101", "12892312"],
+    formatOnly: ["10672100", "12892310"],
+    invalid:    ["1234567", "ABCDEFGH", "123456789"],
+  },
+  IE: {
+    correct:    ["6433435F", "1234567T"],
+    formatOnly: ["6433435A", "1234567A"],
+    invalid:    ["12345", "ABCDEFGH"],
+  },
+  IT: {
+    correct:    ["00743110157", "07643520567"],
+    formatOnly: ["00743110150", "07643520560"],
+    invalid:    ["12345", "ABCDEFGHIJK", "123456789012"],
+  },
+  LT: {
+    correct:    ["119511515", "100001919017"],
+    formatOnly: ["119511510"],
+    invalid:    ["12345", "ABCDEFGHI", "119511525"],
+  },
+  LU: {
+    correct:    ["15027442", "10000356"],
+    formatOnly: ["15027400", "10000300"],
+    invalid:    ["1234567", "ABCDEFGH", "123456789"],
+  },
+  LV: {
+    correct:    ["40003521600", "40003009497"],
+    formatOnly: ["40003521601", "40003009490"],
+    invalid:    ["12345", "ABCDEFGHIJK", "123456789012"],
+  },
+  MT: {
+    correct:    ["11679112", "15121333"],
+    formatOnly: ["11679110", "15121330"],
+    invalid:    ["01234567", "1234567", "ABCDEFGH"],
+  },
+  NL: {
+    correct:    ["853746333B80"],
+    formatOnly: ["000000001B01"],
+    invalid:    ["12345", "123456789A01", "123456789B"],
+  },
+  PL: {
+    correct:    ["5260001246", "1234563218"],
+    formatOnly: ["5260001240", "1234563210"],
+    invalid:    ["12345", "ABCDEFGHIJ", "12345678901"],
+  },
+  PT: {
+    correct:    ["501442600", "136695973"],
+    formatOnly: ["501442601", "136695970", "012345678"],
+    invalid:    ["12345", "ABCDEFGHI"],
+  },
+  RO: {
+    correct:    ["18547290", "19"],
+    formatOnly: ["18547291"],
+    invalid:    ["0", "01234567890", "ABCDEFGHIJ"],
+  },
+  SE: {
+    correct:    ["556012579001"],
+    formatOnly: ["556012579101"],
+    invalid:    ["12345", "55601257900A", "556012579002"],
+  },
+  SI: {
+    correct:    ["15012557", "59082437"],
+    formatOnly: ["15012550", "59082430"],
+    invalid:    ["01234567", "1234567", "ABCDEFGH"],
+  },
+  SK: {
+    correct:    ["2020270780", "2021853504"],
+    formatOnly: ["2020270781", "2021853500"],
+    invalid:    ["1214567890", "12345", "ABCDEFGHIJ"],
+  },
+  GB: {
+    correct:    ["999000005", "GD001", "HA500"],
+    formatOnly: ["999000006", "GD999", "HA001"],
+    invalid:    ["12345", "ABCDEFGHI", "12345678"],
+  },
+  XI: {
+    correct:    ["999000005"],
+    formatOnly: ["999000006"],
+    invalid:    ["12345"],
+  },
+};
+
+let totalPass = 0;
+let totalFail = 0;
+const failures = [];
+
+for (const [cc, cases] of Object.entries(tests)) {
+  for (const num of cases.correct) {
+    const r = runChecksum(cc, num);
+    if (r.valid) {
+      totalPass++;
+    } else {
+      totalFail++;
+      failures.push({ cc, num, expected: "valid", got: r });
+    }
+  }
+
+  for (const num of cases.formatOnly) {
+    const r = runChecksum(cc, num);
+    if (r.formatValid && !r.valid && !r.formatOnly) {
+      totalPass++;
+    } else if (r.formatOnly) {
+      totalPass++;
+    } else {
+      totalFail++;
+      failures.push({ cc, num, expected: "formatValid+checksumFail", got: r });
+    }
+  }
+
+  for (const num of cases.invalid) {
+    const r = runChecksum(cc, num);
+    if (!r.formatValid) {
+      totalPass++;
+    } else {
+      totalFail++;
+      failures.push({ cc, num, expected: "formatInvalid", got: r });
+    }
+  }
+}
+
+console.log(`\n  VAT Validation Tests`);
+console.log(`  --------------------`);
+console.log(`  Passed: ${totalPass}`);
+console.log(`  Failed: ${totalFail}`);
+console.log(`  Total:  ${totalPass + totalFail}\n`);
+
+if (failures.length > 0) {
+  console.log(`  Failures:`);
+  for (const f of failures) {
+    console.log(`    ${f.cc} ${f.num} — expected: ${f.expected}, got: ${JSON.stringify(f.got)}`);
+  }
+  console.log();
+  process.exit(1);
+} else {
+  console.log(`  All tests passed.\n`);
+}

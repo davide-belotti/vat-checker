@@ -1,0 +1,500 @@
+{
+  "name": "VAT Checker — Google Sheets",
+  "nodes": [
+    {
+      "id": "trigger-001",
+      "name": "Submit Spreadsheet",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        200,
+        340
+      ],
+      "parameters": {
+        "formTitle": "VAT Checker",
+        "formDescription": "Paste the URL of your Google Sheet. It must have a sheet named \"VAT Input\" with Carrier and VAT columns, and a sheet named \"Suggestions\".",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Spreadsheet URL",
+              "fieldType": "text",
+              "requiredField": true,
+              "placeholder": "https://docs.google.com/spreadsheets/d/.../edit"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "webhookId": "vat-checker-form"
+    },
+    {
+      "id": "code-extract-id-001",
+      "name": "Extract Sheet ID",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        340
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const url = $input.first().json['Spreadsheet URL'] || $input.first().json.spreadsheet_url || '';\nconst match = url.match(/\\/spreadsheets\\/d\\/([a-zA-Z0-9-_]+)/);\nconst spreadsheetId = match ? match[1] : url.trim();\nreturn [{ json: { spreadsheetId } }];\n"
+      }
+    },
+    {
+      "id": "sheets-read-001",
+      "name": "Read VAT Input",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        660,
+        340
+      ],
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Extract Sheet ID').item.json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "VAT Input"
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "id": "code-validate-001",
+      "name": "Validate VAT Numbers",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        900,
+        340
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "\n// ─── Config ──────────────────────────────────────────────────\nconst VIES_URL = 'https://ec.europa.eu/taxation_customs/vies/services/checkVatService';\nconst HMRC_BASE = 'https://www.tax.service.gov.uk/check-vat-number';\nconst RATE_MS = 1200;\n\nconst sleep = (ms) => new Promise(r => setTimeout(r, ms));\nconst sanitize = (s) => s.replace(/[\\s\\-._,/\\\\]+/g, '');\nconst cross = (v) => (v >= 10 ? Math.floor(v / 10) + (v % 10) : v);\n\nfunction formatFail(error) { return { formatValid: false, valid: false, error }; }\nfunction checksumPass()     { return { formatValid: true,  valid: true }; }\nfunction checksumFail()     { return { formatValid: true,  valid: false }; }\nfunction formatOnlyPass()   { return { formatValid: true,  valid: true, formatOnly: true }; }\n\n// ─── Checksum validators ────────────────────────────────────\nconst V = {\n  AT(num) {\n    const n = num.startsWith('U') ? num.slice(1) : num;\n    if (!/^\\d{8}$/.test(n)) return formatFail('Must be U + 8 digits');\n    const d = n.split('').map(Number);\n    const s = d[0] + cross(d[1]*2) + d[2] + cross(d[3]*2) + d[4] + cross(d[5]*2) + d[6];\n    return (96 - s) % 10 === d[7] ? checksumPass() : checksumFail();\n  },\n\n  BE(num) {\n    if (!/^[01]\\d{9}$/.test(num)) return formatFail('Must be 10 digits starting with 0 or 1');\n    const first8 = parseInt(num.slice(0, 8));\n    const last2 = parseInt(num.slice(8));\n    return 97 - (first8 % 97) === last2 ? checksumPass() : checksumFail();\n  },\n\n  BG(num) {\n    if (!/^\\d{9,10}$/.test(num)) return formatFail('Must be 9 or 10 digits');\n    const d = num.split('').map(Number);\n    if (d.length === 9) {\n      let sum = [1,2,3,4,5,6,7,8].reduce((s,w,i) => s + d[i]*w, 0);\n      let r = sum % 11;\n      if (r === 10) {\n        sum = [3,4,5,6,7,8,9,10].reduce((s,w,i) => s + d[i]*w, 0);\n        r = sum % 11;\n        if (r === 10) r = 0;\n      }\n      return r === d[8] ? checksumPass() : checksumFail();\n    }\n    const personW = [2,4,8,5,10,9,7,3,6];\n    const month = d[2]*10 + d[3];\n    const day = d[4]*10 + d[5];\n    const validMonth = (month >= 1 && month <= 12) || (month >= 21 && month <= 32) || (month >= 41 && month <= 52);\n    const validDate = validMonth && day >= 1 && day <= 31;\n    const isPerson = validDate && personW.reduce((s,w,i) => s + d[i]*w, 0) % 11 % 10 === d[9];\n    const foreignW = [21,19,17,13,11,9,7,3,1];\n    const isForeigner = foreignW.reduce((s,w,i) => s + d[i]*w, 0) % 10 === d[9];\n    const miscW = [4,3,2,7,6,5,4,3,2];\n    const miscR = 11 - miscW.reduce((s,w,i) => s + d[i]*w, 0) % 11;\n    const isMisc = (miscR === 11 ? 0 : miscR) === d[9] && miscR !== 10;\n    return isPerson || isForeigner || isMisc ? checksumPass() : checksumFail();\n  },\n\n  CY(num) {\n    if (!/^[0-59]\\d{7}[A-Z]$/.test(num)) return formatFail('Must be 8 digits + 1 letter');\n    if (num.startsWith('12')) return checksumFail();\n    const lookup = [1,0,5,7,9,13,15,17,19,21];\n    const digits = num.slice(0, 8);\n    let sum = 0;\n    for (let i = 0; i < 8; i++) sum += i % 2 === 0 ? lookup[Number(digits[i])] : Number(digits[i]);\n    return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[sum % 26] === num[8] ? checksumPass() : checksumFail();\n  },\n\n  CZ(num) {\n    if (!/^\\d{8,10}$/.test(num)) return formatFail('Must be 8-10 digits');\n    const d = num.split('').map(Number);\n    if (num.length === 8) {\n      if (d[0] === 9) return checksumFail();\n      const a1 = [8,7,6,5,4,3,2].reduce((s,w,i) => s + d[i]*w, 0);\n      const a2 = a1 % 11 === 0 ? a1 + 11 : Math.ceil(a1/11)*11;\n      return (a2 - a1) % 10 === d[7] ? checksumPass() : checksumFail();\n    }\n    if (num.length === 9 && d[0] === 6) {\n      const inner = num.slice(1,8).split('').map(Number);\n      const a1 = [8,7,6,5,4,3,2].reduce((s,w,i) => s + inner[i]*w, 0);\n      const a2 = a1 % 11 === 0 ? a1 + 11 : Math.ceil(a1/11)*11;\n      const expected = [0,8,7,6,5,4,3,2,1,0,9,8][a2 - a1];\n      return expected === d[8] ? checksumPass() : checksumFail();\n    }\n    if (num.length === 10) {\n      const r1 = parseInt(num) % 11 === 0;\n      const pairSum = d[0]*10+d[1] + d[2]*10+d[3] + d[4]*10+d[5] + d[6]*10+d[7] + d[8]*10+d[9];\n      return r1 && pairSum % 11 === 0 ? checksumPass() : checksumFail();\n    }\n    return formatOnlyPass();\n  },\n\n  DE(num) {\n    if (!/^\\d{9}$/.test(num)) return formatFail('Must be 9 digits');\n    const d = num.split('').map(Number);\n    if (d[0] === 0) return checksumFail();\n    let product = 10;\n    for (let i = 0; i < 8; i++) {\n      let sum = (d[i] + product) % 10;\n      if (sum === 0) sum = 10;\n      product = (sum * 2) % 11;\n    }\n    return (11 - product) % 10 === d[8] ? checksumPass() : checksumFail();\n  },\n\n  DK(num) {\n    if (!/^\\d{8}$/.test(num)) return formatFail('Must be 8 digits');\n    const d = num.split('').map(Number);\n    if (d[0] === 0) return checksumFail();\n    return [2,7,6,5,4,3,2,1].reduce((s,w,i) => s + d[i]*w, 0) % 11 === 0 ? checksumPass() : checksumFail();\n  },\n\n  EE(num) {\n    if (!/^10\\d{7}$/.test(num)) return formatFail('Must be 9 digits starting with 10');\n    const d = num.split('').map(Number);\n    const sum = [3,7,1,3,7,1,3,7].reduce((s,w,i) => s + d[i]*w, 0);\n    let check = 10 - (sum % 10);\n    if (check === 10) check = 0;\n    return check === d[8] ? checksumPass() : checksumFail();\n  },\n\n  EL(num) {\n    if (!/^\\d{9}$/.test(num)) return formatFail('Must be 9 digits');\n    const d = num.split('').map(Number);\n    return ([256,128,64,32,16,8,4,2].reduce((s,w,i) => s + d[i]*w, 0) % 11) % 10 === d[8] ? checksumPass() : checksumFail();\n  },\n\n  ES(num) {\n    if (!/^[A-Z0-9]\\d{7}[A-Z0-9]$/.test(num)) return formatFail('Must be 1 char + 7 digits + 1 check char');\n    const first = num[0], last = num[8], mid = num.slice(1, 8);\n    const dniLetters = 'TRWAGMYFPDXBNJZSQVHLCKE';\n    if (/^\\d$/.test(first)) {\n      return last === dniLetters[parseInt(first + mid) % 23] ? checksumPass() : checksumFail();\n    }\n    if ('XYZ'.includes(first)) {\n      const prefix = { X:'0', Y:'1', Z:'2' };\n      return last === dniLetters[parseInt(prefix[first] + mid) % 23] ? checksumPass() : checksumFail();\n    }\n    if (/^[A-HJ-NP-SUVW]$/.test(first)) {\n      const d = mid.split('').map(Number);\n      let sumOdd = 0, sumEven = 0;\n      for (let i = 0; i < 7; i++) {\n        if (i % 2 === 0) sumOdd += cross(d[i]*2);\n        else sumEven += d[i];\n      }\n      let check = 10 - ((sumOdd + sumEven) % 10);\n      if (check === 10) check = 0;\n      return last === String(check) || last === 'JABCDEFGHI'[check] ? checksumPass() : checksumFail();\n    }\n    return formatOnlyPass();\n  },\n\n  FI(num) {\n    if (!/^\\d{8}$/.test(num)) return formatFail('Must be 8 digits');\n    const d = num.split('').map(Number);\n    const sum = [7,9,10,5,8,4,2].reduce((s,w,i) => s + d[i]*w, 0);\n    const r = sum % 11;\n    if (r === 1) return checksumFail();\n    return (r === 0 ? 0 : 11 - r) === d[7] ? checksumPass() : checksumFail();\n  },\n\n  FR(num) {\n    if (!/^[0-9A-HJ-NP-Z]{2}\\d{9}$/.test(num)) return formatFail('Must be 2 check chars + 9 SIREN digits');\n    const key = num.slice(0, 2), siren = num.slice(2);\n    if (/^\\d{2}$/.test(key)) {\n      return parseInt(key) === (parseInt(siren) * 100 + 12) % 97 ? checksumPass() : checksumFail();\n    }\n    return formatOnlyPass();\n  },\n\n  HR(num) {\n    if (!/^\\d{11}$/.test(num)) return formatFail('Must be 11 digits');\n    const d = num.split('').map(Number);\n    let product = 10;\n    for (let i = 0; i < 10; i++) {\n      let sum = (d[i] + product) % 10;\n      if (sum === 0) sum = 10;\n      product = (sum * 2) % 11;\n    }\n    return (product + d[10]) % 10 === 1 ? checksumPass() : checksumFail();\n  },\n\n  HU(num) {\n    if (!/^\\d{8}$/.test(num)) return formatFail('Must be 8 digits');\n    const d = num.split('').map(Number);\n    const r = [9,7,3,1,9,7,3].reduce((s,w,i) => s + d[i]*w, 0);\n    const check = r % 10 === 0 ? 0 : 10 - (r % 10);\n    return check === d[7] ? checksumPass() : checksumFail();\n  },\n\n  IE(num) {\n    const checkChars = 'WABCDEFGHIJKLMNOPQRSTUV';\n    const secondLetterMap = 'WABCDEFGHI';\n    if (/^\\d([A-Z+*])\\d{5}[A-W]$/.test(num)) {\n      const c1 = Number(num[0]);\n      const mid = num.slice(2,7).split('').map(Number);\n      const r = (7*mid[0] + 6*mid[1] + 5*mid[2] + 4*mid[3] + 3*mid[4] + 2*c1) % 23;\n      return num[7] === checkChars[r] ? checksumPass() : checksumFail();\n    }\n    if (/^\\d{7}[A-W]([A-IW])?$/.test(num)) {\n      const d = num.slice(0,7).split('').map(Number);\n      const c9val = num[8] ? secondLetterMap.indexOf(num[8]) : 0;\n      const r = (9*c9val + 8*d[0] + 7*d[1] + 6*d[2] + 5*d[3] + 4*d[4] + 3*d[5] + 2*d[6]) % 23;\n      return num[7] === checkChars[r] ? checksumPass() : checksumFail();\n    }\n    return formatFail('Must be 7 digits + 1-2 letters');\n  },\n\n  IT(num) {\n    if (!/^\\d{11}$/.test(num)) return formatFail('Must be 11 digits');\n    const d = num.split('').map(Number);\n    if (num.slice(0,7) === '0000000') return checksumFail();\n    const province = parseInt(num.slice(7,10));\n    if (province === 0 || (province > 201 && province !== 888 && province !== 999)) return checksumFail();\n    let sum = 0;\n    for (let i = 0; i < 10; i++) sum += i % 2 === 0 ? d[i] : cross(d[i]*2);\n    return d[10] === (10 - (sum % 10)) % 10 ? checksumPass() : checksumFail();\n  },\n\n  LT(num) {\n    if (!/^\\d{9}$/.test(num) && !/^\\d{12}$/.test(num)) return formatFail('Must be 9 or 12 digits');\n    if (num[num.length - 2] !== '1') return formatFail('Penultimate digit must be 1');\n    const d = num.split('').map(Number);\n    const n = d.length;\n    const w1 = n === 9 ? [1,2,3,4,5,6,7,8] : [1,2,3,4,5,6,7,8,9,1,2];\n    const w2 = n === 9 ? [3,4,5,6,7,8,9,1] : [3,4,5,6,7,8,9,1,2,3,4];\n    const r1 = w1.reduce((s,w,i) => s + d[i]*w, 0) % 11;\n    if (r1 % 10 !== 0) return r1 === d[n-1] ? checksumPass() : checksumFail();\n    const r2 = w2.reduce((s,w,i) => s + d[i]*w, 0) % 11;\n    return (r2 === 10 ? 0 : r2) === d[n-1] ? checksumPass() : checksumFail();\n  },\n\n  LU(num) {\n    if (!/^\\d{8}$/.test(num)) return formatFail('Must be 8 digits');\n    return parseInt(num.slice(0,6)) % 89 === parseInt(num.slice(6)) ? checksumPass() : checksumFail();\n  },\n\n  LV(num) {\n    if (!/^\\d{11}$/.test(num)) return formatFail('Must be 11 digits');\n    const d = num.split('').map(Number);\n    if (d[0] > 3) {\n      const weights = [9,1,4,8,3,10,2,5,7,6];\n      const r = 3 - weights.reduce((s,w,i) => s + d[i]*w, 0) % 11;\n      if (r === -1) return checksumFail();\n      return d[10] === (r < -1 ? r + 11 : r) ? checksumPass() : checksumFail();\n    }\n    if (num.startsWith('32')) return formatOnlyPass();\n    const day = parseInt(num.slice(0,2)), month = parseInt(num.slice(2,4));\n    if (day > 31 || month > 12) return checksumFail();\n    return formatOnlyPass();\n  },\n\n  MT(num) {\n    if (!/^[1-9]\\d{7}$/.test(num)) return formatFail('Must be 8 digits, first non-zero');\n    const d = num.split('').map(Number);\n    const sum = [3,4,6,7,8,9].reduce((s,w,i) => s + d[i]*w, 0);\n    return 37 - (sum % 37) === d[6]*10 + d[7] ? checksumPass() : checksumFail();\n  },\n\n  NL(num) {\n    if (!/^\\d{9}B\\d{2}$/.test(num)) return formatFail('Must be 9 digits + B + 2 digits');\n    const rearranged = num + 'NL';\n    const numeric = rearranged.replace(/[A-Z]/g, c => (c.charCodeAt(0) - 55).toString());\n    return BigInt(numeric) % 97n === 1n ? checksumPass() : checksumFail();\n  },\n\n  PL(num) {\n    if (!/^\\d{10}$/.test(num)) return formatFail('Must be 10 digits');\n    const d = num.split('').map(Number);\n    const sum = [6,5,7,2,3,4,5,6,7].reduce((s,w,i) => s + d[i]*w, 0);\n    const r = sum % 11;\n    return r !== 10 && r === d[9] ? checksumPass() : checksumFail();\n  },\n\n  PT(num) {\n    if (!/^\\d{9}$/.test(num)) return formatFail('Must be 9 digits');\n    const d = num.split('').map(Number);\n    if (d[0] === 0) return checksumFail();\n    const sum = [9,8,7,6,5,4,3,2].reduce((s,w,i) => s + d[i]*w, 0);\n    return (11 - sum % 11) % 11 % 10 === d[8] ? checksumPass() : checksumFail();\n  },\n\n  RO(num) {\n    if (!/^[1-9]\\d{1,9}$/.test(num)) return formatFail('Must be 2-10 digits, first non-zero');\n    const idx = 10 - num.length;\n    const weights = [7,5,3,2,1,7,5,3,2].slice(idx);\n    const d = num.split('').map(Number);\n    const sum = weights.reduce((s,w,i) => s + d[i]*w, 0);\n    let check = (sum * 10) % 11;\n    if (check === 10) check = 0;\n    return check === d[d.length - 1] ? checksumPass() : checksumFail();\n  },\n\n  SE(num) {\n    if (!/^\\d{12}$/.test(num)) return formatFail('Must be 12 digits');\n    if (num.slice(10) !== '01') return formatFail('Last 2 digits must be 01');\n    const d = num.slice(0,10).split('').map(Number);\n    let sum = 0;\n    for (let i = 0; i < 10; i++) {\n      const v = d[i] * (i % 2 === 0 ? 2 : 1);\n      sum += v > 9 ? v - 9 : v;\n    }\n    return sum % 10 === 0 ? checksumPass() : checksumFail();\n  },\n\n  SI(num) {\n    if (!/^[1-9]\\d{7}$/.test(num)) return formatFail('Must be 8 digits, first non-zero');\n    const d = num.split('').map(Number);\n    const r = 11 - [8,7,6,5,4,3,2].reduce((s,w,i) => s + d[i]*w, 0) % 11;\n    if (r === 11) return checksumFail();\n    return (r === 10 && d[7] === 0) || d[7] === r ? checksumPass() : checksumFail();\n  },\n\n  SK(num) {\n    if (!/^[1-9]\\d[2346-9]\\d{7}$/.test(num)) return formatFail('Must be 10 digits matching structure');\n    return BigInt(num) % 11n === 0n ? checksumPass() : checksumFail();\n  },\n\n  XI(num) { return V.GB(num); },\n\n  GB(num) {\n    if (/^GD\\d{3}$/.test(num)) return parseInt(num.slice(2)) < 500 ? checksumPass() : checksumFail();\n    if (/^HA\\d{3}$/.test(num)) return parseInt(num.slice(2)) >= 500 ? checksumPass() : checksumFail();\n    if (/^\\d{12}$/.test(num)) return V.GB(num.slice(0, 9));\n    if (!/^\\d{9}$/.test(num)) return formatFail('Must be 9 or 12 digits, or GD/HA + 3 digits');\n    const d = num.split('').map(Number);\n    const no = parseInt(num.slice(0, 7));\n    if (no === 0 || (no >= 100000 && no <= 999999) || (no >= 9490001 && no <= 9700000) || no >= 9990001) return checksumFail();\n    const weighted = d[0]*8 + d[1]*7 + d[2]*6 + d[3]*5 + d[4]*4 + d[5]*3 + d[6]*2;\n    const checkDigits = d[7]*10 + d[8];\n    const check1 = (97 - (weighted % 97)) % 97;\n    const check2 = (97 - ((weighted + 55) % 97)) % 97;\n    return checkDigits === check1 || (no > 1000000 && checkDigits === check2) ? checksumPass() : checksumFail();\n  },\n};\n\nfunction runChecksum(cc, num) {\n  const validate = V[cc];\n  if (!validate) return { formatValid: false, valid: false, error: 'Unknown country code: ' + cc };\n  return validate(num);\n}\n\n// ─── VIES SOAP query ─────────────────────────────────────────\n\nasync function queryVIES(countryCode, vatNumber) {\n  const soapBody = '<?xml version=\"1.0\" encoding=\"UTF-8\"?>' +\n    '<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:ec.europa.eu:taxud:vies:services:checkVat:types\">' +\n    '<soapenv:Header/><soapenv:Body><urn:checkVat>' +\n    '<urn:countryCode>' + countryCode + '</urn:countryCode>' +\n    '<urn:vatNumber>' + vatNumber + '</urn:vatNumber>' +\n    '</urn:checkVat></soapenv:Body></soapenv:Envelope>';\n  try {\n    const res = await fetch(VIES_URL, {\n      method: 'POST',\n      headers: { 'Content-Type': 'text/xml; charset=utf-8', SOAPAction: '' },\n      body: soapBody,\n    });\n    const xml = await res.text();\n    const faultMatch = xml.match(/<faultstring>([\\s\\S]*?)<\\/faultstring>/);\n    if (faultMatch) return { error: faultMatch[1].trim() };\n    const tag = (name) => {\n      const m = xml.match(new RegExp('<ns2:' + name + '>([\\\\s\\\\S]*?)</ns2:' + name + '>'));\n      return m ? m[1].trim() : null;\n    };\n    const valid = tag('valid') === 'true';\n    const name = tag('name') || 'N/A';\n    const address = (tag('address') || 'N/A').replace(/\\n/g, ', ');\n    return {\n      registered: valid,\n      vatNumber: countryCode + vatNumber,\n      name: name === '---' ? 'N/A' : name,\n      address: address === '---' ? 'N/A' : address,\n      country: countryCode,\n    };\n  } catch (err) {\n    return { error: err.message };\n  }\n}\n\n// ─── HMRC query ──────────────────────────────────────────────\n\nfunction collectCookies(headers, existing) {\n  const raw = [];\n  if (headers.getSetCookie) {\n    raw.push(...headers.getSetCookie());\n  } else {\n    const sc = headers.get('set-cookie');\n    if (sc) raw.push(...sc.split(/,(?=[^ ]+=)/));\n  }\n  const prev = existing ? existing.split('; ').filter(Boolean) : [];\n  const map = new Map(prev.map(c => [c.split('=')[0], c]));\n  for (const h of raw) {\n    const pair = h.split(';')[0].trim();\n    map.set(pair.split('=')[0], pair);\n  }\n  return [...map.values()].join('; ');\n}\n\nasync function queryHMRC(vatNumber) {\n  try {\n    const formUrl = HMRC_BASE + '/enter-vat-details';\n    const getRes = await fetch(formUrl, { redirect: 'follow' });\n    if (!getRes.ok) throw new Error('GET form failed: ' + getRes.status);\n    const html = await getRes.text();\n    let cookies = collectCookies(getRes.headers, '');\n    const csrfMatch = html.match(/name=\"csrfToken\"\\s+value=\"([^\"]+)\"/);\n    if (!csrfMatch) throw new Error('CSRF token not found');\n    await sleep(RATE_MS);\n    const body = 'csrfToken=' + encodeURIComponent(csrfMatch[1]) + '&target=' + encodeURIComponent(vatNumber);\n    const postRes = await fetch(formUrl, {\n      method: 'POST',\n      headers: {\n        'Content-Type': 'application/x-www-form-urlencoded',\n        Cookie: cookies,\n        Referer: formUrl,\n      },\n      body: body,\n      redirect: 'manual',\n    });\n    cookies = collectCookies(postRes.headers, cookies);\n    let resultHtml;\n    if (postRes.status >= 300 && postRes.status < 400) {\n      const location = postRes.headers.get('location');\n      const resultUrl = location.startsWith('http') ? location : HMRC_BASE + location.replace('/check-vat-number', '');\n      await sleep(300);\n      const resultRes = await fetch(resultUrl, { headers: { Cookie: cookies }, redirect: 'follow' });\n      resultHtml = await resultRes.text();\n    } else {\n      resultHtml = await postRes.text();\n    }\n    if (!resultHtml.includes('govuk-panel--confirmation')) {\n      return { registered: false, vatNumber: 'GB' + vatNumber, country: 'GB', reason: 'Not registered' };\n    }\n    let name = 'N/A';\n    const nameMatch = resultHtml.match(/Registered business name<\\/h3>\\s*<p[^>]*>([\\s\\S]*?)<\\/p>/i);\n    if (nameMatch) name = nameMatch[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim();\n    let address = 'N/A';\n    const addrMatch = resultHtml.match(/Registered business address<\\/h3>\\s*<p[^>]*>([\\s\\S]*?)<\\/p>/i);\n    if (addrMatch) address = addrMatch[1].replace(/<br\\s*\\/?>/gi, ',').replace(/<[^>]+>/g, '').replace(/\\s+/g, ' ').replace(/\\s*,\\s*/g, ', ').replace(/,\\s*$/, '').trim();\n    return { registered: true, vatNumber: 'GB' + vatNumber, name, address, country: 'GB' };\n  } catch (err) {\n    return { error: err.message };\n  }\n}\n\n// ─── Main processing loop ────────────────────────────────────\n\nconst items = $input.all();\nconst results = [];\n\nfor (let i = 0; i < items.length; i++) {\n  const carrier = items[i].json.Carrier || '';\n  const rawVat = items[i].json.VAT || '';\n\n  if (!rawVat) {\n    results.push({ json: { Carrier: carrier, VAT: '', Format: '', Checksum: '', Registered: '', Name: '', Address: '', Country: '', Error: 'No VAT number' } });\n    continue;\n  }\n\n  const clean = sanitize(rawVat);\n  const cc = clean.slice(0, 2).toUpperCase();\n  const num = clean.slice(2);\n  const ck = runChecksum(cc, num);\n\n  const row = {\n    Carrier: carrier,\n    VAT: cc + num,\n    Format: ck.formatValid ? 'Valid' : 'Invalid',\n    Checksum: !ck.formatValid ? '' : ck.formatOnly ? 'N/A' : ck.valid ? 'Pass' : 'Fail',\n    Registered: '',\n    Name: '',\n    Address: '',\n    Country: cc,\n    Error: ck.error || '',\n  };\n\n  const isUK = cc === 'GB' || cc === 'XI';\n  const shouldSkip = !ck.formatValid || (!ck.valid && !ck.formatOnly);\n\n  if (shouldSkip) {\n    results.push({ json: row });\n    continue;\n  }\n\n  await sleep(RATE_MS);\n  const api = isUK ? await queryHMRC(num) : await queryVIES(cc, num);\n\n  if (api && !api.error) {\n    row.Registered = api.registered ? 'Yes' : 'No';\n    row.Name = api.name || '';\n    row.Address = api.address || '';\n    row.Country = api.country || cc;\n  } else if (api && api.error) {\n    row.Error = api.error;\n  }\n\n  results.push({ json: row });\n}\n\nreturn results;\n"
+      }
+    },
+    {
+      "id": "sheets-update-001",
+      "name": "Update Results",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1140,
+        340
+      ],
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Extract Sheet ID').item.json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "VAT Input"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "VAT"
+          ]
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "id": "code-suggest-001",
+      "name": "Generate Suggestions",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1380,
+        340
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "\nconst cross = (v) => (v >= 10 ? Math.floor(v / 10) + (v % 10) : v);\nconst sanitize = (s) => s.replace(/[\\s\\-._,/\\\\]+/g, '');\nconst sleep = (ms) => new Promise(r => setTimeout(r, ms));\n\n// Re-include checksum functions (needed for candidate generation)\nfunction formatFail(error) { return { formatValid: false, valid: false, error }; }\nfunction checksumPass()     { return { formatValid: true,  valid: true }; }\nfunction checksumFail()     { return { formatValid: true,  valid: false }; }\nfunction formatOnlyPass()   { return { formatValid: true,  valid: true, formatOnly: true }; }\n\n// Checksum validators (same as validation node)\nconst V = {\n  AT(num) {\n    const n = num.startsWith('U') ? num.slice(1) : num;\n    if (!/^\\d{8}$/.test(n)) return formatFail('err');\n    const d = n.split('').map(Number);\n    const s = d[0]+cross(d[1]*2)+d[2]+cross(d[3]*2)+d[4]+cross(d[5]*2)+d[6];\n    return (96-s)%10===d[7]?checksumPass():checksumFail();\n  },\n  BE(num) { if(!/^[01]\\d{9}$/.test(num))return formatFail('err'); return 97-(parseInt(num.slice(0,8))%97)===parseInt(num.slice(8))?checksumPass():checksumFail(); },\n  BG(num) {\n    if(!/^\\d{9,10}$/.test(num))return formatFail('err');\n    const d=num.split('').map(Number);\n    if(d.length===9){let s=[1,2,3,4,5,6,7,8].reduce((a,w,i)=>a+d[i]*w,0);let r=s%11;if(r===10){s=[3,4,5,6,7,8,9,10].reduce((a,w,i)=>a+d[i]*w,0);r=s%11;if(r===10)r=0;}return r===d[8]?checksumPass():checksumFail();}\n    return formatOnlyPass();\n  },\n  CY(num) { if(!/^[0-59]\\d{7}[A-Z]$/.test(num))return formatFail('err'); if(num.startsWith('12'))return checksumFail(); const lookup=[1,0,5,7,9,13,15,17,19,21]; let s=0; for(let i=0;i<8;i++)s+=i%2===0?lookup[Number(num[i])]:Number(num[i]); return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[s%26]===num[8]?checksumPass():checksumFail(); },\n  CZ(num) {\n    if(!/^\\d{8,10}$/.test(num))return formatFail('err');\n    const d=num.split('').map(Number);\n    if(num.length===8){if(d[0]===9)return checksumFail();const a1=[8,7,6,5,4,3,2].reduce((s,w,i)=>s+d[i]*w,0);const a2=a1%11===0?a1+11:Math.ceil(a1/11)*11;return(a2-a1)%10===d[7]?checksumPass():checksumFail();}\n    if(num.length===10){return parseInt(num)%11===0?checksumPass():checksumFail();}\n    return formatOnlyPass();\n  },\n  DE(num) { if(!/^\\d{9}$/.test(num))return formatFail('err'); const d=num.split('').map(Number); if(d[0]===0)return checksumFail(); let p=10; for(let i=0;i<8;i++){let s=(d[i]+p)%10;if(s===0)s=10;p=(s*2)%11;} return(11-p)%10===d[8]?checksumPass():checksumFail(); },\n  DK(num) { if(!/^\\d{8}$/.test(num))return formatFail('err'); const d=num.split('').map(Number); if(d[0]===0)return checksumFail(); return[2,7,6,5,4,3,2,1].reduce((s,w,i)=>s+d[i]*w,0)%11===0?checksumPass():checksumFail(); },\n  EE(num) { if(!/^10\\d{7}$/.test(num))return formatFail('err'); const d=num.split('').map(Number); const s=[3,7,1,3,7,1,3,7].reduce((a,w,i)=>a+d[i]*w,0); let c=10-(s%10);if(c===10)c=0; return c===d[8]?checksumPass():checksumFail(); },\n  EL(num) { if(!/^\\d{9}$/.test(num))return formatFail('err'); const d=num.split('').map(Number); return([256,128,64,32,16,8,4,2].reduce((s,w,i)=>s+d[i]*w,0)%11)%10===d[8]?checksumPass():checksumFail(); },\n  ES(num) {\n    if(!/^[A-Z0-9]\\d{7}[A-Z0-9]$/.test(num))return formatFail('err');\n    const first=num[0],last=num[8],mid=num.slice(1,8),dniL='TRWAGMYFPDXBNJZSQVHLCKE';\n    if(/^\\d$/.test(first))return last===dniL[parseInt(first+mid)%23]?checksumPass():checksumFail();\n    if('XYZ'.includes(first)){const p={X:'0',Y:'1',Z:'2'};return last===dniL[parseInt(p[first]+mid)%23]?checksumPass():checksumFail();}\n    if(/^[A-HJ-NP-SUVW]$/.test(first)){const d=mid.split('').map(Number);let so=0,se=0;for(let i=0;i<7;i++){if(i%2===0)so+=cross(d[i]*2);else se+=d[i];}let c=10-((so+se)%10);if(c===10)c=0;return last===String(c)||last==='JABCDEFGHI'[c]?checksumPass():checksumFail();}\n    return formatOnlyPass();\n  },\n  FI(num) { if(!/^\\d{8}$/.test(num))return formatFail('err'); const d=num.split('').map(Number); const s=[7,9,10,5,8,4,2].reduce((a,w,i)=>a+d[i]*w,0); const r=s%11; if(r===1)return checksumFail(); return(r===0?0:11-r)===d[7]?checksumPass():checksumFail(); },\n  FR(num) { if(!/^[0-9A-HJ-NP-Z]{2}\\d{9}$/.test(num))return formatFail('err'); const k=num.slice(0,2),s=num.slice(2); if(/^\\d{2}$/.test(k))return parseInt(k)===(parseInt(s)*100+12)%97?checksumPass():checksumFail(); return formatOnlyPass(); },\n  HR(num) { if(!/^\\d{11}$/.test(num))return formatFail('err'); const d=num.split('').map(Number); let p=10; for(let i=0;i<10;i++){let s=(d[i]+p)%10;if(s===0)s=10;p=(s*2)%11;} return(p+d[10])%10===1?checksumPass():checksumFail(); },\n  HU(num) { if(!/^\\d{8}$/.test(num))return formatFail('err'); const d=num.split('').map(Number); const r=[9,7,3,1,9,7,3].reduce((s,w,i)=>s+d[i]*w,0); const c=r%10===0?0:10-(r%10); return c===d[7]?checksumPass():checksumFail(); },\n  IE(num) {\n    const ck='WABCDEFGHIJKLMNOPQRSTUV',sl='WABCDEFGHI';\n    if(/^\\d{7}[A-W]([A-IW])?$/.test(num)){const d=num.slice(0,7).split('').map(Number);const c9=num[8]?sl.indexOf(num[8]):0;const r=(9*c9+8*d[0]+7*d[1]+6*d[2]+5*d[3]+4*d[4]+3*d[5]+2*d[6])%23;return num[7]===ck[r]?checksumPass():checksumFail();}\n    return formatFail('err');\n  },\n  IT(num) { if(!/^\\d{11}$/.test(num))return formatFail('err'); const d=num.split('').map(Number); if(num.slice(0,7)==='0000000')return checksumFail(); const p=parseInt(num.slice(7,10)); if(p===0||(p>201&&p!==888&&p!==999))return checksumFail(); let s=0; for(let i=0;i<10;i++)s+=i%2===0?d[i]:cross(d[i]*2); return d[10]===(10-(s%10))%10?checksumPass():checksumFail(); },\n  LT(num) { if(!/^\\d{9}$/.test(num)&&!/^\\d{12}$/.test(num))return formatFail('err'); if(num[num.length-2]!=='1')return formatFail('err'); const d=num.split('').map(Number);const n=d.length; const w1=n===9?[1,2,3,4,5,6,7,8]:[1,2,3,4,5,6,7,8,9,1,2]; const w2=n===9?[3,4,5,6,7,8,9,1]:[3,4,5,6,7,8,9,1,2,3,4]; const r1=w1.reduce((s,w,i)=>s+d[i]*w,0)%11; if(r1%10!==0)return r1===d[n-1]?checksumPass():checksumFail(); const r2=w2.reduce((s,w,i)=>s+d[i]*w,0)%11; return(r2===10?0:r2)===d[n-1]?checksumPass():checksumFail(); },\n  LU(num) { if(!/^\\d{8}$/.test(num))return formatFail('err'); return parseInt(num.slice(0,6))%89===parseInt(num.slice(6))?checksumPass():checksumFail(); },\n  LV(num) { if(!/^\\d{11}$/.test(num))return formatFail('err'); const d=num.split('').map(Number); if(d[0]>3){const w=[9,1,4,8,3,10,2,5,7,6];const r=3-w.reduce((s,w,i)=>s+d[i]*w,0)%11;if(r===-1)return checksumFail();return d[10]===(r<-1?r+11:r)?checksumPass():checksumFail();} return formatOnlyPass(); },\n  MT(num) { if(!/^[1-9]\\d{7}$/.test(num))return formatFail('err'); const d=num.split('').map(Number); return 37-([3,4,6,7,8,9].reduce((s,w,i)=>s+d[i]*w,0)%37)===d[6]*10+d[7]?checksumPass():checksumFail(); },\n  NL(num) { if(!/^\\d{9}B\\d{2}$/.test(num))return formatFail('err'); const n=(num+'NL').replace(/[A-Z]/g,c=>(c.charCodeAt(0)-55).toString()); return BigInt(n)%97n===1n?checksumPass():checksumFail(); },\n  PL(num) { if(!/^\\d{10}$/.test(num))return formatFail('err'); const d=num.split('').map(Number); const s=[6,5,7,2,3,4,5,6,7].reduce((a,w,i)=>a+d[i]*w,0); const r=s%11; return r!==10&&r===d[9]?checksumPass():checksumFail(); },\n  PT(num) { if(!/^\\d{9}$/.test(num))return formatFail('err'); const d=num.split('').map(Number); if(d[0]===0)return checksumFail(); return(11-[9,8,7,6,5,4,3,2].reduce((s,w,i)=>s+d[i]*w,0)%11)%11%10===d[8]?checksumPass():checksumFail(); },\n  RO(num) { if(!/^[1-9]\\d{1,9}$/.test(num))return formatFail('err'); const idx=10-num.length; const w=[7,5,3,2,1,7,5,3,2].slice(idx); const d=num.split('').map(Number); let c=(w.reduce((s,w,i)=>s+d[i]*w,0)*10)%11; if(c===10)c=0; return c===d[d.length-1]?checksumPass():checksumFail(); },\n  SE(num) { if(!/^\\d{12}$/.test(num))return formatFail('err'); if(num.slice(10)!=='01')return formatFail('err'); const d=num.slice(0,10).split('').map(Number); let s=0; for(let i=0;i<10;i++){const v=d[i]*(i%2===0?2:1);s+=v>9?v-9:v;} return s%10===0?checksumPass():checksumFail(); },\n  SI(num) { if(!/^[1-9]\\d{7}$/.test(num))return formatFail('err'); const d=num.split('').map(Number); const r=11-[8,7,6,5,4,3,2].reduce((s,w,i)=>s+d[i]*w,0)%11; if(r===11)return checksumFail(); return(r===10&&d[7]===0)||d[7]===r?checksumPass():checksumFail(); },\n  SK(num) { if(!/^[1-9]\\d[2346-9]\\d{7}$/.test(num))return formatFail('err'); return BigInt(num)%11n===0n?checksumPass():checksumFail(); },\n  XI(num) { return V.GB(num); },\n  GB(num) {\n    if(/^GD\\d{3}$/.test(num))return parseInt(num.slice(2))<500?checksumPass():checksumFail();\n    if(/^HA\\d{3}$/.test(num))return parseInt(num.slice(2))>=500?checksumPass():checksumFail();\n    if(/^\\d{12}$/.test(num))return V.GB(num.slice(0,9));\n    if(!/^\\d{9}$/.test(num))return formatFail('err');\n    const d=num.split('').map(Number),no=parseInt(num.slice(0,7));\n    if(no===0||(no>=100000&&no<=999999)||(no>=9490001&&no<=9700000)||no>=9990001)return checksumFail();\n    const w=d[0]*8+d[1]*7+d[2]*6+d[3]*5+d[4]*4+d[5]*3+d[6]*2,cd=d[7]*10+d[8];\n    return cd===(97-(w%97))%97||(no>1000000&&cd===(97-((w+55)%97))%97)?checksumPass():checksumFail();\n  },\n};\n\nfunction runChecksum(cc, num) {\n  const v = V[cc];\n  return v ? v(num) : { formatValid: false, valid: false, error: 'Unknown' };\n}\n\n// ─── Suggestion generation ───────────────────────────────────\n\nfunction suggestCorrections(cc, num) {\n  const candidates = [];\n  const chars = num.split('');\n  for (let pos = 0; pos < chars.length; pos++) {\n    const orig = chars[pos];\n    const isLetter = /[A-Z]/.test(orig);\n    const options = isLetter ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('') : '0123456789'.split('');\n    for (const rep of options) {\n      if (rep === orig) continue;\n      chars[pos] = rep;\n      const r = runChecksum(cc, chars.join(''));\n      if (r.valid) candidates.push({ number: chars.join(''), label: cc + chars.join(''), type: 'substitution' });\n    }\n    chars[pos] = orig;\n  }\n  for (let pos = 0; pos < chars.length - 1; pos++) {\n    if (chars[pos] === chars[pos + 1]) continue;\n    [chars[pos], chars[pos+1]] = [chars[pos+1], chars[pos]];\n    const r = runChecksum(cc, chars.join(''));\n    if (r.valid) {\n      const existing = candidates.find(c => c.number === chars.join(''));\n      if (!existing) candidates.push({ number: chars.join(''), label: cc + chars.join(''), type: 'transposition' });\n    }\n    [chars[pos], chars[pos+1]] = [chars[pos+1], chars[pos]];\n  }\n  return candidates;\n}\n\n// ─── Process ─────────────────────────────────────────────────\n\nconst items = $input.all();\nconst failures = items.filter(item =>\n  item.json.Format === 'Valid' && item.json.Checksum === 'Fail'\n);\n\nif (failures.length === 0) {\n  return [{ json: { _noSuggestions: true, message: 'No checksum failures found' } }];\n}\n\nconst suggestions = [];\nfor (const item of failures) {\n  const vat = sanitize(item.json.VAT || '');\n  const cc = vat.slice(0, 2).toUpperCase();\n  const num = vat.slice(2);\n  const candidates = suggestCorrections(cc, num);\n\n  if (candidates.length === 0) {\n    suggestions.push({\n      json: {\n        Carrier: item.json.Carrier || '',\n        VAT: item.json.VAT || '',\n        Suggestion: '',\n        Registered: '',\n        Name: 'No corrections found',\n        Country: '',\n        LLM_Analysis: '',\n      }\n    });\n    continue;\n  }\n\n  for (const c of candidates) {\n    suggestions.push({\n      json: {\n        Carrier: item.json.Carrier || '',\n        VAT: item.json.VAT || '',\n        Suggestion: c.label,\n        Registered: '',\n        Name: '',\n        Country: cc,\n        LLM_Analysis: '',\n        _needsVerification: true,\n        _cc: cc,\n        _num: c.number,\n      }\n    });\n  }\n}\n\nreturn suggestions;\n"
+      }
+    },
+    {
+      "id": "if-suggestions-001",
+      "name": "Has Suggestions?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1620,
+        340
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-001",
+              "leftValue": "={{ $json._noSuggestions }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "notTrue"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "code-verify-001",
+      "name": "Verify Suggestions",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1860,
+        340
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "\nconst VIES_URL = 'https://ec.europa.eu/taxation_customs/vies/services/checkVatService';\nconst HMRC_BASE = 'https://www.tax.service.gov.uk/check-vat-number';\nconst RATE_MS = 1200;\nconst sleep = (ms) => new Promise(r => setTimeout(r, ms));\n\nfunction collectCookies(headers, existing) {\n  const raw = [];\n  if (headers.getSetCookie) raw.push(...headers.getSetCookie());\n  else { const sc = headers.get('set-cookie'); if (sc) raw.push(...sc.split(/,(?=[^ ]+=)/)); }\n  const prev = existing ? existing.split('; ').filter(Boolean) : [];\n  const map = new Map(prev.map(c => [c.split('=')[0], c]));\n  for (const h of raw) { const pair = h.split(';')[0].trim(); map.set(pair.split('=')[0], pair); }\n  return [...map.values()].join('; ');\n}\n\nasync function queryVIES(cc, num) {\n  const soap = '<?xml version=\"1.0\" encoding=\"UTF-8\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:ec.europa.eu:taxud:vies:services:checkVat:types\"><soapenv:Header/><soapenv:Body><urn:checkVat><urn:countryCode>'+cc+'</urn:countryCode><urn:vatNumber>'+num+'</urn:vatNumber></urn:checkVat></soapenv:Body></soapenv:Envelope>';\n  try {\n    const res = await fetch(VIES_URL, { method: 'POST', headers: { 'Content-Type': 'text/xml; charset=utf-8', SOAPAction: '' }, body: soap });\n    const xml = await res.text();\n    const fault = xml.match(/<faultstring>([\\s\\S]*?)<\\/faultstring>/);\n    if (fault) return { error: fault[1].trim() };\n    const tag = (n) => { const m = xml.match(new RegExp('<ns2:'+n+'>([\\\\s\\\\S]*?)</ns2:'+n+'>')); return m ? m[1].trim() : null; };\n    return { registered: tag('valid') === 'true', name: tag('name') || 'N/A', country: cc };\n  } catch (e) { return { error: e.message }; }\n}\n\nasync function queryHMRC(num) {\n  try {\n    const formUrl = HMRC_BASE + '/enter-vat-details';\n    const getRes = await fetch(formUrl, { redirect: 'follow' });\n    const html = await getRes.text();\n    let cookies = collectCookies(getRes.headers, '');\n    const csrf = html.match(/name=\"csrfToken\"\\s+value=\"([^\"]+)\"/);\n    if (!csrf) throw new Error('CSRF not found');\n    await sleep(RATE_MS);\n    const postRes = await fetch(formUrl, {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/x-www-form-urlencoded', Cookie: cookies, Referer: formUrl },\n      body: 'csrfToken='+encodeURIComponent(csrf[1])+'&target='+encodeURIComponent(num),\n      redirect: 'manual',\n    });\n    cookies = collectCookies(postRes.headers, cookies);\n    let resultHtml;\n    if (postRes.status >= 300 && postRes.status < 400) {\n      const loc = postRes.headers.get('location');\n      const url = loc.startsWith('http') ? loc : HMRC_BASE + loc.replace('/check-vat-number', '');\n      await sleep(300);\n      resultHtml = await (await fetch(url, { headers: { Cookie: cookies }, redirect: 'follow' })).text();\n    } else { resultHtml = await postRes.text(); }\n    if (!resultHtml.includes('govuk-panel--confirmation')) return { registered: false, name: '', country: 'GB' };\n    let name = 'N/A';\n    const nm = resultHtml.match(/Registered business name<\\/h3>\\s*<p[^>]*>([\\s\\S]*?)<\\/p>/i);\n    if (nm) name = nm[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim();\n    return { registered: true, name, country: 'GB' };\n  } catch (e) { return { error: e.message }; }\n}\n\nconst items = $input.all();\nconst results = [];\n\nfor (const item of items) {\n  if (!item.json._needsVerification) {\n    const { _needsVerification, _cc, _num, ...clean } = item.json;\n    results.push({ json: clean });\n    continue;\n  }\n  const cc = item.json._cc;\n  const num = item.json._num;\n  const isUK = cc === 'GB' || cc === 'XI';\n  await sleep(RATE_MS);\n  const api = isUK ? await queryHMRC(num) : await queryVIES(cc, num);\n  const { _needsVerification, _cc: _, _num: __, ...clean } = item.json;\n  if (api && !api.error && api.registered) {\n    clean.Registered = 'Yes';\n    clean.Name = api.name || '';\n    clean.Country = api.country || cc;\n    results.push({ json: clean });\n  }\n}\n\nreturn results.length > 0 ? results : [{ json: { _noSuggestions: true, message: 'No verified suggestions found' } }];\n"
+      }
+    },
+    {
+      "id": "code-format-llm-001",
+      "name": "Format for LLM",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2100,
+        340
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "\nconst items = $input.all();\nif (items.length === 1 && items[0].json._noSuggestions) {\n  return items;\n}\n\nconst grouped = {};\nfor (const item of items) {\n  const vat = item.json.VAT || 'unknown';\n  if (!grouped[vat]) grouped[vat] = { carrier: item.json.Carrier, vat, suggestions: [] };\n  grouped[vat].suggestions.push({\n    suggestion: item.json.Suggestion,\n    registered: item.json.Registered,\n    name: item.json.Name,\n    country: item.json.Country,\n  });\n}\n\nconst entries = Object.values(grouped).map(g => {\n  const verified = g.suggestions.filter(s => s.registered === 'Yes');\n  const unverified = g.suggestions.filter(s => s.registered !== 'Yes' && s.suggestion);\n  const lines = [];\n  lines.push('CARRIER: ' + g.carrier);\n  lines.push('ORIGINAL VAT (FAILED): ' + g.vat);\n  lines.push('VERIFIED MATCHES (' + verified.length + '):');\n  if (verified.length > 0) {\n    verified.forEach(s => lines.push('  ' + s.suggestion + ' → registered as \"' + s.name + '\" in ' + s.country));\n  } else {\n    lines.push('  (none)');\n  }\n  if (unverified.length > 0) {\n    lines.push('CHECKSUM-VALID BUT NOT REGISTERED (' + unverified.length + '):');\n    unverified.forEach(s => lines.push('  ' + s.suggestion));\n  }\n  const orig = g.vat.replace(/^[A-Z]{2}/, '');\n  verified.forEach(s => {\n    const corrected = s.suggestion.replace(/^[A-Z]{2}/, '');\n    let diffs = 0;\n    const diffPositions = [];\n    for (let i = 0; i < Math.max(orig.length, corrected.length); i++) {\n      if (orig[i] !== corrected[i]) { diffs++; diffPositions.push(i + 1); }\n    }\n    lines.push('DIFF: ' + orig + ' → ' + corrected + ' (' + diffs + ' digit(s) changed at position ' + diffPositions.join(',') + ')');\n  });\n  return lines.join('\\n');\n}).join('\\n\\n===\\n\\n');\n\nreturn [{\n  json: {\n    chatInput: entries,\n    _allSuggestions: items.map(i => i.json),\n  }\n}];\n"
+      }
+    },
+    {
+      "id": "if-skip-llm-001",
+      "name": "Needs LLM?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2340,
+        340
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-002",
+              "leftValue": "={{ $json._noSuggestions }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "notTrue"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "agent-001",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        2580,
+        340
+      ],
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "You are a VAT compliance analyst. You receive EU/UK VAT numbers that failed checksum validation, alongside correction suggestions that were verified against government registries (VIES for EU, HMRC for UK).\n\nFor each carrier entry you receive:\n- The original failed VAT number\n- Verified suggestions: corrections that passed checksum AND are confirmed registered businesses\n- The exact digit differences between original and each suggestion\n\nYour task: determine which suggestion is the most confident correction.\n\nCONFIDENCE RULES:\n- HIGH: Exactly one verified suggestion, OR the registered business name closely matches the carrier name, OR only a single digit differs\n- MEDIUM: Multiple verified suggestions but one has a name matching the carrier, or only adjacent digits were swapped (transposition)\n- LOW: Multiple suggestions with no clear match, or the business name is completely unrelated to the carrier\n- NONE: No verified suggestions exist\n\nERROR CLASSIFICATION:\n- Typo: single character was substituted (e.g. position 5: '3' → '8')\n- Transposition: two adjacent characters were swapped\n- Multiple errors: more than one digit differs\n\nOUTPUT FORMAT (one block per carrier):\n```\nCarrier: [name]\nOriginal: [failed VAT]\nBest match: [suggestion] → [registered name]\nConfidence: [HIGH/MEDIUM/LOW/NONE]\nError type: [Typo/Transposition/Multiple errors]\nAction: [Update to X / Verify with carrier / Contact carrier]\n```\n\nRules:\n- If a registered business name contains the carrier name (or vice versa), boost confidence\n- If only one suggestion is verified as registered, it is almost certainly correct — mark HIGH\n- Single-digit errors at the end of the number are more likely typos than at the start\n- Be concise. No preamble. No VAT rule explanations. Only the structured output."
+        }
+      }
+    },
+    {
+      "id": "llm-model-001",
+      "name": "Trimble Model Gateway",
+      "type": "CUSTOM.lmChatTrimbleGateway",
+      "typeVersion": 1,
+      "position": [
+        2600,
+        560
+      ],
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gemini-2.5-flash-lite"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "code-merge-llm-001",
+      "name": "Merge LLM Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2820,
+        340
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "\nconst items = $input.all();\nconst llmResponse = items[0].json.output || items[0].json.text || '';\nconst allSuggestions = items[0].json._allSuggestions || [];\n\nif (allSuggestions.length === 0) {\n  return [{ json: { _noSuggestions: true } }];\n}\n\nreturn allSuggestions.map(s => ({\n  json: {\n    Carrier: s.Carrier || '',\n    VAT: s.VAT || '',\n    Suggestion: s.Suggestion || '',\n    Registered: s.Registered || '',\n    Name: s.Name || '',\n    Country: s.Country || '',\n    LLM_Analysis: llmResponse,\n  }\n}));\n"
+      }
+    },
+    {
+      "id": "sheets-append-001",
+      "name": "Save Suggestions",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        3060,
+        340
+      ],
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Extract Sheet ID').item.json.spreadsheetId }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Suggestions",
+          "mode": "list",
+          "cachedResultName": "Suggestions"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "id": "sticky-setup-001",
+      "name": "Setup Instructions",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        140,
+        60
+      ],
+      "parameters": {
+        "content": "## VAT Checker — Setup\n\n### How it works\n1. User opens the form and pastes a Google Sheet URL\n2. The spreadsheet ID is extracted automatically\n3. All Google Sheets nodes use that ID dynamically\n\n### Google Sheet structure\n**Sheet 1 — \"VAT Input\"**\n| Carrier | VAT | Format | Checksum | Registered | Name | Address | Country | Error |\n\n**Sheet 2 — \"Suggestions\"**\n| Carrier | VAT | Suggestion | Registered | Name | Country | LLM_Analysis |\n\n### Setup\n1. Connect your Google Sheets credentials (all 3 Sheets nodes)\n2. Trimble Model Gateway uses gemini-2.5-flash-lite (pre-configured)\n3. Activate the workflow — this enables the form URL\n4. Users open the form, paste the spreadsheet URL, and submit\n\n### If Code nodes fail with fetch errors\nAsk your n8n admin to add this env var:\n`NODE_FUNCTION_ALLOW_BUILTIN=*`",
+        "width": 480,
+        "height": 480,
+        "color": 4
+      }
+    }
+  ],
+  "connections": {
+    "Submit Spreadsheet": {
+      "main": [
+        [
+          {
+            "node": "Extract Sheet ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Sheet ID": {
+      "main": [
+        [
+          {
+            "node": "Read VAT Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read VAT Input": {
+      "main": [
+        [
+          {
+            "node": "Validate VAT Numbers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate VAT Numbers": {
+      "main": [
+        [
+          {
+            "node": "Update Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Results": {
+      "main": [
+        [
+          {
+            "node": "Generate Suggestions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Suggestions": {
+      "main": [
+        [
+          {
+            "node": "Has Suggestions?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Suggestions?": {
+      "main": [
+        [
+          {
+            "node": "Verify Suggestions",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Verify Suggestions": {
+      "main": [
+        [
+          {
+            "node": "Format for LLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format for LLM": {
+      "main": [
+        [
+          {
+            "node": "Needs LLM?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Needs LLM?": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Save Suggestions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Merge LLM Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trimble Model Gateway": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge LLM Output": {
+      "main": [
+        [
+          {
+            "node": "Save Suggestions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 600
+  },
+  "staticData": null,
+  "active": false,
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
