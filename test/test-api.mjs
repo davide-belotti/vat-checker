@@ -2,13 +2,32 @@ import { fileURLToPath } from "url";
 import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { queryVIES, queryHMRC } from "../validate-vat.mjs";
+import { isTransientError } from "../lib/api-clients.mjs";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+const MAX_RETRIES = 4;
+const VIES_DELAY_MS = 3000;
+const HMRC_DELAY_MS = 2500;
+const RETRY_BASE_MS = 5000;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const cases = JSON.parse(readFileSync(join(__dirname, "api-cases.json"), "utf-8"));
 const viesTests = cases.vies;
 const hmrcTests = cases.hmrc;
+
+async function queryVIESWithRetry(cc, num) {
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    const result = await queryVIES(cc, num);
+    if (!isTransientError(result)) return result;
+    if (attempt < MAX_RETRIES) {
+      const backoff = RETRY_BASE_MS * Math.pow(2, attempt - 1);
+      process.stdout.write(` retry ${attempt}/${MAX_RETRIES - 1} (${(backoff / 1000).toFixed(0)}s)...`);
+      await sleep(backoff);
+    }
+  }
+  return { error: "All retries exhausted" };
+}
 
 async function runApiTests() {
   let passed = 0;
@@ -20,21 +39,22 @@ async function runApiTests() {
   console.log("  ──────────────");
 
   for (const t of viesTests) {
-    await sleep(1500);
-    const result = await queryVIES(t.cc, t.num);
+    await sleep(VIES_DELAY_MS);
+    process.stdout.write(`  ${t.cc}${t.num}  (${t.label})...`);
+    const result = await queryVIESWithRetry(t.cc, t.num);
 
     if (!result || result.error) {
-      console.log(`  SKIP  ${t.cc}${t.num}  (${t.label}) — VIES temporarily unavailable`);
+      console.log(` SKIP — VIES unavailable: ${result?.error || "no response"}`);
       skipped++;
       continue;
     }
 
     const got = result.registered;
     if (got === t.expect) {
-      console.log(`  PASS  ${t.cc}${t.num}  (${t.label}) — Registered: ${got ? "Yes" : "No"}`);
+      console.log(` PASS — Registered: ${got ? "Yes" : "No"}`);
       passed++;
     } else {
-      console.log(`  FAIL  ${t.cc}${t.num}  (${t.label}) — expected ${t.expect}, got ${got}`);
+      console.log(` FAIL — expected ${t.expect}, got ${got}`);
       failures.push({ service: "VIES", id: `${t.cc}${t.num}`, label: t.label, expected: t.expect, got });
       failed++;
     }
@@ -44,7 +64,7 @@ async function runApiTests() {
   console.log("  ──────────────────────");
 
   for (const t of hmrcTests) {
-    await sleep(1000);
+    await sleep(HMRC_DELAY_MS);
     const result = await queryHMRC(t.num);
 
     if (!result || result.error) {
@@ -68,7 +88,7 @@ async function runApiTests() {
   console.log(`  ────────────────`);
   console.log(`  Passed:  ${passed}`);
   console.log(`  Failed:  ${failed}`);
-  console.log(`  Skipped: ${skipped} (service unavailable)`);
+  console.log(`  Skipped: ${skipped} (service unavailable after ${MAX_RETRIES} retries)`);
   console.log(`  Total:   ${passed + failed + skipped}\n`);
 
   if (failures.length > 0) {
@@ -80,7 +100,11 @@ async function runApiTests() {
     return false;
   }
 
-  console.log(`  All API tests passed (${skipped} skipped due to service availability).\n`);
+  if (skipped > 0) {
+    console.log(`  All reachable API tests passed (${skipped} skipped — member state services unavailable).\n`);
+  } else {
+    console.log(`  All API tests passed.\n`);
+  }
   return true;
 }
 

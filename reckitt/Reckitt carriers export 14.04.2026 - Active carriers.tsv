@@ -1,0 +1,259 @@
+Reckitt to check	TRANSPOREON ID	Ticontract ID	Name	CreditorNumber_BillingDetail	VAT	CountryId	Street_1	Street_2	Zip	Location	CarrierStatus
+VAT Nr missing	242534	100298	Unifeeder A/S	242534	DK0000000000	DK	Hveensgade 1	NULL	8000	Aarhus	active
+	200003	100329	LKW Walter International AG	200003	ATU19208701	AT	IZ NÖ SÜD STR. 14	NULL	2355	Wiener Neudorf	active
+	239840	100559	Orkun Uluslararasi Nakliyat Ihracat ve Ticaret Limited Sirketi	239840	NULL	TR	Ulus Mahallesi Kültür Caddesi No: 125	HURRIYET MAHALLESI CATALCA YOLU CAD 464	34537	ISTANBUL	active
+	221276	100759	dls Land u. See Speditionsges. mbH	221276	DE 811 252 507	DE	Jacobsrade 1	NULL	22962	Siek	active
+VAT Nr missing	222443	100908	Tricolore Transport & Logistics	222443	DK0000000000	DK	Thorsvej 8	NULL	6330	Padborg	active
+VAT Nr wrong	229603	100931	T.E.L.S. Transeuropean Logistic Services Ltd. (TELS)	229603	4303303	GB	Suite 4, 11 Rosemont Road, Hampstead	NULL	NW3 6NG	London	active
+VAT Nr missing	339973	100935	TRANSALLIANCE Group	238328	FR0000000000	FR	5 bis rue Saint Léon	NULL	54000	NANCY	active
+VAT Nr missing	230387	100953	ATL CZ s.r.o.	ATL	NULL	CZ	Kladska 916	NULL	500 03	Hradec Kralove	active
+VAT Nr missing	227867	101012	GEFCO Polska Sp. z o.o.	227867	NULL	PL	pl.Bankowy 2	NULL	00-095	Warszawa	active
+	227301	101025	AGROMEX Wojciech i Jacek Fraszka sp. j.	227301	PL8310003586	PL	Marzenin, Plac Rozany 3	NULL	98160	Sedziejowice	active
+	228425	101029	2XL Nv	228425	BE449424358	BE	Baron de Maerelaan 155	NULL	8380	Zeebrugge	active
+	227389	101091	MIRATRANS TRANSPORT SP. Z O.O.	227389	PL7322182068	PL	Sierpów 33	NULL	95-035	Ozorków	active
+	227348	101102	Link Sp. z o.o.	227348	PL5210086737	PL	Nadrzeczna 17	NULL	5462	Wiazowna	active
+VAT Nr wrong	229892	101104	ROHLIG SUUS Logistics S.A.	Rohlig	1230993241	PL	ul. Równoległa 4A	NULL	02-235	Warszawa	active
+VAT Nr missing	239839	101257	XPO LOGISTICS (NORBERT DENTRESSANGLE) UNITED KINGDOM	239797	UK0000000000	GB	Greenfold Way	Leigh Commerce Park	WN7 3XJ	Leigh	active
+	230536	101262	Pekaes Sp z. o.o.	690061	PL5270104717	PL	ul. Spedycyjna 1	NULL	05-870	Błonie	active
+	224437	101299	IMPERIAL Logistics & Services GmbH	224437	DE 811 168499	DE	Schifferstr. 26	NULL	47059	Duisburg	active
+VAT Nr missing	233644	101455	pfenning logistics	233644	NULL	DE	Daimlerstraße 4	NULL	68542	Heddesheim	active
+VAT Nr wrong	228031	101898	ARCESE TRASPORTI S.P.A.	ARCESE	122680226	IT	VIA ALDO MORO, 95	NULL	38062	ARCO (TN)	active
+	228684	101902	ECS European Containers NV	228684	BE0435131508	BE	Karveelstraat 3	NULL	8380	Zeebrugge	active
+VAT Nr missing	227703	101905	DHL Freight France	227703	NULL	FR	19, boulevard du Courcerin ZI Lognes Pariest	NULL	77312	Marne la Vallée Cedex 2	active
+	223624	102223	Waberer's International Zrt.	Waberers	HU17781578	HU	Nagykörösi út 351.	NULL	1239	Budapest	active
+	228119	102915	SKAT TRANSPORT SP. Z O.O. SP. K.	228119	PL 5851356886	PL	SŁOWACKIEGO 199	NULL	80-298	GDAŃSK	active
+	226977	102917	P.H.U.S EXPORT-IMPORT "TRANSPIL-SPEDITION"	226977	PL7670003116	PL	Brzozowa 2	NULL	77430	Krajenka,Skórka	active
+	241761	102990	MAGTRANS Sp. z o. o.	241761	PL6551430917	PL	Bohaterow Warszawy 116	NULL	28-100	Busko-Zdroj	active
+	322784	103007	CH Robinson FR-Caen	227709	FR43322939265	FR	6 RUE DU COLONEL REMY	NULL	14000	CAEN	active
+VAT Nr wrong	302679	103163	REGESTA S.A.	227934	6621004747	PL	NOWOWIEJSKA 52A	NULL	28-400	Pińczów	active
+	230296	103202	Gopet Trans EOOD	230296	BG831689341	BG	Kazichene, Bivsh Stopanski dvor	Skladova Baza GOPET LOGISTICS	1532	SOFIA	active
+	NULL	103294	GEFCO	288321	NULL	FR	9 bld kennedy	NULL	25000	BESANCON	disabled
+	237885	103321	Devnak Nakliyat	Devnak	2940036980	TR	Merkez Mahallesi Bahçeler Cad. No:3	NULL	34540	İstanbul	active
+	241951	103379	Raben Trans European Germany GmbH	243131	DE 200207156	DE	Regioparkring 8	NULL	41199	Mönchengladbach	active
+	230574	103931	FIRMA TRANSPORTOWO SPEDYCYJNO HANDLOWA MIELCZAREK ANDRZEJ	230574	PL8290001407	PL	WILCZA 25	NULL	98-220	ZDUŃSKA WOLA	active
+VAT Nr missing	228717	103932	P.W. Podkowa Sp. z o.o.	228717	NULL	PL	al. Krakowska 51	NULL	5551	Mroków	active
+	316916	104106	HILAL TRANS ULUSLARARASI TASIMACILIK ITH. IHR.TURIZM VE TİC. LTD.STİ	227405	4630004323	TR	İnonu Mah. Kayisdagi Cad. No: 282	Atasehir	34755	istanbul	active
+VAT Nr missing	302772	104145	Geodis United Kingdom Ltd	371165	NULL	GB	Coronation Road	NULL	HP12 3TA	High Wycombe	active
+	230364	104151	DELAMODE ROMANIA	230364	RO6322498	RO	B-dul Timisoara, Nr. 111 - 115, Sector 6	NULL	61327	Bukarest	active
+	237312	104292	CAT LC Portugal	237312	PT 506 906 612	PT	Quinta da Marqueza 1, Herdade Quinta da Torre, Vila Amélia	Armazém 1, Fracção 2	2950-678	Quinta do Anjo	active
+	227683	104298	CONEXTRANS  I.F.F.  S.A.  (A.G.)	227683	EL095349047	GR	12, Str. Lachanagoras	NULL	54628	THESSALONIKI	active
+VAT Nr missing	239887	104325	MacAndrews GmbH	239770	NULL	GB	75 King William Street	NULL	EC4N 7BE	LONDON	active
+	233639	104514	Transport H. Essers & Zonen Nv	270235	BE 0401.296.720	BE	Transportlaan 4	NULL	3600	genk	active
+VAT Nr missing	238494	104586	GT-Trans Polska Sp. z o.o.	GT	PL0000000000	PL	Przejazdowa	18	5800	Pruszkow	active
+	224932	104654	Gartner Intertrans Hungária Kft.	224932	HU10457812	HU	Speditor u. 1.	NULL	8900	Zalaegerszeg	active
+	229121	104852	DARTOM SP. Z O.O.	229121	PL8380000966	PL	BAŁTYCKA 50	NULL	05-825	GRODZISK MAZOWIECKI	active
+	221926	104867	HEMMERLIN SA	221926	FR 11399514611	FR	12, rue des Cévennes	NULL	68390	Sausheim	active
+	230955	104939	FM Polska Sp. z o. o.	230955	PL8381000827	PL	Ługowa 30	NULL	96-320	Mszczonów	active
+	231137	105658	Girteka Logistics Ltd	231137	LT100005407518	LT	Kuprinoniskes vlg	NULL	13279	Vilnius region	active
+VAT Nr missing	258468	105681	EST Contracts BV - Istanbul branch	258468	NULL	NL	Teleportboulevard 120	NULL	1043 EJ	Amsterdam	active
+VAT Nr missing	230869	105715	Frode laursen	230869	DK0000000000	DK	vittenvej 90	NULL	8382	hinnerup	active
+VAT Nr missing	229592	105724	Transforwarding International Sp. z o.o.	229592	NULL	PL	Na Skraju 73A	NULL	05-090	Raszyn	active
+	230876	105748	CONTAINERSHIPS PLC	Containerships	FI08183585	FI	Mannerheimintie 15a	NULL	260	Helsinki	active
+VAT Nr missing	230935	105784	DHL Express Portugal Lda.	230935	PT0000000000	PT	Urbanização do Passil, Lote 93 A	Passil	2890	Alcochete	active
+VAT Nr missing	231183	105799	EST Contracts BV - Lyon branch	231183	NULL	FR	Teleportboulevard 120	NULL	1043EJ	Amsterdam	active
+	229564	105802	EST Contracts BV - Budapest branch	229564	NL811514274	HU	Teleportboulevard 120	NULL	1043 EJ	Amsterdam	active
+	233875	105804	EST Poland sp. z o.o. - branch 1	CHR	NL811514274B01	PL	Łucka 9	NULL	00-842	Warszawa	active
+	244609	105841	A. T. TROTA, S.A.	230931	ESA25038142	ES	CIM LLEIDA VIAL E	PARCELA 17	25190	LLEIDA	active
+	341645	106015	Luís Simões Logística Integrada, S.A.	235268	PT-500289050	PT	Moninhos, Apartado 41	NULL	2671-951	Loures	active
+VAT Nr wrong	258676	106018	transportes J. CARRION	258676	A-04014635	ES	C/PABLO PICASSO, 1	NULL	4230	HUERCAL DE ALMERIA	active
+	336195	106048	GEFCO Deutschland GmbH	258881	DE811122082	DE	Kurhessenstraße 13	NULL	64546	Mörfelden-Walldorf	active
+	241914	106062	ERONTRANS SP. Z O. O.	241914	PL5890011743	PL	Grunwaldzka 64b	NULL	PL 83-000	Pruszcz Gdanski	active
+VAT Nr missing	260712	106161	GEFCO ITALIA SPA	245249	NULL	IT	VIA PALIZZI 89	NULL	20157	MILANO	active
+VAT Nr missing	257414	106180	Transportes Pascoal	257414	PT0000000000	PT	Santa Luzia	NULL	3050-106	Coimbra Norte	active
+	235114	106205	MÜLLER TRANSPORTE GmbH	235114	ATU 194 32 905	AT	Palmersstrasse 10	NULL	2351	WIENER NEUDORF	active
+VAT Nr missing	270235	106220	H. Essers Transport Company Nederland BV	233639	NULL	NL	J.F. Kennedylaan 42	NULL	5555 XD	Valkenswaard	active
+	336720	106221	ITF Polska Sp. z o.o.	233891	PL1181733941	PL	Warszawska 109/6	NULL	05-092	Lomianki	disabled
+	263360	106223	ABC Czepczynski Spolka z o.o. Sp.k.	263360	PL5951442504	PL	Wigury 20	NULL	64400	Międzychód	active
+	233811	106281	VAN CARGO S.A.	Van Cargo	PL5242125771	PL	PRZECLAWSKA 8	NULL	03-879	WARSAW	active
+VAT Nr missing	234810	106350	Schenker Sp z o.o.	234810	NULL	PL	Ordona 2a	NULL	1237	Warszawa	active
+	244040	106373	Hellmann Worldwide Logistics Polska Sp.z o.o sp. k.	257567	PL1230005823	PL	Sokołowska 10	NULL	05-090	Raszyn	active
+	339773	106412	Vesta Ukraine	234135	NULL	UA	Moscow p-t. 6, of 505	NULL	4073	Kiev	active
+VAT Nr missing	342148	106554	DHL EXPRESS SP. Z O.O.	230858	PL0000000000	PL	OSMAŃSKA 2	NULL	2823	WARSZAWA	active
+VAT Nr wrong	234204	106762	TARGOR-TRUCK SP. Z O.O.	234204	7582045405	PL	ŁAWY 97	NULL	07-411	RZEKUŃ	active
+	308816	106979	Ekol Logistics	229745	TR0000000000	TR	Ekol Caddesi 2	Sultanbeyli	34935	İstanbul	active
+	322241	106986	Tradecor s.r.l.	230895	IT 00 160 120 266	IT	Via Lucia Frischin 1	NULL	39100	Bolzano (BZ)	disabled
+	242116	107057	DHL Freight Belgium nv	242116	BE0401264551	BE	Eppegemsesteenweg 31 - 33	NULL	1850	Grimbergen	active
+	326071	107302	MANVESTA	326071	LT582970113	LT	P. Paulaicio str. 13B	NULL	74111	Jurbarkas	active
+	260224	107575	CAMPILLO PALMERA SL	260224	ESB73783003	ES	CTRA MADRID KM 373	P I LA SERRETA	30500	MOLINA DE SEGURA - MURCIA	active
+VAT Nr missing	256443	107919	ATC CARGO SA	238181	NULL	PL	Polska 13A	NULL	81-339	Gdynia	active
+	243850	108020	Bei-Trans	243850	NULL	UA	Junakiva,9	Генерала Юнакива, 9	79039	Lviv	active
+VAT Nr missing	265117	108573	DHL Global Forwarding (Italy) S.p.A. – Div. Freight	228860	NULL	IT	Via delle Industrie 1	NULL	20060	Pozzuolo Martesana	active
+	233418	108809	Patinter España S.L	244443	PT500212848	ES	Poligono Ind. Okiturri	NULL	1207	San Roman de San Roman	active
+	228639	108818	CODOGNOTTO ITALIA SPA	228639	IT00474360310	IT	Via Calnuova 18/20.	NULL	31040	Salgareda	active
+	231501	108826	FIDEL SRL	231501	IT04434190288	IT	UGO FOSCOLO,08	NULL	35131	PADOVA	active
+VAT Nr wrong	241753	109066	TORELLO TRASPORTI SRL	241753	1897330641	IT	G.MARCONI, 251	NULL	83025	MONTORO INFERIORE	active
+	225404	109263	Raben Transport	225404	PL7810020506	PL	71 Poznanska	NULL	62023	Gadki	active
+VAT Nr missing	229245	109320	AMBROGIO TRASPORTI SPA	229245	NULL	IT	tognasca 5	NULL	21013	Gallarate	active
+	236111	109447	Transportes Broliveira, Lda	236111	PT500425353	PT	Estrada de Ourém nº15, Areias	NULL	2490-124	Gondemaria (Ourém)	active
+VAT Nr missing	234562	109513	WITRANS Izak, Wenerski Sp. jawna	234562	NULL	PL	Plocka 2	NULL	05-825	Grodzisk Mazowiecki	active
+	229275	109520	VILLART LOGISTIC S.L.	229275	ESB25479726	ES	C/ BARCELONA	NULL	25600	BALAGUER	active
+VAT Nr wrong	293035	109600	Ibero Linhas - Transportes, Lda. (as agents for WEC LINES)	293035	500361703	PT	Urbanização da Matinha	Rua 2, Edificio Verde, 2º Esquerdo	1950-073	Lisboa	active
+	237766	109675	Lafante Kamil Stańczak	Lafante	PL5252341571	PL	Aleja Solidarności 66/89	NULL	00-240	Warszawa	active
+	250619	109691	Van Steenbergen Transport Arendonk	222172	BE0404199394	BE	Hoge Mauw 210	NULL	2370	Arendonk	active
+	261972	109806	Gefco Tasimacilik ve Lojistik A.S.	261972	NULL	TR	Kayisdagi Cad. Karaman Ciftlik Yolu Kar	NULL	34752	Icerenköy - Istanbul	active
+VAT Nr missing	200019	110477	Schenker Deutschland AG	200019	NULL	DE	Feineisenstraße 4	NULL	44339	Dortmund	active
+	253686	110530	Troyka International Transport & Trade Inc.	253686	8590062681	TR	YENIBOSNA MER. MAH.BASIN EKSPRES YOLU CEMAL ULUSOY CD.SHT	NULL	34730	ISTANBUL	active
+VAT Nr missing	221780	110577	Unterer GesmbH	221780	AT0000000000	AT	Luna 32	NULL	6250	Kundl	active
+	246963	110955	NOLAN TRANSPORT	246963	IE4571931W	IE	OAKLANDS	NEW ROSS	51	CO WEXFORD	active
+	233377	111374	Magnus Logistics, UAB	233377	LT10001806917	LT	Naugarduko str. 55A	NULL	3204	Vilnius	active
+	234594	111558	Trans-Logistic Dębica	234594	PL8722095735	PL	Fabryczna 12	NULL	39-200	Debica	active
+	283841	111714	VISLINE Sp.zo.o	283841	PL5862232082	PL	Siewna 7	NULL	81-574	Gdynia	active
+VAT Nr missing	235220	111724	STALKO Przybysz i Wspólnicy Spółka Jawna	235220	PL0000000000	PL	PONIATOWSKIEGO	NULL	05-220	ZIELONKA	active
+	235149	111833	BTG Feldberg & Sohn GmbH & Co. KG	235149	DE 170014163	DE	Wüppings Weide 1	NULL	46395	Bocholt	active
+VAT Nr missing	247138	112012	Codognotto Austria GmbH	247138	NULL	AT	Lederergasse 35/12	NULL	1080	Wien	active
+	244718	112270	TRANS ITALIA SRL	244718	IT02032300655	IT	PIAZZA MARTINEZ ,05	NULL	84085	MERCATO S.SEVERINO	active
+	251312	112610	Gefco United Kingdom	306763	GB 272369149	GB	376-378 Chiswick High Road	Chiswick,	W4 5TF	London	active
+	305901	113266	Transport Gapiński Sp. z o.o. Sp. k.	305901	PL7661997146	PL	Skocka 20	NULL	62-100	Wągrowiec	active
+VAT Nr missing	235502	113385	XPO LOGISTICS (NORBERT DENTRESSANGLE) HIGH CUBE	235502	FR0000000000	FR	Z.I.  Rue des Moines	NULL	2203	SOISSONS	active
+	291017	113482	Borusan Lojistik	291017	NULL	TR	YALÇIN KOREŞ CAD. NO:22	NULL	34303	İSTANBUL	active
+	238008	113852	J&S Speed Kft	238008	HU 12939848	HU	Agostyáni út 91.	NULL	2890	Tata	active
+	234090	114574	Euroafrica Shipping Lines Cyprus Limited	234090	CY10109723K	CY	Arch.Makariou III,229	MELIZA COURT , 4th floor	3105	Limassol , Cyprus	active
+VAT Nr missing	302996	115706	Geodis Logistics Netherlands B.V.	302996	NULL	NL	Transportcentrum 24	NULL	7547RX	Enschede	active
+	285150	116294	TRANSMEJA JSC	285150	LT451301917	LT	Metalistu str. 3	NULL	78109	Siauliai	active
+	252367	116602	AGROLOGISTIKA	252367	LT100001123912	LT	Tilžės g. 60T	NULL	91108	Klaipėda	active
+VAT Nr missing	240173	116618	VLANTANA UAB	240173	NULL	LT	Dvaro 1	Gobergiškės k.	96173	Klaipedos raj.	active
+	243440	117319	Hecny Express LLC	243440	7715679440	RU	Prishvina, 8, build. 2	NULL	127549	Moscow	disabled
+	306335	117453	Zammler Ukraine Ltd	306335	NULL	UA	Hryhoriia Andriushchenka str.,  4-H (G)	NULL	1135	Kyiv	active
+VAT Nr wrong	270154	117670	DHL Global Forwarding Sp. z o.o.	270154	7280257292	PL	ul. Krakowiaków 44	NULL	02-255	Warszawa	active
+	300793	117798	SIA GEFCO BALTIC	266476	LV50003993021	LV	P. BRIEZA 15	NULL	1010	Riga	active
+VAT Nr missing	260916	117946	Alba-Zöchling	260916	HU0000000000	HU	Holland Fasor 9	NULL	8000	Székesfehérvár	active
+	319704	118007	CMA CGM UK	McAndrPT	GB802298146	GB	Princes Parade	NULL	L3 1BG	liverpool	active
+	243478	118075	Fracht FWO Polska Sp. z o.o.	243478	PL7542735115	PL	ul. Inflancka 4C	NULL	00-189	Warszawa	active
+VAT Nr missing	306324	118946	GEFCO PORTUGAL TRANSITÁRIOS LDA	269824	NULL	PT	Rua Dr.ºAntónio Loureiro Borges	Edifício Arquiparque I, 1º Piso	1499 -016	Miraflores	active
+VAT Nr missing	231033	119899	GEFCO Magyarorszag Kft.	231033	NULL	HU	Bocskai út 134-146	NULL	1113	Budapest	active
+VAT Nr missing	303710	120187	WEC Lines	303710	NULL	NL	Albert Plesmanweg 59	NULL	3088 GB	Rotterdam	active
+	230849	120335	Waberer's Polska Sp. z o.o.	230849	PL7772306116	PL	Kijowska 1	NULL	03-738	Warszawa	active
+	294768	120511	LOGİTRANS LOJISTİK VE TAŞIMACILIK ORG.LTD.ŞTİ	294768	NULL	TR	ORHANLI MAH. DERVIS CADDESI NO:24 FLOOR:1 OFFICE:4A-B	TUZLA-İSTANBUL	34000	İSTANBUL	active
+VAT Nr missing	242853	121651	A.M.P. Wieczorek Sp. z o.o.	242853	NULL	PL	Mazowiecka	79	05-311	Dębe Wielkie	active
+VAT Nr missing	241368	121659	SPEDPARTNER	241368	NULL	PL	Leszcze 15	NULL	28-400	PINCZOW	active
+	304435	122667	Bollore Logistics UK Ltd.	309209	GB 432 3813 73	GB	Unit 1 Skyline, Great South West Road	NULL	TW14 8NT	London Heathrow	active
+	280887	122907	Stellar-Logistic	280887	36591814	UA	48 Degtyarivs`ka Str.	NULL	4112	Kyiv	active
+VAT Nr wrong	308952	123195	ID LOGISTICS POLSKA S.A.	308952	5252425204	PL	Al. Roździeńskiego 91	NULL	40-203	Katowice	active
+VAT Nr missing	229071	124903	GONDRAND	229071	NULL	FR	13 RUE CURIE	BP 71339	68013	COLMAR CEDEX	active
+VAT Nr missing	247108	126723	Croome LTD	247108	NULL	GB	Cullet Drive	NULL	ME11 5JS	Queenborough, Kent	active
+VAT Nr missing	268421	126868	Yusen Logistics UK Ltd	268421	NULL	GB	Grange Park 3, Cheaney Road	NULL	NN4 5FB	Northampton	active
+	268784	129847	Codognotto Polska Sp. Z.o.o.	228639	PL7251959614	PL	Kościuszki 80/82	NULL	90-437	Lodz	active
+	270644	131987	smet srl	270644	IT00316190651	IT	via tiberio claudio felice 48	NULL	84131	salerno	active
+	258486	132929	DHL FREIGHT SPAIN SL	262215	NULL	ES	C/ Rumania, 4	Poligono Industrial de Coslada (PAL)	28221	Madrid	active
+	251083	135533	Okura Uluslararası Tasımacılık Iletisim Tic. ve San. A.Ş	251083	6400108811	TR	Talatpaşa Cad., Menekşe sokak no:15/1	NULL	34590	Istanbul	active
+VAT Nr missing	246337	139296	Friday Spółka z ograniczoną odpowiedzialnością  Spółka komandytowa	246337	PL0000000000	PL	ul. Ryżowa 33A	NULL	02-495	Warszawa	active
+	306978	139793	PCC Intermodal	306978	PL7491968481	PL	ul. Hutnicza 16	NULL	81-061	Gdynia	active
+VAT Nr missing	286095	140748	Borchard Lines Ltd	286095	NULL	GB	10 Chiswell Street	NULL	EC1Y4XY	London	active
+	337986	141494	Transcurbel-2 S.A.	279394	A58869470	ES	Ronda Guinardó, nº 52	NULL	8025	Barcelona	disabled
+	251488	148323	ARBA SP. Z O.O.	251488	PL7611452717	PL	SIERAKOWO 55	NULL	06-300	PRZASNYSZ	active
+VAT Nr wrong	260906	148713	Marcotran Polska Sp. z o.o.	260906	9691579265	PL	ul. Poznańska 9	NULL	44-120	Pyskowice	active
+	243238	150267	F.lli Dissegna Srl	243238	IT01838650248	IT	Via Ca' Vico 29	NULL	36028	Rossano Veneto VI	active
+	266476	150902	GEFCO Ukraine	266476	UA358940826599	UA	110, Zhylyanska	NULL	1032	Kyiv	active
+VAT Nr missing	240088	156700	Luis Simoes Logistica Integrada,s.a.	263570	NULL	ES	Parque Empresarial San Fernando, Av. de Castilla	NULL	28830	San Fernando de Henares, Madrid	active
+VAT Nr missing	337193	159232	DHL Global Forwarding  Hellas S.A.	241668	NULL	GR	41, Agiou Dimitriou str.	NULL	18546	Pireaus	active
+	273352	160532	Scantek LTD Sp. z o. o.	273352	PL1080005217	PL	Braniborska 38/40	NULL	53-680	Wrocław	active
+VAT Nr wrong	261289	161174	Charter Sp. z .o.o.	261289	812-17-66-337	PL	Urszulin 8	NULL	05-825	Grodzisk Mazowiecki	active
+VAT Nr wrong	258750	162818	MGT Transport Krajowy i Międzynarodowy Grycz Mariusz	258750	7621904664	PL	Monte Cassino 3	NULL	07-200	Wyszków	active
+VAT Nr missing	258627	162850	Europejskie Centrum Logistyczne Sp. z o.o.	258627	NULL	PL	Ul. Przemysłowa 13B	NULL	35-105	Rzeszów	active
+VAT Nr missing	258650	163586	NORBERT DENTRESSANGLE LOGISTICS POLAND	227422	NULL	PL	SZYSZKOWA 35/37	NULL	02-285	WARSZAWA	active
+VAT Nr wrong	258985	163790	NTG Road Sp.zo.o.	258985	5272674838	PL	Chełmżyńska 180	NTG Marki, Katowice, Gdynia, Goleniow	04-464	Warszawa	active
+VAT Nr missing	300245	165161	LOCKWOOD HAULAGE LTD.	300245	NULL	GB	RIPLEY ROAD	NULL	DE56 2JR	AMBERGATE	active
+VAT Nr missing	262830	171856	LOTOS BALTICA	262830	LT0000000000	LT	Pramones str. 2	NULL	17102	Sacininkai	active
+VAT Nr missing	339552	172585	GEFCO (Suisse) SA	237202	NULL	CH	6 Route des Jeunes	Case postale 1767	1211	GENEVE	active
+VAT Nr missing	262730	172766	The Overland Transport & Trading Co Ltd	262730	UK0000000000	GB	High Street	Billinghay	LN4 4BU	Lincoln	active
+VAT Nr missing	272106	172885	AEROTRANS PIOTR CYRSON	272106	NULL	PL	WRZOSOWA 12	NULL	5101	NOWY DWÓR MAZOWIECKI	active
+VAT Nr missing	283525	188054	C.H.ROBINSON PL-Warsaw 2	231183	NL	PL	Aleja Jana Pawła II 29	NULL	00-867	Warszawa	active
+VAT Nr missing	230638	192144	Simple Way Sp z o.o sp.k	230638	NULL	PL	Wigury 20	NULL	64-400	Miedzychod	active
+	260208	193849	TRANSINTERTOP LTD	260208	HU11475165	HU	TOPART 1	NULL	2851	KÖRNYE	active
+VAT Nr missing	334308	194186	XPO LOGISTICS_ Transport Solution FTL PACKED France	242108	NULL	FR	1208, ROUTE DES PIERRELLES - BP 93 - BEAUSEMBLANT	NULL	26240	BEAUSEMBLANT	active
+VAT Nr wrong	272915	194472	Hart Logistics sp. z o. o. sp. k.	272915	7792413387	PL	Świerzawska 10	NULL	60-321	Poznań	active
+VAT Nr missing	244904	199664	GEFCO France	244904	NULL	FR	Rue des Lilas d Espagne	NULL	92402	Courbevoie Cedex	active
+VAT Nr missing	262232	200242	Geis PL Sp. z o.o.	262232	NULL	PL	Pieńki 7	NULL	95-010	Stryków	active
+VAT Nr wrong	368458	201550	Locotranssped Sp. Z O.O.	351923	7831682017	PL	Ul.Arcybiskupa A. Baraniaka 88c Bud.B	NULL	61-131	Poznan	active
+	265297	202739	Express Logistic Sp.z o.o.	265297	PL1231277587	PL	Dunikowskiego 24	NULL	5501	Piaseczno	active
+VAT Nr missing	273747	202968	Aro-Trans Rafał Bartosz Kosztowny Spedycja i Produkcja Mebli	273747	NULL	PL	Ogrody 29/32	NULL	85-870	Bydgoszcz	active
+VAT Nr wrong	269078	204759	C&T, a.s.	269078	2022259723	SK	Partizanska cesta 2733/97	NULL	97401	Banska Bystrica	active
+VAT Nr missing	292757	207899	KLog Logística SA	292757	PT0000000000	PT	Rua de Castelões Centro, 260 - Fajozes	NULL	4485-065	Vila do Conde	active
+	236276	210167	FIRMA TRANSPORTOWO-HANDLOWA EDWARD OSICA	236276	PL8221005023	PL	ZACHODNIA 34	NULL	05-300	MIŃSK MAZOWIECKI	active
+	234132	211258	CMA CGM Polska Sp. z o.o.	234132	GB802298146	PL	Polska 13 A	NULL	81-339	Gdynia	active
+VAT Nr missing	276509	211366	Sokołów-Logistyka	276509	PL0000000000	PL	Aleja 550-lecia 2	NULL	08-300	Sokołów Podlaski	active
+VAT Nr wrong	275463	211525	NOSTA Logistik Sp. z.o.o.	275463	5981632563	PL	Hynka 32	NULL	80-465	Gdańsk	active
+	500975	211576	P&O Ferrymasters Ltd.	PandOHU	NL809172811B01	NL	PO Box 1036	NULL	3180 AA	Rozenburg	active
+	264024	211975	Orange Logistics Sp. z o.o.	264024	PL6342773808	PL	Roździeńskiego 205	NULL	40-203	Katowice	disabled
+	287378	212256	Rosteka UAB	287378	LT100004761617	LT	Darbo str 9	NULL	52102	Kaunas	active
+	335085	213578	Ekol Spain	291662	NULL	ES	Pol. Ind. Modula – Coslada II Avda de la Cañada, 62 Nave 1 Modulo	NULL	28820	Madrid	disabled
+	293151	213818	PORTMANN LOGISTICS POLSKA SP. Z.O.O	280653	PL 7811775773	PL	DERENIOWA 2 LOK 7	NULL	02-776	WARSZAWA	active
+VAT Nr missing	257579	214414	Rail Cargo Logistics - Poland Sp. z o.o.	257579	NULL	PL	Wąwozowa 11	NULL	02-796	Warszawa	active
+VAT Nr missing	260701	216534	VGL Road Sp. z o.o.	260701	NULL	PL	Al. Zwycięstwa 237/7	NULL	81-521	Gdynia	active
+	227584	216919	GEFCO Deutschland GmbH	227584	DE811122082	DE	Industriestr. 80	NULL	42327	Wuppertal	active
+	254299	216920	GEFCO Deutschland GmbH	254299	DE811122082	DE	Märkische Allee 65	NULL	14979	Großbeeren	active
+	281136	216937	BRAXSTONE KRAWCZYK, RENE SP. JAWNA	281136	PL1182095709	PL	KOLEJOWA 204A, KIEŁPIN	NULL	05-092	ŁOMIANKI	disabled
+VAT Nr missing	272701	217005	F.H.P. MAG-MAR ALICJA MATUSIK	272701	PL8240000989	PL	ALEJA SOLIDARNOŚCI 3	NULL	07-100	WĘGRÓW	active
+VAT Nr wrong	332116	219086	Antrans Bis Ireneusz Pacia Sp. k.	332116	6372190299	PL	Wspólna 1c	NULL	32-300	Olkusz	active
+	261803	219441	DEVEGA SRL	261803	RO26244980	RO	4, BERZEI	NULL	410151	ORADEA	active
+	227422	221272	ND Polska Sp. z o.o.	227422	PL725-00-13-591	PL	Wólczańska 53	NULL	90-608	Łódź	active
+VAT Nr wrong	321388	221674	Frigo-trans	321388	8252102129   8250004747	PL	Miedzyrzecka186	NULL	21-400	Łuków	active
+	334679	222799	Ekol Logistics Sp. z o.o.	293623	972-125-38-94	PL	Inwestycyjna 8	NULL	41-208	Sosnowiec	disabled
+VAT Nr wrong	286782	223354	Speedbergx Sp. z o.o. Spółka komandytowa	286782	7732475775	PL	P.O.W. 17/216	NULL	97-200	Tomaszów Mazowiecki	active
+	284914	223429	ATL EUROPE s.r.o.	284914	CZ25925865	CZ	Hořická 283/22	NULL	500 02	Hradec Králové	active
+	287492	223856	BOMAR SP. Z O.O.	287492	PL5342491222	PL	UL.WINCENTEGO WITOSA 19	SIEDLIN	09-100	PŁOŃSK	active
+	320606	224921	DHL Global Forwarding	241666	NULL	RO	Costache Negri	NULL	50552	Bucuresti	disabled
+VAT Nr missing	374769	227627	BARSAN Global Logistics	374769	NULL	PL	Wita Stwosza 7/427	NULL	40-040	Katowice	active
+VAT Nr missing	281425	229078	Grupa Transportowa Sp. z o.o.	281425	NULL	PL	Łódzka 30 ab	NULL	97-300	Piotrków Trybunalski	active
+	325764	231042	DHL GLOBAL FORWARDING TASIMACILIK A.S.	272532	TR0000000000	TR	KIBRIS SEHITLERI CAD.	no 135/5	35221	IZMIR	disabled
+VAT Nr missing	323836	234343	Uniserve Ltd	270376	NULL	GB	Thurrock Park Way	NULL	RM187HD	Tilbury	active
+	321472	234553	BEI-TRANS POLSKA Sp. z.o.o	243850	5252549320	PL	ul.Aleja Solidanosci 117 nr loc207	NULL	00-140	Warszawa	disabled
+	298847	234916	Range-Trans OU	298847	EE202200221063094214	EE	Mustamae tee 5-703	Harju maakond	10616	Tallinn	disabled
+	302185	238192	Cargo Line/ГК Карго Лайн	302185	NULL	BY	Витебский р-н, М-8, 89-й км, 1А	NULL	211319	Vitebskaya oblast/Витебская область	active
+VAT Nr missing	262215	239724	DHL FREIGHT SPAIN, S.L	262215	NULL	ES	AVDA. DE ESPIOCA, 64	NULL	46460	VALENCIA	active
+VAT Nr wrong	260692	241438	JASTIM Sp z o.o.	260692	5262499368	PL	Al. Jerozlimskie 144	NULL	02-305	Warszawa	active
+	296223	241887	AKTRANS TASIMACILIK TİC.SAN.LTD.STİ	296223	420165084	TR	ATATÜRK CAD.SIDALI İŞHANI  KAT:3/9	NULL	33070	mersin	active
+	288977	242005	BFI SP. Z O.O. SP.K.	288977	5862323399	PL	Aleja Zwycięstwa 173	NULL	81-521	Gdynia	active
+VAT Nr missing	313765	242292	Arsenal Logistic Sp. z o.o.	313765	NULL	PL	Alley Jerozolimskie 85	NULL	02-001	Warsaw	active
+VAT Nr missing	300152	242469	FERTRANS SPAGNA SL	300152	NULL	ES	Av. Ports D'Europa, 100	NULL	8040	Barcelona	active
+	230460	245648	ECS European Containers NV	230460	BE0435131508	BE	Karveelstraat 3	NULL	8380	Zeebrugge	active
+	251427	246198	MacAndrews & Co Ltd	McAndrPT	GB802298146	GB	12 Princes Parade	Princes Dock	L3 1BG	Liverpool	disabled
+VAT Nr missing	318021	248781	BARSAN GLOBAL LOGISTIC KFT	343065	NULL	HU	ARADI VERTANUK UTJA 13 FST 5	NULL	9021	GYOR	active
+VAT Nr missing	282622	249488	TBX SP. Z O.O.	282622	NULL	PL	Szyszkowa 35/37	NULL	02-285	Warszawa	active
+VAT Nr missing	280700	250392	NAPOLITRANS SRL	280700	NULL	IT	Loc. Pezzagrande	NULL	84025	EBOLI	active
+	290599	253166	ZAMMLER Polska Sp. z o.o.	290599	PL 5252582464	PL	3 Maja Nr. 8	Millenium Logistic Park, building C7	05-800	PRUSZKOW	active
+VAT Nr missing	305312	254132	DHL FREIGHT	351041	NULL	FR	28 rue Eugène Hénaff	NULL	69200	Vénissieux	active
+VAT Nr missing	236381	358523	P.U.T.H. TRANS-POL SP.JAWNA S. KLASZTORNY, Z.DĄBROWSKI	236381	NULL	PL	ul. Kozietulskiego 4a	NULL	96-100	Skierniewice	active
+VAT Nr missing	286632	364460	FM LOGISTIC IBERICA, S.L.	286632	NULL	ES	C/ BERRIOBIDE, 34	NULL	31013	ANSOAIN	active
+	327392	365661	Linktis sp. z o.o.	327392	PL9512373803	PL	Stępińska 22/30	NULL	00-739	warszawa	active
+VAT Nr missing	308710	366654	VIRADO TRANSPORT LTD	308710	NULL	GB	Lankaster Approach, North Killingholme Industrial Estate	NULL	DN40 3JZ	Immingham	active
+	328811	367347	MAERSK LINE	364586	NULL	DK	Esplanaden 50	NULL	DK1263	Copenhagen	disabled
+	334648	368635	BATUINTERNATİONAL LOJİSTİK İÇ VE DIŞ TİCARET ANONİM ŞİRKETİ	334648	150 057 6603 – Atışalanı VD	TR	Oruçreis Mh. Tekstilkent Cd.	No:12/A İç Kapı No: 022-023 Atışalanı/Esenler	34235	İstanbul	active
+VAT Nr missing	312643	368906	Overis Sp.z,o.o.	312643	NULL	PL	Łapiguz 91	NULL	21-400	Łuków	active
+	311846	368993	YILMAZ ULUSLARARASI NAKLİYAT İTH. İHR. SAN. VE TİC. LTD. ŞTİ	311846	NULL	TR	İstiklal Cad.	5204 sok	33060	Mersin	disabled
+	313261	370532	ALCOR LOGISTICS Sp. z o.o.	313261	PL5291820117	PL	T. Bairda 36/60	36/60	05-825	Grodzisk Mazowiecki	active
+	343126	377692	EVEROAD	343126	NULL	FR	24 rue Petrelle	NULL	75002	Paris	disabled
+	348059	379897	SARP INTERMODAL	348059	NULL	TR	DEREBOYU NO 56	TURKOBA MAH.KAYALAR CAD. NO.10/1	34356	ISTANBUL	active
+	346723	380690	EXPEDITORS INTERNATIONAL UK LTD	286269	NULL	GB	UNIT 4	SHINE KNOWLEDGE PARK	HU8 7FB	HULL	disabled
+VAT Nr missing	305812	381067	GEFCO Greece	305812	NULL	GR	Lampsakou 2	NULL	11528	Athens	active
+	351096	383657	H.Essers & Zonen Internationaal Transport NV (Pharma)	351016	BE 0401 296 720	BE	Transportlaan 4	NULL	3600	Genk	disabled
+VAT Nr wrong	352386	391771	Hopi PL sp z o.o.	352386	5272681413	PL	Przyokopowa 33	NULL	01-208	Warszawa	active
+	354554	393256	ATOM ULUSLARARASI NAKLİYAT VE LOJİSTİK HİZMETLERİ TİC.A.S.	354554	NULL	TR	1476/1 SOKAK KATİPOGLU İS MERKEZİ NO:2 K:2 D:2 ALSANCAK	NULL	35220	İZMİR	active
+VAT Nr missing	362880	397995	F.H.U Łuczkowski	362880	NULL	PL	Kościelna 5	NULL	34-400	Nowy Targ	active
+	357479	399120	Marvicon SRL	357479	RO34957399	RO	Strada Ogorului 258, Et. 2	NULL	410554	Oradea	active
+VAT Nr missing	365199	399207	Containerships - CMA CGM GmbH	239770	NULL	DE	Chilehaus A, Fischertwiete 2	NULL	20095	Hamburg	active
+VAT Nr missing	365019	399577	RANGE-TRANS SPOLKA Z OGRANICZANA ODPOWIEDZIALNOSCIA	365019	NULL	PL	Matki Teresy z Kalkuty 18, lok.8	NULL	20-538	Lublin	active
+	366132	399694	Uber Freight B.V.	366132	NULL	NL	Mr.Treublaan 7	NULL	1097 DP	Amsterdam	disabled
+VAT Nr missing	366806	400038	TRANSPIL-SPEDITION LOGISTICS GROUP SP. Z O.O. SP. KOMANDYTOWA	366806	NULL	PL	Brzozowa 2	NULL	64-917	Skorka	active
+	374048	403917	GT-Trans Faktoring Sp. z o.o.	374048	PL5223051994	PL	85 Al. Jerozolimskie, Unit 21	NULL	02-001	Warsaw	active
+	375326	404643	Blackbuck Poland Sp. Z o.o.	375326	PL7010943304	PL	Mokotowska 49	NULL	00-542	Warszawa	active
+	377350	405714	Range Trans Group OÜ	383302	EE 102138294	EE	Pärnu mnt 76-7,	Harju maakond,  Kesklinna linnaosa,	10131	Tallinn	disabled
+VAT Nr missing	379056	411812	Luk-Trans Łukasz Bloch	379056	NULL	PL	26A	BLOCHY	07-210	Długosiodło	active
+VAT Nr wrong	387692	412158	KRAFTTRANS Taurus Sp. z o.o.	387692	5213880950	PL	ul. BARTYCKA, nr 22B	lok. 21A	00-716	WARSZAWA	active
+VAT Nr missing	391494	412813	DHL Parcel (Switzerland) AG	221832	NULL	CH	Güterstrasse 107	NULL	4133	Pratteln	active
+VAT Nr missing	302920	415932	F&O Agnieszka Osica-Foltyn	302920	NULL	PL	F&O Agnieszka Osica-Foltyn	NULL	05-300	Mińsk Mazowiecki	active
+VAT Nr missing	400030	417893	DBK LOGISTICS SP. Z O.O. SP.K.	400030	NULL	PL	Zajęcza 15	NULL	00-351	Warszawa	active
+VAT Nr missing	400421	417957	Broekman Logistics Sp. z o.o.	268459	NULL	PL	Piekary 6/8	NULL	61-823	Poznań	active
+VAT Nr missing	400691	418105	sennder Benelux B.V._TC	366132	NULL	NL	Keizersgracht 62-64	NULL	1015 CS	Amsterdam	active
+	399723	418106	LOPEZ & RYDER LOGISTIC S.L.U.	399723	ESB01729920	ES	Miquel Roca i Junyent nº7	local 212	50011	Zaragoza	active
+	313610	421151	SA TORELLO TRASPORTI SRL	313610	NULL	FR	5 RUE DE MALACOMBE	BP 54	38070	LYON	active
+VAT Nr missing	412708	424787	FM Logistic - Crépy-en-Valois (FR60)	412708	NULL	FR	rue du Bois de Tillet	BP60224	60802	Crépy-en-Valois	active
+VAT Nr missing	413540	428125	Quality Trans Sp.z o.o.	413540	NULL	PL	Tadeusza Kościuszki 38/24	NULL	40-048	Katowice	active
+VAT Nr missing	423233	435336	GRAMIX Sp. z .o.o.	423233	PL1182153482	PL	Komorów	NULL	05-085	Kampinos	active
+	434944	435479	TSL Wiolmar Marcin Osiński	434944	PL5311529716	PL	Broninek 4	NULL	05-190	Nasielsk	active
+VAT Nr missing	441173	438550	UAB Girteka Europe West	441173	NULL	LT	Laisvės pr. 36	NULL	4340	Vilnius	active
+	442297	438603	Ellerman City Liners	442297	GB398523059	GB	133 Hall Lane	NULL	RM141AL	Upminster	active
+VAT Nr missing	460334	445327	SAFE SHIPPING SP. Z O.O.	460334	NULL	PL	JANUSZA KORCZAKA 13	NULL	81-473	GDYNIA	active
+	601754	445942	AKBULUT NAK TUR LTD ŞTİ	428936	NULL	TR	içerenköy mah prof dr necmettin erbakan cad no 83 K:2 D:7	NULL	34752	İSTANBUL	active
+VAT Nr missing	459342	452207	Damco Germany GmbH	459342	NULL	DE	Katharinenstraße 5	NULL	20457	Hamburg	active
+VAT Nr missing	226386	496024	Unifeeder Germany	226386	NULL	DE	Neuer Dovenhof, Brandstwiete 1	NULL	20457	Hamburg	active
