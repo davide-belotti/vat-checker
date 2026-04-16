@@ -102,15 +102,39 @@ In batch mode, output files are derived from the input filename:
 - **`<name>-results.tsv`** — one row per input VAT with columns: Carrier, VAT, Format, Checksum, Registered, Name, Address, Country. When `--suggest` is used, checksum-failed rows show `See suggestions` in the Registered column.
 - **`<name>-suggestions.tsv`** — one row per suggestion with columns: Carrier, VAT, VAT_Suggestion, Format, Checksum, Registered, Name, Address, Country
 
-### Carrier name matching (Cursor Skill)
+### Cursor Skills (AI-powered pipeline steps)
 
-After a batch + suggest run, you can use the **match-carrier-suggestions** Cursor Skill to resolve `See suggestions` rows by comparing carrier names to the registered business names returned by the API. Open Cursor chat and say:
+Three Cursor Skills handle tasks that require natural language reasoning rather than deterministic code. Each is invoked from Cursor chat.
+
+#### Match carrier suggestions
+
+After a batch + suggest run, resolves `See suggestions` rows by comparing carrier names to the registered business names returned by the API.
 
 ```
 Match carriers for input-results.tsv and input-suggestions.tsv
 ```
 
-The skill uses LLM reasoning (not string comparison) to handle typos, acronyms, abbreviations, and legal suffixes. Confident matches are written back into the results file as `Yes (corrected)` with a `Corrected_VAT` column. Ambiguous or low-confidence cases are left for manual review.
+Uses LLM reasoning (not string comparison) to handle typos, acronyms, abbreviations, and legal suffixes. Confident matches are written back into the results file as `Yes (corrected)` with a `Corrected_VAT` column. Ambiguous or low-confidence cases are left for manual review.
+
+#### Discover missing VATs
+
+Searches the web to find VAT numbers for carriers with missing, placeholder, or malformed VATs in a normalized TSV file. Uses country-specific search strategies (e.g., USt-IdNr for DE, partita IVA for IT, NIP for PL) and official registries when available.
+
+```
+Discover missing VATs in reckitt/<name>-normalized.tsv
+```
+
+Discovered VATs are written to a `*-discovered.tsv` file with source and confidence level (High / Medium / Low / Not found). High and Medium confidence results are also written back into the normalized file.
+
+#### Compare addresses
+
+Compares stored carrier addresses against the registered business addresses returned by VIES/HMRC in an enriched TSV file. Handles formatting differences, abbreviations, diacritics, and localized street prefixes.
+
+```
+Compare addresses in reckitt/<name>-enriched.tsv
+```
+
+Each row gets an `AddressMatch` verdict: Match (same location), Partial (same city, different street), Mismatch (different location), or Cannot compare (insufficient data). Results are written back into the enriched file.
 
 ## Folder Structure
 
@@ -118,6 +142,10 @@ The skill uses LLM reasoning (not string comparison) to handle typos, acronyms, 
 vat-checker/
 ├── validate-vat.mjs             # Core CLI — checksum + registry lookup
 ├── suggest-vat.mjs              # Suggestion engine (single-digit corrections)
+├── reckitt/
+│   ├── transform-reckitt.mjs    # Normalize Reckitt carrier export into standard TSV
+│   ├── prepare-batch.mjs        # Prepare normalized file for batch validation
+│   └── merge-results.mjs        # Merge validation results back into enriched TSV
 ├── n8n/
 │   └── n8n-workflow-generator.mjs  # Generates n8n workflow JSON
 ├── test/
@@ -128,8 +156,12 @@ vat-checker/
 ├── workflows/
 │   └── *.json                   # Generated n8n workflow files
 ├── .cursor/skills/
-│   └── match-carrier-suggestions/
-│       └── SKILL.md             # Cursor Skill for carrier name matching
+│   ├── match-carrier-suggestions/
+│   │   └── SKILL.md             # Match carrier names to suggestion results
+│   ├── discover-vat/
+│   │   └── SKILL.md             # Find missing VATs via web search
+│   └── compare-addresses/
+│       └── SKILL.md             # Compare stored vs registered addresses
 ├── TODO.md                      # Improvement plan / roadmap
 └── README.md
 ```
