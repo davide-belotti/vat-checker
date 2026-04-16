@@ -1,0 +1,16 @@
+{
+  "vies": [
+    { "cc": "DE", "num": "811191002",    "expect": true,  "label": "SAP SE" },
+    { "cc": "FR", "num": "40303265045",  "expect": true,  "label": "LVMH" },
+    { "cc": "IT", "num": "00743110157",  "expect": true,  "label": "Pirelli" },
+    { "cc": "ES", "num": "B58378431",    "expect": true,  "label": "Spanish CIF" },
+    { "cc": "NL", "num": "853746333B80", "expect": false, "label": "Synthetic NL (valid checksum, not registered)" },
+    { "cc": "DE", "num": "000000000",    "expect": false, "label": "Invalid DE" },
+    { "cc": "FR", "num": "00000000000",  "expect": false, "label": "Invalid FR" }
+  ],
+  "hmrc": [
+    { "num": "823847609", "expect": true,  "label": "University of Cambridge" },
+    { "num": "434031494", "expect": false, "label": "Unregistered number" },
+    { "num": "000000000", "expect": false, "label": "All zeros" }
+  ]
+}

@@ -10,25 +10,22 @@ instead of being retried.
 
 ---
 
-## Phase 1 — Reliability (fix false negatives)
+## Phase 1 — Reliability (fix false negatives) ✔
 
-- [ ] **1.1 Retry on transient VIES errors**
-  Add retry logic (e.g. 3 attempts with exponential backoff) in `getSuggestions`
+- [x] **1.1 Retry on transient VIES errors**
+  3 attempts with exponential backoff in `getSuggestions` and `validateOne`
   when `queryVIES` returns known transient errors:
   `MS_MAX_CONCURRENT_REQ`, `MS_UNAVAILABLE`, `TIMEOUT`, `SERVICE_UNAVAILABLE`.
-  Currently line 102 in `suggest-vat.mjs` skips any result with `.error`.
+  Also applied to n8n code nodes (`validateAllCode`, `verifySuggestionsCode`).
 
-- [ ] **1.2 Track and report API errors separately**
-  Distinguish between "not registered" and "API error" in the output.
-  Currently both are silently skipped. The user should see:
-  - `Verified: 1 (registered)`
-  - `Failed: 3 (API errors — could not verify)`
-  - `Not registered: 8`
+- [x] **1.2 Track and report API errors separately**
+  `getSuggestions` now returns `apiErrors[]` alongside `verified[]`.
+  CLI output shows: `Verified: N`, `Failed: N (API errors)`, `Not registered: N`.
+  Batch mode includes errored candidates in the suggestions TSV.
 
-- [ ] **1.3 Adaptive rate limiting**
-  Replace the fixed 1s delay with adaptive backoff. If a request returns
-  `MS_MAX_CONCURRENT_REQ`, increase the delay for subsequent requests
-  (e.g. 1s → 3s → 5s). Reset on success.
+- [x] **1.3 Adaptive rate limiting**
+  Delay starts at 1s, doubles (up to 5s) on transient errors, decreases
+  by 500ms on success (floor 1s). Applied to CLI scripts and n8n nodes.
 
 ---
 
@@ -77,13 +74,24 @@ instead of being retried.
 
 ---
 
+## Housekeeping
+
+- [x] **H.1 Move JSON output into `workflows/` folder**
+  Generated workflow JSON now written to `workflows/YYYY-MM-DD_n8n-vat-checker-workflow.json`.
+  Each regeneration produces a dated file for version tracking.
+
+- [x] **H.2 Add generation timestamp to JSON**
+  Top-level `_generated` ISO timestamp added to workflow JSON metadata.
+
+---
+
 ## Priority
 
-1. **1.1** (retry logic) — highest impact, directly fixes the Fercamm false negative
-2. **1.2** (error reporting) — makes failures visible
+1. ~~**1.1** (retry logic) — highest impact, directly fixes the Fercamm false negative~~ ✔
+2. ~~**1.2** (error reporting) — makes failures visible~~ ✔
 3. **2.2** (FR key recalc) — trivial to implement, big win for FR VATs
 4. **3.1** (verbose mode) — better debugging UX
-5. **1.3** (adaptive rate limit) — reduces throttling cascades
+5. ~~**1.3** (adaptive rate limit) — reduces throttling cascades~~ ✔
 6. **2.1** (two-digit deep mode) — catches more edge cases
 7. **2.3** (missing/extra digit) — broader correction
 8. **3.2 + 3.3** — polish

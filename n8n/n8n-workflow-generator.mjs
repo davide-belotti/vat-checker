@@ -1,10 +1,11 @@
-import { writeFileSync } from "fs";
+import { writeFileSync, mkdirSync } from "fs";
+import { join } from "path";
 
 // ═══════════════════════════════════════════════════════════════
 // n8n Workflow Generator — VAT Checker
 // ═══════════════════════════════════════════════════════════════
 //
-// Run:   node n8n-workflow-generator.mjs
+// Run:   node n8n/n8n-workflow-generator.mjs
 // Out:   n8n-vat-checker-workflow.json  (import into n8n)
 //
 // Prerequisites on your n8n instance:
@@ -465,10 +466,18 @@ async function queryHMRC(vatNumber) {
   }
 }
 
+// ─── Transient error handling ─────────────────────────────────
+
+const TRANSIENT_ERRORS = ['MS_MAX_CONCURRENT_REQ', 'MS_UNAVAILABLE', 'TIMEOUT', 'SERVICE_UNAVAILABLE'];
+function isTransientError(r) {
+  return r && r.error && TRANSIENT_ERRORS.some(e => r.error.includes(e));
+}
+
 // ─── Main processing loop ────────────────────────────────────
 
 const items = $input.all();
 const results = [];
+let delayMs = RATE_MS;
 
 for (let i = 0; i < items.length; i++) {
   const carrier = items[i].json.Carrier || '';
@@ -504,16 +513,23 @@ for (let i = 0; i < items.length; i++) {
     continue;
   }
 
-  await sleep(RATE_MS);
-  const api = isUK ? await queryHMRC(num) : await queryVIES(cc, num);
+  await sleep(delayMs);
+  let api;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    api = isUK ? await queryHMRC(num) : await queryVIES(cc, num);
+    if (!isTransientError(api)) break;
+    if (attempt < 3) await sleep(delayMs * Math.pow(2, attempt));
+  }
 
   if (api && !api.error) {
     row.Registered = api.registered ? 'Yes' : 'No';
     row.Name = api.name || '';
     row.Address = api.address || '';
     row.Country = api.country || cc;
+    delayMs = Math.max(RATE_MS, delayMs > RATE_MS ? delayMs - 500 : delayMs);
   } else if (api && api.error) {
     row.Error = api.error;
+    if (isTransientError(api)) delayMs = Math.min(delayMs * 2, 5000);
   }
 
   results.push({ json: row });
@@ -755,8 +771,14 @@ async function queryHMRC(num) {
   } catch (e) { return { error: e.message }; }
 }
 
+const TRANSIENT_ERRORS = ['MS_MAX_CONCURRENT_REQ', 'MS_UNAVAILABLE', 'TIMEOUT', 'SERVICE_UNAVAILABLE'];
+function isTransientError(r) {
+  return r && r.error && TRANSIENT_ERRORS.some(e => r.error.includes(e));
+}
+
 const items = $input.all();
 const results = [];
+let delayMs = RATE_MS;
 
 for (const item of items) {
   if (!item.json._needsVerification) {
@@ -767,14 +789,27 @@ for (const item of items) {
   const cc = item.json._cc;
   const num = item.json._num;
   const isUK = cc === 'GB' || cc === 'XI';
-  await sleep(RATE_MS);
-  const api = isUK ? await queryHMRC(num) : await queryVIES(cc, num);
+  await sleep(delayMs);
+
+  let api;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    api = isUK ? await queryHMRC(num) : await queryVIES(cc, num);
+    if (!isTransientError(api)) break;
+    if (attempt < 3) await sleep(delayMs * Math.pow(2, attempt));
+  }
+
   const { _needsVerification, _cc: _, _num: __, ...clean } = item.json;
   if (api && !api.error && api.registered) {
     clean.Registered = 'Yes';
     clean.Name = api.name || '';
     clean.Country = api.country || cc;
     results.push({ json: clean });
+    delayMs = Math.max(RATE_MS, delayMs > RATE_MS ? delayMs - 500 : delayMs);
+  } else if (api && api.error) {
+    clean.Registered = '';
+    clean.Name = 'API error: ' + api.error;
+    results.push({ json: clean });
+    if (isTransientError(api)) delayMs = Math.min(delayMs * 2, 5000);
   }
 }
 
@@ -866,7 +901,11 @@ return allSuggestions.map(s => ({
 // Workflow JSON structure
 // ═══════════════════════════════════════════════════════════════
 
+const now = new Date();
+const datestamp = now.toISOString().slice(0, 10);
+
 const workflow = {
+  _generated: now.toISOString(),
   name: "VAT Checker — Google Sheets",
   nodes: [
     // 1. Form Trigger — user pastes the spreadsheet URL
@@ -1289,7 +1328,9 @@ const workflow = {
 
 // ─── Write output ────────────────────────────────────────────
 
-const outputPath = "n8n-vat-checker-workflow.json";
+const outputDir = "workflows";
+mkdirSync(outputDir, { recursive: true });
+const outputPath = join(outputDir, `${datestamp}_n8n-vat-checker-workflow.json`);
 writeFileSync(outputPath, JSON.stringify(workflow, null, 2), "utf-8");
 console.log(`\n  ✔ Workflow JSON written to ${outputPath}`);
 console.log(`  Import it into n8n: Workflows → Import from File\n`);

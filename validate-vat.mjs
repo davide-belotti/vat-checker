@@ -473,6 +473,20 @@ const checksumValidators = {
   },
 };
 
+// ─── Transient VIES error detection ─────────────────────────
+
+const TRANSIENT_ERRORS = [
+  "MS_MAX_CONCURRENT_REQ",
+  "MS_UNAVAILABLE",
+  "TIMEOUT",
+  "SERVICE_UNAVAILABLE",
+];
+
+function isTransientError(result) {
+  if (!result || !result.error) return false;
+  return TRANSIENT_ERRORS.some((e) => result.error.includes(e));
+}
+
 // ─── Checksum router ────────────────────────────────────────
 
 function runChecksum(cc, num) {
@@ -693,9 +707,17 @@ async function validateOne(rawVat) {
     !checksumResult.valid && (isUK || !checksumResult.formatOnly);
   if (shouldSkip) return result;
 
-  const apiResult = isUK
-    ? await queryHMRC(vatNumber)
-    : await queryVIES(countryCode, vatNumber);
+  let apiResult;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    apiResult = isUK
+      ? await queryHMRC(vatNumber)
+      : await queryVIES(countryCode, vatNumber);
+
+    if (!isTransientError(apiResult)) break;
+    if (attempt < 3) {
+      await sleep(RATE_LIMIT_MS * Math.pow(2, attempt));
+    }
+  }
 
   if (apiResult) {
     if (apiResult.error) {
@@ -735,13 +757,16 @@ async function runSingle(rawVat, suggest = false) {
     if (suggest) {
       console.log(`  Generating suggestions...\n`);
       const { getSuggestions } = await import("./suggest-vat.mjs");
-      const { candidates, confidence, verified } = await getSuggestions(
+      const { candidates, confidence, verified, apiErrors } = await getSuggestions(
         countryCode,
         vatNumber,
       );
 
       console.log(`  Candidates:  ${candidates.length} (checksum-valid)`);
       console.log(`  Verified:    ${verified.length} (registered)`);
+      if (apiErrors.length > 0) {
+        console.log(`  Failed:      ${apiErrors.length} (API errors — could not verify)`);
+      }
       console.log(`  Confidence:  ${confidence}\n`);
 
       if (verified.length > 0) {
@@ -758,6 +783,14 @@ async function runSingle(rawVat, suggest = false) {
         }
       } else {
         console.log(`  No registered corrections found.\n`);
+      }
+
+      if (apiErrors.length > 0) {
+        console.log(`  Candidates that could not be verified (API errors):`);
+        for (const e of apiErrors) {
+          console.log(`    ${e.vatSuggestion} — ${e.error}`);
+        }
+        console.log();
       }
     }
 
@@ -831,7 +864,13 @@ function writeResultsTsv(results, filePath) {
         ? "N/A"
         : r.checksumValid ? "Pass" : "Fail";
     const reg =
-      r.registered === true ? "Yes" : r.registered === false ? "No" : "";
+      r.registered === true
+        ? "Yes"
+        : r.registered === false
+          ? "No"
+          : r.seeSuggestions
+            ? "See suggestions"
+            : "";
 
     return [
       esc(r.carrier),
@@ -867,9 +906,18 @@ function writeSuggestionsTsv(rows, filePath) {
 
 // ─── Batch mode ─────────────────────────────────────────────
 
-async function runBatch(inputPath, suggest) {
-  const rows = parseTsv(inputPath);
-  console.log(`\n  Processing ${rows.length} VAT numbers...\n`);
+async function runBatch(inputPath, suggest, range) {
+  let rows = parseTsv(inputPath);
+  const totalRows = rows.length;
+
+  if (range) {
+    const start = range.from - 1;
+    const end = Math.min(range.to, totalRows);
+    rows = rows.slice(start, end);
+    console.log(`\n  Range ${range.from}-${end} of ${totalRows} rows (processing ${rows.length})\n`);
+  } else {
+    console.log(`\n  Processing ${rows.length} VAT numbers...\n`);
+  }
 
   const results = [];
 
@@ -915,10 +963,26 @@ async function runBatch(inputPath, suggest) {
         process.stdout.write(
           `  Suggesting for ${r.countryCode}${r.vatNumber}...`,
         );
-        const { confidence, verified } = await getSuggestions(
+        const { confidence, verified, apiErrors } = await getSuggestions(
           r.countryCode,
           r.vatNumber,
         );
+
+        if (apiErrors.length > 0) {
+          for (const e of apiErrors) {
+            suggestionRows.push({
+              carrier: r.carrier,
+              vat: `${r.countryCode}${r.vatNumber}`,
+              vatSuggestion: e.vatSuggestion,
+              format: "",
+              checksum: "",
+              registered: "",
+              name: `API error: ${e.error}`,
+              address: "",
+              country: "",
+            });
+          }
+        }
 
         if (verified.length === 0) {
           suggestionRows.push({
@@ -931,7 +995,10 @@ async function runBatch(inputPath, suggest) {
             name: "No registered corrections found",
             country: "",
           });
-          console.log(" no matches");
+          const errCount = apiErrors.length;
+          console.log(errCount > 0
+            ? ` no matches (${errCount} API error${errCount > 1 ? "s" : ""})`
+            : " no matches");
         } else {
           for (const v of verified) {
             suggestionRows.push({
@@ -946,13 +1013,22 @@ async function runBatch(inputPath, suggest) {
               country: v.country,
             });
           }
-          console.log(` ${verified.length} registered match(es)`);
+          const errCount = apiErrors.length;
+          console.log(` ${verified.length} registered match(es)${errCount > 0 ? `, ${errCount} API error(s)` : ""}`);
         }
+      }
+
+      for (const r of failed) {
+        r.seeSuggestions = true;
       }
 
       const suggestPath = deriveOutputPath(inputPath, "suggestions");
       writeSuggestionsTsv(suggestionRows, suggestPath);
       console.log(`\n  Suggestions written to ${suggestPath}`);
+
+      const resultsPathUpdate = deriveOutputPath(inputPath, "results");
+      writeResultsTsv(results, resultsPathUpdate);
+      console.log(`  Results updated with suggestion references.`);
     } else {
       console.log(`\n  No checksum failures — no suggestions needed.`);
     }
@@ -971,10 +1047,31 @@ async function runBatch(inputPath, suggest) {
   console.log(`  Total:            ${results.length}`);
   console.log(`  Registered:       ${valid}`);
   console.log(`  Not registered:   ${notReg}`);
+  if (errors > 0) console.log(`  Failed:           ${errors} (API errors — could not verify)`);
   console.log(`  Format invalid:   ${fmtFail}`);
   console.log(`  Checksum failed:  ${chkFail}`);
-  if (errors > 0) console.log(`  API errors:       ${errors}`);
   console.log();
+}
+
+// ─── Range parser ───────────────────────────────────────────
+
+function parseRange(rangeStr) {
+  const m = rangeStr.match(/^(\d+)?-(\d+)?$/);
+  if (!m || (!m[1] && !m[2])) {
+    console.error("Error: Invalid --range format. Use: 1-10, -5, or 50-");
+    process.exit(1);
+  }
+  const from = m[1] ? parseInt(m[1]) : 1;
+  const to = m[2] ? parseInt(m[2]) : Infinity;
+  if (from < 1) {
+    console.error("Error: --range start must be >= 1");
+    process.exit(1);
+  }
+  if (from > to) {
+    console.error("Error: --range start must be <= end");
+    process.exit(1);
+  }
+  return { from, to };
 }
 
 // ─── Main ───────────────────────────────────────────────────
@@ -984,20 +1081,39 @@ async function main() {
 
   let filePath = null;
   let suggest = false;
+  let test = false;
+  let rangeStr = null;
   const positional = [];
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === "--file" && i + 1 < args.length) {
       filePath = args[++i];
+    } else if (args[i] === "--range" && i + 1 < args.length) {
+      rangeStr = args[++i];
     } else if (args[i] === "--suggest") {
       suggest = true;
+    } else if (args[i] === "--test") {
+      test = true;
     } else if (!args[i].startsWith("--")) {
       positional.push(args[i]);
     }
   }
 
-  if (filePath) {
-    await runBatch(filePath, suggest);
+  const range = rangeStr ? parseRange(rangeStr) : null;
+
+  if (range && !filePath) {
+    console.error("Error: --range can only be used with --file (batch mode).");
+    process.exit(1);
+  }
+
+  if (test) {
+    const { runTests } = await import("./test/test-vat.mjs");
+    runTests();
+    const { runApiTests } = await import("./test/test-api.mjs");
+    const ok = await runApiTests();
+    if (!ok) process.exit(1);
+  } else if (filePath) {
+    await runBatch(filePath, suggest, range);
   } else if (positional.length > 0) {
     await runSingle(positional.join(""), suggest);
   } else {
@@ -1005,7 +1121,9 @@ async function main() {
     console.error("  Single:   node validate-vat.mjs <VAT_NUMBER>");
     console.error("  Suggest:  node validate-vat.mjs <VAT_NUMBER> --suggest");
     console.error("  Batch:    node validate-vat.mjs --file input.tsv");
+    console.error("  Range:    node validate-vat.mjs --file input.tsv --range 1-10");
     console.error("  Batch+S:  node validate-vat.mjs --file input.tsv --suggest");
+    console.error("  Test:     node validate-vat.mjs --test");
     process.exit(1);
   }
 }

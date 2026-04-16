@@ -2,6 +2,20 @@ import { runChecksum, queryVIES, queryHMRC } from "./validate-vat.mjs";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// ─── Transient VIES error detection ─────────────────────────
+
+const TRANSIENT_ERRORS = [
+  "MS_MAX_CONCURRENT_REQ",
+  "MS_UNAVAILABLE",
+  "TIMEOUT",
+  "SERVICE_UNAVAILABLE",
+];
+
+function isTransientError(result) {
+  if (!result || !result.error) return false;
+  return TRANSIENT_ERRORS.some((e) => result.error.includes(e));
+}
+
 // ─── Single-digit error correction ──────────────────────────
 
 function suggestCorrections(cc, num) {
@@ -87,31 +101,54 @@ async function getSuggestions(cc, num) {
   const candidates = suggestCorrections(cc, num);
 
   if (candidates.length === 0) {
-    return { candidates: [], confidence: null, verified: [] };
+    return { candidates: [], confidence: null, verified: [], apiErrors: [] };
   }
 
   const isUK = cc === "GB" || cc === "XI";
   const verified = [];
+  const apiErrors = [];
+  let delayMs = 1000;
 
   for (const c of candidates) {
-    await sleep(1000);
-    const result = isUK
-      ? await queryHMRC(c.number)
-      : await queryVIES(cc, c.number);
+    await sleep(delayMs);
 
-    if (result && !result.error && result.registered) {
-      verified.push({
+    let result;
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      result = isUK
+        ? await queryHMRC(c.number)
+        : await queryVIES(cc, c.number);
+
+      if (!isTransientError(result)) break;
+      if (attempt < 3) {
+        const backoff = delayMs * Math.pow(2, attempt);
+        await sleep(backoff);
+      }
+    }
+
+    if (result && result.error) {
+      if (isTransientError(result)) {
+        delayMs = Math.min(delayMs * 2, 5000);
+      }
+      apiErrors.push({
         vatSuggestion: `${cc}${c.number}`,
-        registered: true,
-        name: result.name || "N/A",
-        address: result.address || "N/A",
-        country: result.country || cc,
+        error: result.error,
       });
+    } else if (result && !result.error) {
+      delayMs = Math.max(1000, delayMs > 1000 ? delayMs - 500 : delayMs);
+      if (result.registered) {
+        verified.push({
+          vatSuggestion: `${cc}${c.number}`,
+          registered: true,
+          name: result.name || "N/A",
+          address: result.address || "N/A",
+          country: result.country || cc,
+        });
+      }
     }
   }
 
   const confidence = getVerifiedConfidence(verified.length);
-  return { candidates, confidence, verified };
+  return { candidates, confidence, verified, apiErrors };
 }
 
 export { suggestCorrections, getConfidence, getVerifiedConfidence, getSuggestions };
