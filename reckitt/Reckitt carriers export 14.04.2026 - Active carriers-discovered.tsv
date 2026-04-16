@@ -1,0 +1,120 @@
+TRANSPOREON ID	Carrier	Country	DiscoveredVAT	Source	Confidence	Notes
+242534	Unifeeder A/S	DK	DK11810543	proff.dk / CVR registry	High	CVR 11810543 confirmed at Aarhus
+239840	Orkun Uluslararasi Nakliyat Ihracat ve Ticaret Limited Sirketi	TR		web search	Not found	No Turkish vergi numarası found in public sources
+222443	Tricolore Transport & Logistics	DK	DK33374283	proff.dk / CVR registry	High	CVR 33374283, Thorsvej 8 Padborg matches
+339973	TRANSALLIANCE Group	FR	FR66662013960	societe.com	High	SIREN 662013960, secondary establishment at 5 B Rue Saint Léon, 54000 Nancy matches
+230387	ATL CZ s.r.o.	CZ	CZ26006910	kurzy.cz / Czech business registry	High	IČO 26006910, registered in Hradec Králové
+227867	GEFCO Polska Sp. z o.o.	PL	PL5252109503	KRS / krs-pobierz.pl	High	Now Ceva Ground Logistics Poland, ul. Poleczki 33 Warsaw
+239839	XPO LOGISTICS (NORBERT DENTRESSANGLE) UNITED KINGDOM	GB	GB581379120	vat-lookup.co.uk / Companies House	Medium	XPO Transport Solutions UK Ltd (ex-Norbert Dentressangle Transport Services), registered in Northampton not Leigh
+233644	pfenning logistics	DE	DE812039737	fumo-solutions.com	High	pfenning logistics GmbH GB Transport at Daimlerstraße 4, 68542 Heddesheim matches exactly
+227703	DHL Freight France	FR	FR38488985771	societe.com	High	SIREN 488985771, 19 Bd Courcerin Lognes (Marne la Vallée) matches
+NULL	GEFCO	FR	FR83542050315	societe.com / lefigaro.fr	Medium	GEFCO SA (now CEVA Logistics Europe), SIREN 542050315; Besancon branch not individually confirmed
+228717	P.W. Podkowa Sp. z o.o.	PL	PL5340001656	biznesfinder.pl	High	al. Krakowska 51de, 05-551 Mroków matches
+302772	Geodis United Kingdom Ltd	GB	GB745967283	vat-lookup.co.uk / companycheck.co.uk	High	Company 01912705, registered in High Wycombe
+239887	MacAndrews GmbH	GB		Companies House / globaldatabase.com	Not found	MacAndrews & Company Limited (00334790) at 75 King William St; sources indicate no VAT registration
+238494	GT-Trans Polska Sp. z o.o.	PL	PL1181887288	targeo.pl / KRS	High	KRS 0000276747, Przejazdowa 18 Pruszków matches
+258468	EST Contracts BV - Istanbul branch	NL	NL866889899B01	transfirm.nl	Medium	KvK 94776245, founded 2024; registered address Trompenburgstraat 2-C differs from stored Teleportboulevard
+230869	Frode laursen	DK	DK29482713	proff.dk / CVR registry	High	CVR 29482713, Vittenvej 88-90, 8382 Hinnerup matches
+229592	Transforwarding International Sp. z o.o.	PL	PL5342147482	egospodarka.pl / transforwarding.pl	High	Na Skraju 73A, 05-090 Raszyn matches
+230935	DHL Express Portugal Lda.	PT	PT500731993	nif.pt / iberinform.pt	High	NIF 500731993; registered office in Lisboa, Alcochete is operational site
+231183	EST Contracts BV - Lyon branch	FR	NL866889899B01	transfirm.nl	Low	Same NL company as Istanbul branch; listed as FR but HQ is Amsterdam; no separate French TVA found
+260712	GEFCO ITALIA SPA	IT	IT08983530158	coobiz.it / impresaitalia.info	High	Via Palizzi 89, 20157 Milano matches exactly
+257414	Transportes Pascoal	PT	PT500514666	einforma.pt	High	NIF confirmed on Portuguese business registry
+270235	H. Essers Transport Company Nederland BV	NL	NL002837110B01	transfirm.nl	High	KvK 17040185; registered address Bergen op Zoom, Valkenswaard may be branch
+234810	Schenker Sp z o.o.	PL	PL5270103824	imsig.pl (KRS)	High	KRS 0000040104; HQ at ul. Żwirki i Wigury 16C, Warszawa
+339773	Vesta Ukraine	UA	35322154	opendatabot.ua	High	EDRPOU code; non-EU country, no VAT prefix; ТОВ ВЄСТА УКРАЇНА
+342148	DHL EXPRESS SP. Z O.O.	PL	PL5270022391	targeo.pl (KRS)	High	KRS 0000047237; ul. Osmańska matches area
+308816	Ekol Logistics	TR	TR3300012602	ekol.dev (company website)	High	Mersis 330001260200018; non-EU, vergi kimlik no from official contact page
+256443	ATC CARGO SA	PL	PL9581531010	krs-online.com.pl	High	KRS 0000303741; ul. Kielecka 2, 81-303 Gdynia matches
+243850	Bei-Trans	UA	31526028	opendatabot.ua	High	EDRPOU code; non-EU country, no VAT prefix; ТОВ БЕЙ-ТРАНС, Lviv
+265117	DHL Global Forwarding (Italy) S.p.A. – Div. Freight	IT	IT00754800159	companyreports.it	High	Via delle Industrie 1, Pozzuolo Martesana confirmed
+229245	AMBROGIO TRASPORTI SPA	IT	IT00510420011	impresaitalia.info	High	Via Tognasca 5, 21013 Gallarate confirmed
+234562	WITRANS Izak, Wenerski Sp. jawna	PL	PL5291580400	egospodarka.pl (KRS)	High	KRS 0000277691; ul. Płocka 2, 05-825 Grodzisk Mazowiecki confirmed
+261972	Gefco Tasimacilik ve Lojistik A.S.	TR		multiple sources	Not found	Non-EU; vergi numarası not publicly available in search results
+200019	Schenker Deutschland AG	DE	DE811228366	dbschenker.com (Impressum)	High	HRB 51435, Frankfurt; Dortmund is branch office
+221780	Unterer GesmbH	AT	ATU32430107	firmenabc.at	High	FN 44434 w; Luna 32, 6250 Kundl confirmed
+235220	STALKO Przybysz i Wspólnicy Spółka Jawna	PL	PL1250022090	krs-pobierz.pl (KRS)	High	KRS 0000048814; ul. Poniatowskiego 65, 05-220 Zielonka confirmed
+247138	Codognotto Austria GmbH	AT	ATU64785511	codognotto.eu (legal terms)	High	FN 323946t; company deleted from register Feb 2026
+235502	XPO LOGISTICS (NORBERT DENTRESSANGLE) HIGH CUBE	FR		multiple XPO entities	Not found	Multiple XPO legal entities in France; Soissons branch was Centrale des Franchises XPO (closed 2018); could not determine current entity
+291017	Borusan Lojistik	TR		multiple sources	Not found	Non-EU; vergi numarası not publicly available in search results
+302996	Geodis Logistics Netherlands B.V.	NL	NL003871678B01	transfirm.nl	High	KvK 12037189; Transportcentrum 24, 7547RX Enschede confirmed
+240173	VLANTANA UAB	LT	LT633770418	tax.lt	High	Company code 163377040; Dvaro g. 1, Gobergiškės k., Klaipėdos r. confirmed
+306335	Zammler Ukraine Ltd	UA	35007717	ua-region.com.ua (EDRPOU registry)	High	Non-EU; ЄДРПОУ code, ІПН 350077126587
+260916	Alba-Zöchling	HU	HU10268526	nemzeticegtar.hu	High	Full adószám 10268526-4-07; matched Székesfehérvár address
+306324	GEFCO PORTUGAL TRANSITÁRIOS LDA	PT	PT502719176	nif.pt	High	Address confirmed at Miraflores; NIPC 502719176
+231033	GEFCO Magyarorszag Kft.	HU	HU13632142	tablazat.hu	High	Full adószám 13632142-2-43; now CEVA Ground Logistics Hungary
+303710	WEC Lines	NL	NL007138015B01	transfirm.nl	High	KvK 24159567; address matched Albert Plesmanweg 59 Rotterdam
+294768	LOGİTRANS LOJİSTİK VE TAŞIMACILIK ORG.LTD.ŞTİ	TR		Not found	Not found	Non-EU (Turkey); tax ID not discoverable via web search
+242853	A.M.P. Wieczorek Sp. z o.o.	PL	PL8222212882	krs-pobierz.pl	High	KRS 0000265865; REGON 140775184
+241368	SPEDPARTNER	PL	PL6621768189	monitorfirm.pb.pl	High	KRS 0000240517; address confirmed Leszcze 15, Pińczów
+229071	GONDRAND	FR	FR91602002461	entreprises.lefigaro.fr	High	SFTGF Soc Francaise Transports Gondrand Frères; SIREN 602002461; Colmar is branch office
+247108	Croome LTD	GB		Not found	Not found	Companies House 07384339 confirmed; VAT not discoverable online
+268421	Yusen Logistics UK Ltd	GB	GB593411144	vat-lookup.co.uk	High	Company number 02548297; address confirmed Northampton
+258486	DHL FREIGHT SPAIN SL	ES	ESB83716563	empresia.es	High	Address at C/ Rumania 4, Coslada, Madrid confirmed
+246337	Friday Spółka z ograniczoną odpowiedzialnością Spółka komandytowa	PL	PL5222993085	mapa.targeo.pl, panoramafirm.pl	Medium	Address matched Ryżowa 33A; company may be struck off (Wykreślona)
+286095	Borchard Lines Ltd	GB	GB243408284	borlines.com (legal terms)	High	Company number 00517224; shipping company since 1933
+240088	Luis Simoes Logistica Integrada,s.a.	ES	ESA79502357	datocapital.es, infoempresa.com	Medium	Registered in Guadalajara; user address shows San Fernando de Henares (same postal area 28830)
+337193	DHL Global Forwarding Hellas S.A.	GR		Not found	Not found	Greek ΑΦΜ not discoverable via web search; address confirmed 41 Agiou Dimitriou, Piraeus
+258627	Europejskie Centrum Logistyczne Sp. z o.o.	PL	PL5170355762	imsig.pl	High	KRS 0000394726; address confirmed Przemysłowa 13B, Rzeszów
+258650	NORBERT DENTRESSANGLE LOGISTICS POLAND	PL	PL9820243290	mapa.targeo.pl	Medium	Now XPO Supply Chain Poland / GXO Logistics Poland; acquired by XPO in 2015
+300245	LOCKWOOD HAULAGE LTD.	GB	GB117334490	vat-lookup.co.uk	Medium	Company number 01087339; found via Lockwood Group VAT listing page
+262830	LOTOS BALTICA	LT	LT100002817211	tax.lt, rekvizitai.vz.lt	High	Company code 300610241; VAT payer since 2007
+339552	GEFCO (Suisse) SA	CH	CHE105880361MWST	auditorstats.ch (official registry)	High	Main entity now CEVA Ground Logistics Switzerland SA; active VAT since 1990; Geneva/Carouge location
+262730	The Overland Transport & Trading Co Ltd	GB	GB128303003	overland-transport.co.uk (company website)	High	Companies House 00824486; address matches Billinghay, Lincoln LN4 4BU
+272106	AEROTRANS PIOTR CYRSON	PL	PL5311413267	biznesfinder.pl	Medium	Address matches: Wrzosowa 12, 05-101 Nowy Dwór Mazowiecki; REGON 142110388
+230638	Simple Way Sp z o.o sp.k	PL	PL5951455352	krs-online.com.pl (KRS registry)	High	KRS 0000342324; address matches: Wigury 20, 64-400 Międzychód
+334308	XPO LOGISTICS_ Transport Solution FTL PACKED France	FR	FR37386220123	societe.com	Medium	XPO Logistics Europe (SIREN 386220123); all sub-entities at Beausemblant 26240 are closed/merged into parent
+244904	GEFCO France	FR	FR83542050315	societe.com (French registry)	High	GEFCO SA; SIREN 542050315; Courbevoie address matches
+262232	Geis PL Sp. z o.o.	PL	PL5261025183	importgenius.com, geis.pl (official site)	High	KRS 0000053574; address matches: Pieńki 7, 95-010 Stryków
+273747	Aro-Trans Rafał Bartosz Kosztowny Spedycja i Produkcja Mebli	PL	PL9532383064	targeo.pl	Medium	Address matches: Ogrody 29, 85-870 Bydgoszcz
+292757	KLog Logística SA	PT	PT510338879	nif.pt, iberinform.pt	High	Confirmed NIF; HQ in Maia, branch at Rua de Castelões Centro 260, Vila do Conde matches
+276509	Sokołów-Logistyka	PL	PL8231060414	krs-online.com.pl (KRS registry)	High	KRS 0000094189; address matches: al. 550-Lecia 2, 08-300 Sokołów Podlaski
+335085	Ekol Spain	ES	ESB66160052	expansion.com, lokinn.com (Spanish registry)	High	Ekol Spain Logistics SL (now DFDS Logistics Iberia SL since Dec 2025); has Coslada location
+257579	Rail Cargo Logistics - Poland Sp. z o.o.	PL	PL6292204786	krs-pobierz.pl (KRS registry)	High	KRS 0000038546; parent: Rail Cargo Logistics - Austria GmbH
+260701	VGL Road Sp. z o.o.	PL	PL5862253658	targeo.pl	Medium	Address matches: al. Zwycięstwa 237, 81-521 Gdynia
+321388	Frigo-trans	PL	PL8252181465	panoramafirm.pl, frigo-express.com.pl	Low	Address Międzyrzecka 186, Łuków matches Frigo-Express Logistic, not Frigo-Trans; name mismatch; original NIPs 8252102129/8250004747 not found in registries
+320606	DHL Global Forwarding	RO	RO31169876	totalfirme.ro, IATA directory	Medium	Entity is DHL Logistics SRL at Costache Negri 1-5, Sector 5, Bucharest 050552; working point of DHL
+374769	BARSAN Global Logistics	PL	PL6792888463	krs-pobierz.pl, northdata.com (KRS registry)	High	Barsan Global Logistics Polska sp. z o.o.; KRS 0000257983; Katowice
+281425	Grupa Transportowa Sp. z o.o.	PL	PL7712852200	targeo.pl, imsig.pl, grupatransportowa.pl	High	KRS 0000367098; address matches: Łódzka 30AB, 97-300 Piotrków Trybunalski
+325764	DHL GLOBAL FORWARDING TASIMACILIK A.S.	TR	TR2950430412	importkey.com (shipping database)	Medium	10-digit Turkish vergi numarası; not from official registry
+323836	Uniserve Ltd	GB	GB927553502	vat-lookup.co.uk	Medium	VAT registered to Uniserve Holdings Ltd at same Tilbury address (group VAT); Companies House 01826635 for Uniserve Ltd
+302185	Cargo Line/ГК Карго Лайн	BY	BY390170432	praca.by	Medium	UNP (Belarus tax ID); Vitebsk region matches; international refrigerated transport company
+262215	DHL FREIGHT SPAIN, S.L	ES	ESB83716563	dhl.com legal entity list	High	CIF B83716563; registered at Rumanía 4, Coslada, Madrid
+313765	Arsenal Logistic Sp. z o.o.	PL		Web search	Not found	No Polish KRS/NIP record found matching this exact entity name at Aleje Jerozolimskie 85; arsenal-logistics.com is a UK company (company code 11349471)
+300152	FERTRANS SPAGNA SL	ES	ESB65925687	einforma.com	High	Current address: Pol. Ind. Pla de Fonolleres, Granyanella, Lleida (moved from Barcelona)
+318021	BARSAN GLOBAL LOGISTIC KFT	HU	HU25781841	nemzeticegtar.hu	High	Adószám 25781841-2-41; registered at Honvéd utca 8, 1054 Budapest (not Győr as in Transporeon)
+282622	TBX SP. Z O.O.	PL	PL1182096488	panoramafirm.pl	Medium	Address confirmed: Szyszkowa 35/37, 02-285 Warszawa
+280700	NAPOLITRANS SRL	IT	IT04775450655	registroaziende.it	High	P.IVA 04775450655; Via Pezzagrande, 84025 Eboli (SA)
+305312	DHL FREIGHT	FR	FR38488985771	societe.com	High	DHL FREIGHT FRANCE SAS; SIREN 488985771; 19 Bd Courcerin, 77185 Lognes
+236381	P.U.T.H. TRANS-POL SP.JAWNA S. KLASZTORNY, Z.DĄBROWSKI	PL	PL8360007706	krs-pobierz.pl	High	KRS 0000185273; ul. Kozietulskiego 4a, 96-100 Skierniewice
+286632	FM LOGISTIC IBERICA, S.L.	ES	ESB31506025	einforma.com	High	CIF B31506025; C/ Berriobide 34, 31013 Ansoain, Navarra
+308710	VIRADO TRANSPORT LTD	GB		qoobus.com, Companies House	Not found	Company number 09718054; records indicate company is not VAT registered
+328811	MAERSK LINE	DK	DK53139655	maersk.com	High	A.P. Møller-Mærsk A/S (formerly Maersk Line A/S); Esplanaden 50, 1263 Copenhagen K
+334648	BATUINTERNATİONAL LOJİSTİK	TR		Web search	Not found	Full name: Batu International Lojistik İç ve Dış Tic. A.Ş.; tax number not publicly available online
+312643	Overis Sp.z,o.o.	PL	PL8252176323	aleo.com, imsig.pl	High	KRS 0000588571; ul. Łapiguz 91, 21-400 Łuków
+311846	YILMAZ ULUSLARARASI NAKLİYAT	TR		Web search	Not found	Full name: Yılmaz Uluslararası Nakliyat İth. İhr. San. ve Tic. Ltd. Şti.; tax number not publicly available online
+343126	EVEROAD	FR	FR55819871724	societe.com	High	Now SENNDER FRANCE SAS; SIREN 819871724; 24 rue Pétrelle, 75009 Paris
+348059	SARP INTERMODAL	TR		Web search	Not found	Full name: Sarp Intermodal Hizmetleri İç ve Dış Tic. A.Ş.; rebranded as Talay Logistics in 2024; tax number not publicly available online
+346723	EXPEDITORS INTERNATIONAL UK LTD	GB	GB417141383	vat-lookup.co.uk	High	Company number 01872622; registered at 1 Ascot Road, Bedfont, Middlesex TW14 8QH
+305812	GEFCO Greece	GR		Web search	Not found	GEFCO Greece subsidiary (est. 2017); now part of CEVA Logistics; AFM not found in public sources
+354554	ATOM ULUSLARARASI NAKLİYAT VE LOJİSTİK HİZMETLERİ TİC.A.S.	TR	TR1030553378	atomlojistik.com	High	Tax ID 1030553378; Trade Registry: İzmir No. 168765; Alsancak, Konak, İzmir
+362880	F.H.U Łuczkowski	PL	PL7352728017	panoramafirm.pl	Medium	FHU Marcin Łuczkowski; ul. Kościelna 5, 34-400 Nowy Targ; international refrigerated transport
+365199	Containerships - CMA CGM GmbH	DE		Handelsregister Hamburg, northdata.com, creditsafe	Not found	German VAT not publicly available; HRB 59289
+365019	RANGE-TRANS SPOLKA Z OGRANICZANA ODPOWIEDZIALNOSCIA	PL		Polish KRS/CEIDG registries	Not found	Company not found in Polish business registries at given address
+366132	Uber Freight B.V.	NL	NL859288961B01	creditsafe.com	Medium	Entity renamed to sennder Benelux B.V.; same KvK 72928069
+366806	TRANSPIL-SPEDITION LOGISTICS GROUP SP. Z O.O. SP. KOMANDYTOWA	PL	PL7671705599	northdata.com, krs-online.com.pl	High	KRS 0000670736; address Brzozowa 2, Skórka matches
+379056	Luk-Trans Łukasz Bloch	PL	PL7621873194	targeo.pl, CEIDG	High	Name and address match exactly; sole proprietorship
+391494	DHL Parcel (Switzerland) AG	CH	CHE109390707MWST	moneyhouse.ch, lixt.ch	High	UID CHE-109.390.707; Güterstrasse 107, Pratteln matches
+302920	F&O Agnieszka Osica-Foltyn	PL	PL8221247476	monitorfirm.pb.pl, CEIDG	High	Name and Mińsk Mazowiecki address match exactly
+400030	DBK LOGISTICS SP. Z O.O. SP.K.	PL	PL5252827718	krs-pobierz.pl, aleo.com	Medium	sp.k. struck off 2023; NIP shared with active DBK LOGISTICS CEE at same Zajęcza 15 address
+400421	Broekman Logistics Sp. z o.o.	PL	PL7811851793	panoramafirm.pl, oferteo.pl	High	Piekary 6/8, Poznań matches; KRS confirmed
+400691	sennder Benelux B.V._TC	NL	NL859288961B01	creditsafe.com, btw-zoeken.nl	High	KvK 72928069; formerly Uber Freight B.V.
+313610	SA TORELLO TRASPORTI SRL	FR	FR77822218129	francebilan.fr	High	French SIREN 822218129; branch at 38070 Saint-Quentin-Fallavier near Lyon
+412708	FM Logistic - Crépy-en-Valois (FR60)	FR	FR27367801404	entreprises.lefigaro.fr	High	Legal entity is FM France SAS, SIREN 367801404; site at rue du Bois de Tillet confirmed
+413540	Quality Trans Sp.z o.o.	PL	PL6621821630	krs-online.com.pl	Low	Only Quality Trans sp. z o.o. found is registered in Pińczów, not Katowice; address mismatch
+441173	UAB Girteka Europe West	LT	LT100015399114	tax.lt (Lithuanian tax registry)	High	Laisvės pr. 36, Vilnius matches; renamed to Girteka Logistics UAB in 2025
+460334	SAFE SHIPPING SP. Z O.O.	PL	PL5862072135	krs-online.com.pl	High	KRS 0000043913; Korczaka 13, 81-473 Gdynia matches exactly
+601754	AKBULUT NAK TUR LTD ŞTİ	TR		und.org.tr, nakliyeilani.com	Not found	Turkish vergi numarası not available in public online sources
+459342	Damco Germany GmbH	DE	DE811151940	aeodirectory.com	High	AEO certified; Wendenstraße 375, Hamburg; owned by Maersk A/S
+226386	Unifeeder Germany	DE		hafen-hamburg.de, Handelsregister HRB 110177	Not found	Branch of Danish Unifeeder A/S (DK VAT: DK11810543); German USt-IdNr not publicly listed
+229603	T.E.L.S. Transeuropean Logistic Services Ltd. (TELS)	GB	GB989803158	Companies House (gov.uk), vat-lookup.co.uk	High	Company number 04303303; renamed to TELS Global UK Ltd (June 2024); registered address moved to Prospect House Suite 22, 2 Athenaeum Road, Whetstone, N20 9AE
