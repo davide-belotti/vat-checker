@@ -45,6 +45,7 @@ function applyDiscovery(enrichedPath, discoveredPath, jobDir, idColumn) {
   }
 
   let updated = 0;
+  let lowConfidence = 0;
   let notFound = 0;
 
   for (const record of records) {
@@ -67,6 +68,7 @@ function applyDiscovery(enrichedPath, discoveredPath, jobDir, idColumn) {
     }
 
     if (confidence === "Low") {
+      lowConfidence++;
       const extra = dNotes
         ? ` ${Array.isArray(dNotes) ? dNotes.join("; ") : dNotes}`
         : "";
