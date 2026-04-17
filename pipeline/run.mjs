@@ -5,7 +5,7 @@ import { execSync } from "child_process";
 
 import { transform } from "./transform.mjs";
 import { prepareBatch } from "./prepare-batch.mjs";
-import { mergeResults, writeEnrichedCsv, printMergeSummary } from "./merge-results.mjs";
+import { mergeResults, writeEnriched, printMergeSummary } from "./merge-results.mjs";
 import { prepDiscovery, applyDiscovery } from "./discover-unresolved.mjs";
 import { apiPass2 } from "./api-pass2.mjs";
 import { finalize } from "./finalize.mjs";
@@ -65,21 +65,21 @@ async function run(jobDir, startStep) {
     transform(inputPath, mappingPath, jobDir);
   }
 
-  const normalizedPath = join(intDir, "normalized.csv");
+  const normalizedPath = join(intDir, "normalized.ndjson");
 
   // ── Step 2: API Pass 1 ────────────────────────────────────
 
   if (step <= 2) {
     console.log(`\n  ── Step 2: API Pass 1 (VIES / HMRC) ──`);
-    const { batchPath, sidecarPath } = prepareBatch(normalizedPath, jobDir, idColumn);
+    const { batchPath } = prepareBatch(normalizedPath, jobDir, idColumn);
 
-    console.log(`  Running validate-vat.mjs --file --suggest...`);
+    console.log(`  Running validate-vat.mjs --file...`);
     console.log(`  (This may take 10-30 minutes depending on row count)\n`);
 
     const rootDir = resolve(jobDir, "..", "..", "..");
     try {
       execSync(
-        `node validate-vat.mjs --file "${batchPath}" --suggest`,
+        `node validate-vat.mjs --file "${batchPath}"`,
         { cwd: rootDir, stdio: "inherit", timeout: 3600000 },
       );
     } catch (err) {
@@ -87,19 +87,17 @@ async function run(jobDir, startStep) {
     }
 
     const resultsPath = batchPath.replace(".tsv", "-results.tsv");
-    const suggestionsPath = batchPath.replace(".tsv", "-suggestions.tsv");
-
-    const { idColumn: id, merged } = mergeResults(
-      join(intDir, "sidecar.json"), resultsPath, suggestionsPath, jobDir,
+    const merged = mergeResults(
+      join(intDir, "sidecar.ndjson"), resultsPath, jobDir,
     );
-    const pass1Path = join(intDir, "enriched-pass1.csv");
-    writeEnrichedCsv(merged, id, pass1Path);
+    const pass1Path = join(intDir, "enriched-pass1.ndjson");
+    writeEnriched(merged, pass1Path);
     printMergeSummary(merged, pass1Path);
   }
 
   // ── Step 3: Discover unresolved (web search) ──────────────
 
-  const pass1Path = join(intDir, "enriched-pass1.csv");
+  const pass1Path = join(intDir, "enriched-pass1.ndjson");
 
   if (step <= 3) {
     console.log(`\n  ── Step 3: Discover unresolved rows ──`);
@@ -113,7 +111,7 @@ async function run(jobDir, startStep) {
       console.log(`  │  "Discover missing VATs in ${outPath}"              │`);
       console.log(`  │                                                     │`);
       console.log(`  │  Then save results to:                              │`);
-      console.log(`  │  ${join(intDir, "discovered.csv")}                  │`);
+      console.log(`  │  ${join(intDir, "discovered.ndjson")}                │`);
       console.log(`  │                                                     │`);
       console.log(`  │  Re-run with: --step 3apply                         │`);
       console.log(`  └─────────────────────────────────────────────────────┘`);
@@ -123,22 +121,18 @@ async function run(jobDir, startStep) {
   }
 
   if (step <= 3 || startStep === "3apply") {
-    const discoveredFile = join(intDir, "discovered.csv");
-    const discoveredJson = join(intDir, "discovered.json");
-    const discoveredPath = existsSync(discoveredFile) ? discoveredFile
-      : existsSync(discoveredJson) ? discoveredJson : null;
-
-    if (discoveredPath) {
+    const discoveredPath = join(intDir, "discovered.ndjson");
+    if (existsSync(discoveredPath)) {
       applyDiscovery(pass1Path, discoveredPath, jobDir, idColumn);
     } else {
-      console.log(`  No discovery file found — skipping apply.`);
+      console.log(`  No discovery file found at ${discoveredPath} — skipping apply.`);
     }
   }
 
   // ── Step 4: API Pass 2 ────────────────────────────────────
 
-  const discoveredPath = join(intDir, "enriched-discovered.csv");
-  const pass2Input = existsSync(discoveredPath) ? discoveredPath : pass1Path;
+  const discoveredEnrichedPath = join(intDir, "enriched-discovered.ndjson");
+  const pass2Input = existsSync(discoveredEnrichedPath) ? discoveredEnrichedPath : pass1Path;
 
   if (step <= 4) {
     console.log(`\n  ── Step 4: API Pass 2 (validate discovered VATs) ──`);
@@ -147,7 +141,7 @@ async function run(jobDir, startStep) {
 
   // ── Step 5: Compare Names ─────────────────────────────────
 
-  const pass2Path = join(intDir, "enriched-pass2.csv");
+  const pass2Path = join(intDir, "enriched-pass2.ndjson");
   const namesInput = existsSync(pass2Path) ? pass2Path : pass2Input;
 
   if (step <= 5) {
@@ -176,7 +170,7 @@ async function run(jobDir, startStep) {
     if (!startStep || startStep === "6") return;
   }
 
-  // ── Step 7: Finalize (confidence labels) ──────────────────
+  // ── Step 7: Finalize (confidence labels + CSV) ────────────
 
   if (step <= 7) {
     console.log(`\n  ── Step 7: Assign Confidence Labels ──`);

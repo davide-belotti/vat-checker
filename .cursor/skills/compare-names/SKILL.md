@@ -3,7 +3,7 @@ name: compare-names
 description: >-
   Compare carrier names against registered business names using LLM reasoning.
   Use when the user asks to compare names, match names, check name matches,
-  or mentions an enriched CSV file needing name comparison.
+  or mentions an enriched NDJSON file needing name comparison.
 ---
 
 # Compare Names
@@ -14,25 +14,51 @@ handle rebranding, legal suffixes, abbreviations, and transliteration.
 
 ## Required Input
 
-This skill needs **one file**: a pipe-delimited CSV with at least `Carrier`
-and `RegisteredName` columns. If the user does not provide a file path, ask:
+This skill reads and writes **one file**: an NDJSON file (one JSON object per
+line) produced by the pipeline. Typical path:
 
-> Please provide the path to the enriched CSV file, e.g.:
-> `Compare names in pipeline/jobs/<name>/intermediate/enriched-pass2.csv`
+```
+pipeline/jobs/<name>/intermediate/enriched-pass2.ndjson
+```
+
+If the user does not provide a file path, ask:
+
+> Please provide the path to the enriched NDJSON file, e.g.:
+> `Compare names in pipeline/jobs/<name>/intermediate/enriched-pass2.ndjson`
+
+## Record shape
+
+Each line is a JSON object with at least:
+
+```json
+{
+  "id": "242534",
+  "carrier": "LKW Walter",
+  "registered": "Yes",
+  "registeredName": "LKW WALTER INTERNATIONALE TRANSPORTORGANISATION AG",
+  "nameMatch": "",
+  "notes": []
+}
+```
+
+You'll be modifying `nameMatch` and (for Partial/Mismatch) `notes`.
 
 ## Workflow
 
 ### Step 1 — Load and filter
 
-Read the CSV file (pipe-delimited `|`). Collect rows where:
+Read the file line by line, parsing each with `JSON.parse`. Collect records
+where:
 
-- `RegisteredName` is not empty and not `N/A`
+- `registeredName` is a non-empty string (not `""`, not absent)
 
-Rows without a registered name get `NameMatch` = `N/A` — skip them.
+Records without a registered name get `nameMatch = "N/A"` — skip further
+reasoning for them.
 
 ### Step 2 — LLM name comparison
 
-For each eligible row, compare `Carrier` (input) vs `RegisteredName` (from API/web).
+For each eligible record, compare `carrier` (input) vs `registeredName`
+(from API/web).
 
 #### Matching rules — use natural language reasoning, not string comparison:
 
@@ -44,7 +70,7 @@ For each eligible row, compare `Carrier` (input) vs `RegisteredName` (from API/w
 | Typos / misspellings | `Fercamm` vs `FERCAM SPA` | Match |
 | Partial name in longer | `Dachser` vs `DACHSER SE LOGISTIKZENTRUM` | Match |
 | Local language full form | `SKAT TRANSPORT SP. Z O.O. SP. K.` vs `SKAT TRANSPORT SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ SPÓŁKA KOMANDYTOWA` | Match |
-| Rebranding / acquisition | `GEFCO Polska` vs `CEVA GROUND LOGISTICS POLAND` | Mismatch |
+| Rebranding / acquisition | `GEFCO Polska` vs `CEVA GROUND LOGISTICS POLAND` | Partial |
 | Parent/subsidiary | `DHL Freight France` vs `DHL FREIGHT FRANCE SAS` | Match |
 | Holding company name | `Schenker Sp z o.o.` vs `DB SCHENKER SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ` | Match |
 | Completely different | `ABC Corp` vs `XYZ Trading Ltd` | Mismatch |
@@ -56,32 +82,34 @@ For each eligible row, compare `Carrier` (input) vs `RegisteredName` (from API/w
   A.S., Kft., AB, OY, UAB, SRL, EOOD, etc.
 - **Ignore case and diacritics**: ö=o, ł=l, ü=u, etc.
 - **"Partial" means the company likely IS the same but has been renamed.**
-  This is different from "Match" — it signals a structural event (acquisition,
+  Different from "Match" — it signals a structural event (acquisition,
   rebrand, merger) that the reviewer should know about.
-- **Mismatch means clearly different companies.** Not just a name variation —
-  genuinely different entities.
+- **Mismatch means clearly different companies** — not just a name variation.
 
 ### Step 3 — Notes for Partial and Mismatch
 
-**Mandatory.** For every Partial or Mismatch verdict, write an explanation in
-the `Notes` column:
+**Mandatory.** For every `Partial` or `Mismatch` verdict, append an
+explanation to the `notes` array (it's already an array — just push a string):
 
-- **Partial**: Explain the name change. What happened, when, why.
+- **Partial**: explain the name change. What happened, when, why.
   `"GEFCO Polska → CEVA Ground Logistics Poland (GEFCO acquired by CMA CGM 2022, rebranded to CEVA)"`
 
-- **Mismatch**: Explain what was found instead.
+- **Mismatch**: explain what was found instead.
   `"API returns PIRELLI & C. SPA — completely different company, possible wrong VAT in source data"`
 
-For **Match** verdicts, Notes are optional (only add if there's something
-non-obvious, like a DBA name or subsidiary relationship).
+For **Match** verdicts, notes are optional (only add if non-obvious, e.g., a
+DBA name or subsidiary relationship).
 
 ### Step 4 — Update the file
 
-For each compared row, write the verdict into the `NameMatch` column.
-For Partial and Mismatch, append the explanation to the `Notes` column
-(preserve existing notes, separate with "; ").
+For each compared record, set `nameMatch` to one of: `"Match"`, `"Partial"`,
+`"Mismatch"`, `"N/A"`.
 
-Write the updated file back to the **same path** (overwrite).
+For Partial and Mismatch, push the explanation onto `record.notes` (preserve
+existing entries in the array — just append).
+
+Write the updated records back to the **same NDJSON path** (overwrite). One
+JSON object per line, no trailing commas, no pretty-printing.
 
 ### Step 5 — Report
 
@@ -92,8 +120,8 @@ Name Comparison Summary
 ───────────────────────
 Compared:    N rows
 Match:       N (same company)
-Partial:     N (renamed/rebranded — see Notes)
-Mismatch:    N (different company — see Notes)
+Partial:     N (renamed/rebranded — see notes)
+Mismatch:    N (different company — see notes)
 N/A:         N (no registered name)
 
 Partial matches:
@@ -107,9 +135,10 @@ Mismatches:
 
 ## Important Constraints
 
-- **Only modify `NameMatch` and `Notes` columns** — do not change any other data
-- **Notes are mandatory for Partial and Mismatch** — the reviewer must be able
-  to understand the verdict without re-investigating
-- **Name match is the strongest confidence signal** — be accurate. When uncertain
-  between Match and Partial, choose Partial (conservative)
+- **Only modify `nameMatch` and `notes`** — do not change any other fields
+- **Notes are mandatory for Partial and Mismatch** — the reviewer must
+  understand the verdict without re-investigating
+- **`notes` is always an array of strings** — never a concatenated string.
+  Use `record.notes.push("...")`, not `record.notes += "; ..."`
+- **When uncertain between Match and Partial, choose Partial** (conservative)
 - **Always read the file first** — don't assume file contents from memory

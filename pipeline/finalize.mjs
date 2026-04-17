@@ -1,54 +1,55 @@
-import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 import { fileURLToPath } from "url";
-import { SEP, NON_EU_COUNTRIES } from "./transform.mjs";
-import { readPipeCsv, assignConfidence } from "./merge-results.mjs";
+import { readNdjson, writeCsv } from "./lib/io.mjs";
+import { assignConfidence } from "./merge-results.mjs";
 
-const esc = (s) => (s ?? "").toString().replace(/\|/g, " ");
+// ─── Canonical output column order ──────────────────────────
+// This is the ONLY place the pipeline decides what the final CSV
+// looks like — column order, header casing, and how nested fields
+// (like notes[]) are flattened.
 
-// ─── Finalize: assign confidence labels + write output ──────
+function outputColumns(idColumn) {
+  return [
+    { key: "id",                header: idColumn },
+    { key: "carrier",           header: "Carrier" },
+    { key: "originalVat",       header: "OriginalVAT" },
+    { key: "vat",               header: "VAT" },
+    { key: "vatSource",         header: "VatSource" },
+    { key: "country",           header: "Country" },
+    { key: "registered",        header: "Registered" },
+    { key: "registeredName",    header: "RegisteredName" },
+    { key: "registeredAddress", header: "RegisteredAddress" },
+    { key: "storedAddress",     header: "StoredAddress" },
+    { key: "nameMatch",         header: "NameMatch" },
+    { key: "addressMatch",      header: "AddressMatch" },
+    { key: "confidence",        header: "Confidence" },
+    { key: "notes",             header: "Notes" },  // array → "a; b; c"
+  ];
+}
+
+// ─── Finalize: assign confidence + write output CSV ─────────
 
 function finalize(enrichedPath, jobDir, idColumn) {
-  const { headers, rows } = readPipeCsv(enrichedPath);
+  const records = readNdjson(enrichedPath);
 
-  const stats = { Confirmed: 0, "Likely correct": 0, "To be verified": 0, "Non-EU": 0, Unresolved: 0 };
+  const stats = {
+    Confirmed: 0, "Likely correct": 0, "To be verified": 0,
+    "Non-EU": 0, Unresolved: 0,
+  };
 
-  for (const row of rows) {
-    const label = assignConfidence({
-      Registered: row.Registered || "",
-      VatSource: row.VatSource || "",
-      NameMatch: row.NameMatch || "",
-      Country: row.Country || "",
-    });
-    row.Confidence = label;
+  for (const r of records) {
+    const label = assignConfidence(r);
+    r.confidence = label;
     stats[label] = (stats[label] || 0) + 1;
   }
 
-  // Write final output
   const outPath = join(jobDir, "output", "enriched.csv");
-  const header = [
-    idColumn, "Carrier", "OriginalVAT", "VAT", "VatSource", "Country",
-    "Registered", "RegisteredName", "RegisteredAddress", "StoredAddress",
-    "NameMatch", "AddressMatch", "Confidence", "Notes",
-  ].join(SEP);
-
-  const lines = rows.map((r) =>
-    [
-      esc(r[idColumn]), esc(r.Carrier), esc(r.OriginalVAT), esc(r.VAT),
-      r.VatSource || "original", r.Country || "", r.Registered || "",
-      esc(r.RegisteredName || ""), esc(r.RegisteredAddress || ""),
-      esc(r.StoredAddress || ""),
-      r.NameMatch || "", r.AddressMatch || "", r.Confidence || "",
-      esc(r.Notes || ""),
-    ].join(SEP),
-  );
-
-  writeFileSync(outPath, [header, ...lines].join("\n") + "\n", "utf-8");
+  writeCsv(outPath, records, outputColumns(idColumn));
 
   console.log(`\n  Finalize`);
   console.log(`  ────────`);
   console.log(`  Output:          ${outPath}`);
-  console.log(`  Total:           ${rows.length}`);
+  console.log(`  Total:           ${records.length}`);
   console.log(`  Confirmed:       ${stats.Confirmed}`);
   console.log(`  Likely correct:  ${stats["Likely correct"]}`);
   console.log(`  To be verified:  ${stats["To be verified"]}`);
@@ -62,10 +63,10 @@ function finalize(enrichedPath, jobDir, idColumn) {
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const [enrichedPath, jobDir, idColumn] = process.argv.slice(2);
   if (!enrichedPath || !jobDir || !idColumn) {
-    console.error("Usage: node pipeline/finalize.mjs <enriched.csv> <jobDir> <idColumn>");
+    console.error("Usage: node pipeline/finalize.mjs <enriched.ndjson> <jobDir> <idColumn>");
     process.exit(1);
   }
   finalize(enrichedPath, jobDir, idColumn);
 }
 
-export { finalize };
+export { finalize, outputColumns };

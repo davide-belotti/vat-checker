@@ -1,8 +1,7 @@
-import { readFileSync, writeFileSync, existsSync } from "fs";
-import { basename, dirname, join } from "path";
+import { readFileSync } from "fs";
+import { join } from "path";
 import { fileURLToPath } from "url";
-
-const SEP = "|";
+import { writeNdjson } from "./lib/io.mjs";
 
 const sanitize = (s) => s.replace(/[\s\-._,/\\]+/g, "");
 
@@ -124,7 +123,7 @@ function transform(inputPath, mappingPath, jobDir) {
     process.exit(1);
   }
 
-  const rows = [];
+  const records = [];
   const stats = { valid: 0, placeholder: 0, missing: 0, wrong_format: 0, non_eu: 0 };
 
   for (let i = 1; i < lines.length; i++) {
@@ -140,43 +139,31 @@ function transform(inputPath, mappingPath, jobDir) {
 
     stats[status]++;
 
-    rows.push({
+    records.push({
       id: get(iId),
       carrier: get(iCarrier),
       originalVat: rawVat === "NULL" ? "" : rawVat,
       vat,
+      vatSource: "original",
       vatStatus: status,
       country,
       storedAddress: buildStoredAddress([
         get(iStreet1), get(iStreet2), get(iZip), get(iCity),
       ]),
+      notes: [],
     });
   }
 
   const intDir = join(jobDir, "intermediate");
-  const outPath = join(intDir, "normalized.csv");
-
-  const esc = (s) => (s ?? "").toString().replace(/\|/g, " ");
-  const outHeader = [
-    mapping.id, "Carrier", "OriginalVAT",
-    "VAT", "VatStatus", "Country", "StoredAddress",
-  ].join(SEP);
-
-  const outLines = rows.map((r) =>
-    [
-      esc(r.id), esc(r.carrier), esc(r.originalVat),
-      esc(r.vat), r.vatStatus, r.country, esc(r.storedAddress),
-    ].join(SEP),
-  );
-
-  writeFileSync(outPath, [outHeader, ...outLines].join("\n") + "\n", "utf-8");
+  const outPath = join(intDir, "normalized.ndjson");
+  writeNdjson(outPath, records);
 
   console.log(`\n  Transform`);
   console.log(`  ─────────`);
   console.log(`  Input:        ${inputPath}`);
   console.log(`  Mapping:      ${mappingPath}`);
   console.log(`  Output:       ${outPath}`);
-  console.log(`  Total rows:   ${rows.length}`);
+  console.log(`  Total rows:   ${records.length}`);
   console.log(`  Valid VAT:    ${stats.valid}`);
   console.log(`  Placeholder:  ${stats.placeholder}`);
   console.log(`  Missing:      ${stats.missing}`);
@@ -184,7 +171,7 @@ function transform(inputPath, mappingPath, jobDir) {
   console.log(`  Non-EU/UK:    ${stats.non_eu}`);
   console.log();
 
-  return { outPath, idColumn: mapping.id, rows };
+  return { outPath, idColumn: mapping.id, records };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
@@ -196,4 +183,4 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   transform(inputPath, mappingPath, jobDir);
 }
 
-export { transform, classifyAndReconstruct, NON_EU_COUNTRIES, SUPPORTED_EU_UK, SEP };
+export { transform, classifyAndReconstruct, NON_EU_COUNTRIES, SUPPORTED_EU_UK };
