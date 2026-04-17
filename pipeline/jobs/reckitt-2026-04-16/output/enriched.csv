@@ -1,0 +1,259 @@
+TRANSPOREON ID|Carrier|OriginalVAT|VAT|VatSource|Country|Registered|RegisteredName|RegisteredAddress|StoredAddress|NameMatch|AddressMatch|Confidence|Notes
+242534|Unifeeder A/S|DK0000000000||original|DK||||Hveensgade 1, 8000, Aarhus|||Unresolved|No VAT: placeholder
+200003|LKW Walter International AG|ATU19208701|ATU19208701|original|AT|Yes|LKW WALTER Internationale Transportorganisation AG|IZ Noe Sued Str 14, AT-2355 Wiener Neudorf|IZ NÖ SÜD STR. 14, 2355, Wiener Neudorf|||Confirmed|
+239840|Orkun Uluslararasi Nakliyat Ihracat ve Ticaret Limited Sirketi|||original|TR||||Ulus Mahallesi Kültür Caddesi No: 125, HURRIYET MAHALLESI CATALCA YOLU CAD 464, 34537, ISTANBUL|||Non-EU|No VAT: missing
+221276|dls Land u. See Speditionsges. mbH|DE 811 252 507|DE811252507|original|DE|Yes|N/A|N/A|Jacobsrade 1, 22962, Siek|||Confirmed|
+222443|Tricolore Transport & Logistics|DK0000000000||original|DK||||Thorsvej 8, 6330, Padborg|||Unresolved|No VAT: placeholder
+229603|T.E.L.S. Transeuropean Logistic Services Ltd. (TELS)|4303303|GB4303303|original|GB||||Suite 4, 11 Rosemont Road, Hampstead, NW3 6NG, London|||Unresolved|
+339973|TRANSALLIANCE Group|FR0000000000||original|FR||||5 bis rue Saint Léon, 54000, NANCY|||Unresolved|No VAT: placeholder
+230387|ATL CZ s.r.o.|||original|CZ||||Kladska 916, 500 03, Hradec Kralove|||Unresolved|No VAT: missing
+227867|GEFCO Polska Sp. z o.o.|||original|PL||||pl.Bankowy 2, 00-095, Warszawa|||Unresolved|No VAT: missing
+227301|AGROMEX Wojciech i Jacek Fraszka sp. j.|PL8310003586|PL8310003586|original|PL|Yes|AGROMEX WOJCIECH I JACEK FRASZKA SPÓŁKA JAWNA|MARZENIN , PL. RÓŻANY 3, 98-160 SĘDZIEJOWICE|Marzenin, Plac Rozany 3, 98160, Sedziejowice|||Confirmed|
+228425|2XL Nv|BE449424358|BE449424358|original|BE||||Baron de Maerelaan 155, 8380, Zeebrugge|||Unresolved|
+227389|MIRATRANS TRANSPORT SP. Z O.O.|PL7322182068|PL7322182068|original|PL|Yes|MIRATRANS TRANSPORT SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|SIERPÓW 33, 95-035 OZORKÓW|Sierpów 33, 95-035, Ozorków|||Confirmed|
+227348|Link Sp. z o.o.|PL5210086737|PL5210086737|original|PL|Yes|'LINK' SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|NADRZECZNA 17, 05-462 WIĄZOWNA|Nadrzeczna 17, 5462, Wiazowna|||Confirmed|
+229892|ROHLIG SUUS Logistics S.A.|1230993241|PL1230993241|original|PL|Yes|'ROHLIG SUUS LOGISTICS SPÓŁKA AKCYJNA'|RÓWNOLEGŁA 4A, 02-235 WARSZAWA|ul. Równoległa 4A, 02-235, Warszawa|||Confirmed|
+239839|XPO LOGISTICS (NORBERT DENTRESSANGLE) UNITED KINGDOM|UK0000000000||original|GB||||Greenfold Way, Leigh Commerce Park, WN7 3XJ, Leigh|||Unresolved|No VAT: placeholder
+230536|Pekaes Sp z. o.o.|PL5270104717|PL5270104717|original|PL|Yes|GEODIS ROAD NETWORK SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|SPEDYCYJNA 1, 05-870 BŁONIE|ul. Spedycyjna 1, 05-870, Błonie|||Confirmed|
+224437|IMPERIAL Logistics & Services GmbH|DE 811 168499|DE811168499|original|DE|Yes|N/A|N/A|Schifferstr. 26, 47059, Duisburg|||Confirmed|
+233644|pfenning logistics|||original|DE||||Daimlerstraße 4, 68542, Heddesheim|||Unresolved|No VAT: missing
+228031|ARCESE TRASPORTI S.P.A.|122680226|IT122680226|original|IT||||VIA ALDO MORO, 95, 38062, ARCO (TN)|||Unresolved|
+228684|ECS European Containers NV|BE0435131508|BE0435131508|original|BE|Yes|NV ECS EUROPEAN CONTAINERS|Baron de Maerelaan 155, 8380 Brugge|Karveelstraat 3, 8380, Zeebrugge|||Confirmed|
+227703|DHL Freight France|||original|FR||||19, boulevard du Courcerin ZI Lognes Pariest, 77312, Marne la Vallée Cedex 2|||Unresolved|No VAT: missing
+223624|Waberer's International Zrt.|HU17781578|HU17781578|original|HU|Yes|Áfa csoport / VAT Group (Az áfa csoport tagjai lekérdezhetőek: / Members of the VAT group can be checked on: https://nav.gov.hu/adatbazisok/adatbleker/csoportos_afaalanyok)|NAGYKOROSI ÚT 351 1239 BUDAPEST|Nagykörösi út 351., 1239, Budapest|||Confirmed|
+228119|SKAT TRANSPORT SP. Z O.O. SP. K.|PL 5851356886|PL5851356886|original|PL|Yes|SKAT TRANSPORT PROSTA SPÓŁKA AKCYJNA|JULIUSZA SŁOWACKIEGO 199, 80-298 GDAŃSK|SŁOWACKIEGO 199, 80-298, GDAŃSK|||Confirmed|
+226977|P.H.U.S EXPORT-IMPORT "TRANSPIL-SPEDITION"|PL7670003116|PL7670003116|original|PL|Yes|WALDEMAR BOCHEŃSKI|SKÓRKA , BRZOZOWA 2, 77-430 KRAJENKA|Brzozowa 2, 77430, Krajenka,Skórka|||Confirmed|
+241761|MAGTRANS Sp. z o. o.|PL6551430917|PL6551430917|original|PL|Yes|'MAGTRANS' SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|BOHATERÓW WARSZAWY 116, 28-100 BUSKO-ZDRÓJ|Bohaterow Warszawy 116, 28-100, Busko-Zdroj|||Confirmed|
+322784|CH Robinson FR-Caen|FR43322939265|FR43322939265|original|FR|Yes|SAS C.H ROBINSON FRANCE|BP 58321, 165 AV DU BOIS DE LA PIE, 95700 ROISSY EN FRANCE|6 RUE DU COLONEL REMY, 14000, CAEN|||Confirmed|
+302679|REGESTA S.A.|6621004747|PL6621004747|original|PL|Yes|REGESTA SPÓŁKA AKCYJNA|NOWOWIEJSKA 52A, 28-400 PIŃCZÓW|NOWOWIEJSKA 52A, 28-400, Pińczów|||Confirmed|
+230296|Gopet Trans EOOD|BG831689341|BG831689341|original|BG|Yes|ГОПЕТ ТРАНС - ЕООД|ул. Вега  №7 обл.СОФИЯ, с.КАЗИЧЕНЕ 1532|Kazichene, Bivsh Stopanski dvor, Skladova Baza GOPET LOGISTICS, 1532, SOFIA|||Confirmed|
+NULL|GEFCO|||original|FR||||9 bld kennedy, 25000, BESANCON|||Unresolved|No VAT: missing
+237885|Devnak Nakliyat|2940036980|TR2940036980|original|TR|N/A (non-EU)|||Merkez Mahallesi Bahçeler Cad. No:3, 34540, İstanbul|||Non-EU|
+241951|Raben Trans European Germany GmbH|DE 200207156|DE200207156|original|DE|No|||Regioparkring 8, 41199, Mönchengladbach|||Unresolved|
+230574|FIRMA TRANSPORTOWO SPEDYCYJNO HANDLOWA MIELCZAREK ANDRZEJ|PL8290001407|PL8290001407|original|PL|Yes|ANDRZEJ MIELCZAREK|WILCZA 25, 98-220 ZDUŃSKA WOLA|WILCZA 25, 98-220, ZDUŃSKA WOLA|||Confirmed|
+228717|P.W. Podkowa Sp. z o.o.|||original|PL||||al. Krakowska 51, 5551, Mroków|||Unresolved|No VAT: missing
+316916|HILAL TRANS ULUSLARARASI TASIMACILIK ITH. IHR.TURIZM VE TİC. LTD.STİ|4630004323|TR4630004323|original|TR|N/A (non-EU)|||İnonu Mah. Kayisdagi Cad. No: 282, Atasehir, 34755, istanbul|||Non-EU|
+302772|Geodis United Kingdom Ltd|||original|GB||||Coronation Road, HP12 3TA, High Wycombe|||Unresolved|No VAT: missing
+230364|DELAMODE ROMANIA|RO6322498|RO6322498|original|RO|Yes|DELAMODE ROMANIA SRL|MUNICIPIUL  BUCUREŞTI, SECTOR 6 00000 BLD. TIMIŞOARA Nr. 4A Et. 1|B-dul Timisoara, Nr. 111 - 115, Sector 6, 61327, Bukarest|||Confirmed|
+237312|CAT LC Portugal|PT 506 906 612|PT506906612|original|PT|Yes|CAT LC AFRETAMENTOS E LOGISTICA CARGO UNIPESSOAL LDA|URBANIZAÇÃO DO PASSIL LOTE 93 A RUA DO VALE DA MAÇAROCA N 34, 7, ALCOCHETE, 2890-182 ALCOCHETE|Quinta da Marqueza 1, Herdade Quinta da Torre, Vila Amélia, Armazém 1, Fracção 2, 2950-678, Quinta do Anjo|||Confirmed|
+227683|CONEXTRANS  I.F.F.  S.A.  (A.G.)|EL095349047|EL095349047|original|GR|Yes|CONEXTRANS ΑΝΩΝΥΜΗ ΕΤΑΙΡΙΑ ΔΙΕΘΝΩΝ ΚΑΙ ΕΘΝΙΚΩΝ ΜΕΤΑΦΟΡΩΝ  CONEXTRANS ΑΕ|ΘΕΡΜΗ ΑΡΙΘΝΟΣ  ΑΓΡΟΤΕΜ 51 0         57001 - ΘΕΡΜΗ|12, Str. Lachanagoras, 54628, THESSALONIKI|||Confirmed|
+239887|MacAndrews GmbH|||original|GB||||75 King William Street, EC4N 7BE, LONDON|||Unresolved|No VAT: missing
+233639|Transport H. Essers & Zonen Nv|BE 0401.296.720|BE0401296720|original|BE|Yes|NV HENRI ESSERS EN ZONEN INTERNATIONAAL TRANSPORT|Transportlaan 4, 3600 Genk|Transportlaan 4, 3600, genk|||Confirmed|
+238494|GT-Trans Polska Sp. z o.o.|PL0000000000||original|PL||||Przejazdowa, 18, 5800, Pruszkow|||Unresolved|No VAT: placeholder
+224932|Gartner Intertrans Hungária Kft.|HU10457812|HU10457812|original|HU|Yes|GARTNER INTERTRANS HUNGÁRIA NEMZETKÖZI FUV.,SZÁLLITMÁNYOZÁSI KFT.|SPEDITOR UTCA 1. 8900 ZALAEGERSZEG|Speditor u. 1., 8900, Zalaegerszeg|||Confirmed|
+229121|DARTOM SP. Z O.O.|PL8380000966|PL8380000966|original|PL|Yes|DARTOM SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|BAŁTYCKA 50, 05-825 GRODZISK MAZOWIECKI|BAŁTYCKA 50, 05-825, GRODZISK MAZOWIECKI|||Confirmed|
+221926|HEMMERLIN SA|FR 11399514611|FR11399514611|original|FR|Yes|SAS HEMMERLIN|12 RUE DES CEVENNES, 68390 SAUSHEIM|12, rue des Cévennes, 68390, Sausheim|||Confirmed|
+230955|FM Polska Sp. z o. o.|PL8381000827|PL8381000827|original|PL|Yes|FM POLSKA SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|TARCZYŃSKA 111A, 96-320 MSZCZONÓW|Ługowa 30, 96-320, Mszczonów|||Confirmed|
+231137|Girteka Logistics Ltd|LT100005407518|LT100005407518|original|LT|Yes|EVERWEST UAB|Laisvės pr. 36, Vilniaus m., Vilniaus m. sav.|Kuprinoniskes vlg, 13279, Vilnius region|||Confirmed|
+258468|EST Contracts BV - Istanbul branch|||original|NL||||Teleportboulevard 120, 1043 EJ, Amsterdam|||Unresolved|No VAT: missing
+230869|Frode laursen|DK0000000000||original|DK||||vittenvej 90, 8382, hinnerup|||Unresolved|No VAT: placeholder
+229592|Transforwarding International Sp. z o.o.|||original|PL||||Na Skraju 73A, 05-090, Raszyn|||Unresolved|No VAT: missing
+230876|CONTAINERSHIPS PLC|FI08183585|FI08183585|original|FI|No|||Mannerheimintie 15a, 260, Helsinki|||Unresolved|
+230935|DHL Express Portugal Lda.|PT0000000000||original|PT||||Urbanização do Passil, Lote 93 A, Passil, 2890, Alcochete|||Unresolved|No VAT: placeholder
+231183|EST Contracts BV - Lyon branch|||original|FR||||Teleportboulevard 120, 1043EJ, Amsterdam|||Unresolved|No VAT: missing
+229564|EST Contracts BV - Budapest branch|NL811514274|NL811514274|original|HU||||Teleportboulevard 120, 1043 EJ, Amsterdam|||Unresolved|
+233875|EST Poland sp. z o.o. - branch 1|NL811514274B01|NL811514274B01|original|PL|See suggestions|||Łucka 9, 00-842, Warszawa|||Unresolved|
+244609|A. T. TROTA, S.A.|ESA25038142|ESA25038142|original|ES|Yes|N/A|N/A|CIM LLEIDA VIAL E, PARCELA 17, 25190, LLEIDA|||Confirmed|
+341645|Luís Simões Logística Integrada, S.A.|PT-500289050|PT500289050|original|PT|Yes|LUÍS SIMÕES LOGÍSTICA INTEGRADA, S.A.|MONINHOS, LOURES, 2670-501 LOURES|Moninhos, Apartado 41, 2671-951, Loures|||Confirmed|
+258676|transportes J. CARRION|A-04014635|ESA04014635|original|ES|Yes|N/A|N/A|C/PABLO PICASSO, 1, 4230, HUERCAL DE ALMERIA|||Confirmed|
+336195|GEFCO Deutschland GmbH|DE811122082|DE811122082|original|DE|Yes|N/A|N/A|Kurhessenstraße 13, 64546, Mörfelden-Walldorf|||Confirmed|
+241914|ERONTRANS SP. Z O. O.|PL5890011743|PL5890011743|original|PL|Yes|ERONTRANS SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|GRUNWALDZKA 64B, 83-000 PRUSZCZ GDAŃSKI|Grunwaldzka 64b, PL 83-000, Pruszcz Gdanski|||Confirmed|
+260712|GEFCO ITALIA SPA|||original|IT||||VIA PALIZZI 89, 20157, MILANO|||Unresolved|No VAT: missing
+257414|Transportes Pascoal|PT0000000000||original|PT||||Santa Luzia, 3050-106, Coimbra Norte|||Unresolved|No VAT: placeholder
+235114|MÜLLER TRANSPORTE GmbH|ATU 194 32 905|ATU19432905|original|AT|Yes|Müller BeteiligungsverwaltungsGmbH|Palmersstraße 10, AT-2351 Wiener Neudorf|Palmersstrasse 10, 2351, WIENER NEUDORF|||Confirmed|
+270235|H. Essers Transport Company Nederland BV|||original|NL||||J.F. Kennedylaan 42, 5555 XD, Valkenswaard|||Unresolved|No VAT: missing
+336720|ITF Polska Sp. z o.o.|PL1181733941|PL1181733941|original|PL|No|||Warszawska 109/6, 05-092, Lomianki|||Unresolved|
+263360|ABC Czepczynski Spolka z o.o. Sp.k.|PL5951442504|PL5951442504|original|PL|Yes|ABC CZEPCZYŃSKI SP. Z O.O. SPÓŁKA KOMANDYTOWA|WIGURY 20, 64-400 MIĘDZYCHÓD|Wigury 20, 64400, Międzychód|||Confirmed|
+233811|VAN CARGO S.A.|PL5242125771|PL5242125771|original|PL|Yes|VAN CARGO SPÓŁKA AKCYJNA|PRZECŁAWSKA 8, 03-879 WARSZAWA|PRZECLAWSKA 8, 03-879, WARSAW|||Confirmed|
+234810|Schenker Sp z o.o.|||original|PL||||Ordona 2a, 1237, Warszawa|||Unresolved|No VAT: missing
+244040|Hellmann Worldwide Logistics Polska Sp.z o.o sp. k.|PL1230005823|PL1230005823|original|PL|Yes|HELLMANN WORLDWIDE LOGISTICS POLSKA SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ SPÓŁKA KOMANDYTOWA|ALEJA KRAKOWSKA 61, 02-183 WARSZAWA|Sokołowska 10, 05-090, Raszyn|||Confirmed|
+339773|Vesta Ukraine|||original|UA||||Moscow p-t. 6, of 505, 4073, Kiev|||Non-EU|No VAT: missing
+342148|DHL EXPRESS SP. Z O.O.|PL0000000000||original|PL||||OSMAŃSKA 2, 2823, WARSZAWA|||Unresolved|No VAT: placeholder
+234204|TARGOR-TRUCK SP. Z O.O.|7582045405|PL7582045405|original|PL|Yes|"TARGOR-TRUCK" SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|ŁAWY 97, 07-411 RZEKUŃ|ŁAWY 97, 07-411, RZEKUŃ|||Confirmed|
+308816|Ekol Logistics|TR0000000000||original|TR||||Ekol Caddesi 2, Sultanbeyli, 34935, İstanbul|||Non-EU|No VAT: placeholder
+322241|Tradecor s.r.l.|IT 00 160 120 266|IT05160120266|corrected|IT|Yes (corrected)|GERMANCARS SRL|VIA JACOPO MONICO 2 , 31033 CASTELFRANCO VENETO TV|Via Lucia Frischin 1, 39100, Bolzano (BZ)|||To be verified|Corrected from IT00160120266
+242116|DHL Freight Belgium nv|BE0401264551|BE0401264551|original|BE|Yes|NV DHL FREIGHT (BELGIUM)|Brandekensweg 2, 2627 Schelle|Eppegemsesteenweg 31 - 33, 1850, Grimbergen|||Confirmed|
+326071|MANVESTA|LT582970113|LT582970113|original|LT|Yes|UAB "Manvesta"|P. Paulaičio g. 13B, Jurbarko m., Jurbarko miesto sen., Jurbarko r. sav.|P. Paulaicio str. 13B, 74111, Jurbarkas|||Confirmed|
+260224|CAMPILLO PALMERA SL|ESB73783003|ESB73783003|original|ES|Yes|N/A|N/A|CTRA MADRID KM 373, P I LA SERRETA, 30500, MOLINA DE SEGURA - MURCIA|||Confirmed|
+256443|ATC CARGO SA|||original|PL||||Polska 13A, 81-339, Gdynia|||Unresolved|No VAT: missing
+243850|Bei-Trans|||original|UA||||Junakiva,9, Генерала Юнакива, 9, 79039, Lviv|||Non-EU|No VAT: missing
+265117|DHL Global Forwarding (Italy) S.p.A. – Div. Freight|||original|IT||||Via delle Industrie 1, 20060, Pozzuolo Martesana|||Unresolved|No VAT: missing
+233418|Patinter España S.L|PT500212848|PT500212848|original|ES|Yes|PATINTER PORTUGUESA AUTOMOVEIS TRANSPORTADORES SA|ESTRADA NACONAL 16 KM 106 100 FAGILDE, FORNOS DE MACEIRA DÂO, 3530-070 FORNOS DE MACEIRA DAO|Poligono Ind. Okiturri, 1207, San Roman de San Roman|||Confirmed|
+228639|CODOGNOTTO ITALIA SPA|IT00474360310|IT00474360310|original|IT|Yes|CODOGNOTTO ITALIA S.P.A.|VIA CALNUOVA 18 , 31040 SALGAREDA TV|Via Calnuova 18/20., 31040, Salgareda|||Confirmed|
+231501|FIDEL SRL|IT04434190288|IT04434190288|original|IT|Yes|FIDEL S.R.L. IN LIQUIDAZIONE|VIA NEWTON 10 , 35028 PIOVE DI SACCO PD|UGO FOSCOLO,08, 35131, PADOVA|||Confirmed|
+241753|TORELLO TRASPORTI SRL|1897330641|IT1897330641|original|IT||||G.MARCONI, 251, 83025, MONTORO INFERIORE|||Unresolved|
+225404|Raben Transport|PL7810020506|PL7810020506|original|PL|Yes|RABEN TRANSPORT SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|POZNAŃSKA 71, 62-023 GĄDKI|71 Poznanska, 62023, Gadki|||Confirmed|
+229245|AMBROGIO TRASPORTI SPA|||original|IT||||tognasca 5, 21013, Gallarate|||Unresolved|No VAT: missing
+236111|Transportes Broliveira, Lda|PT500425353|PT500425353|original|PT|Yes|TRANSPORTES BROLIVEIRA LDA|RUA DAS AREIAS N 17 AREIAS GONDEMARIA, GONDEMARIA, 2490-124 GONDEMARIA|Estrada de Ourém nº15, Areias, 2490-124, Gondemaria (Ourém)|||Confirmed|
+234562|WITRANS Izak, Wenerski Sp. jawna|||original|PL||||Plocka 2, 05-825, Grodzisk Mazowiecki|||Unresolved|No VAT: missing
+229275|VILLART LOGISTIC S.L.|ESB25479726|ESB25479726|original|ES|Yes|N/A|N/A|C/ BARCELONA, 25600, BALAGUER|||Confirmed|
+293035|Ibero Linhas - Transportes, Lda. (as agents for WEC LINES)|500361703|PT500361703|original|PT|Yes|IBERO LINHAS TRANSPORTES LDA|RUA DO PROGRESSO 471 3, PERAFITA, 4455-533 PERAFITA|Urbanização da Matinha, Rua 2, Edificio Verde, 2º Esquerdo, 1950-073, Lisboa|||Confirmed|
+237766|Lafante Kamil Stańczak|PL5252341571|PL5252341571|original|PL|Yes|KAMIL STAŃCZAK|WARSZAWA , AL. SOLIDARNOŚCI 66 M89, 00-240|Aleja Solidarności 66/89, 00-240, Warszawa|||Confirmed|
+250619|Van Steenbergen Transport Arendonk|BE0404199394|BE0404199394|original|BE|Yes|BVBA Transport Arendonk|Hoge Mauw 210, 2370 Arendonk|Hoge Mauw 210, 2370, Arendonk|||Confirmed|
+261972|Gefco Tasimacilik ve Lojistik A.S.|||original|TR||||Kayisdagi Cad. Karaman Ciftlik Yolu Kar, 34752, Icerenköy - Istanbul|||Non-EU|No VAT: missing
+200019|Schenker Deutschland AG|||original|DE||||Feineisenstraße 4, 44339, Dortmund|||Unresolved|No VAT: missing
+253686|Troyka International Transport & Trade Inc.|8590062681|TR8590062681|original|TR|N/A (non-EU)|||YENIBOSNA MER. MAH.BASIN EKSPRES YOLU CEMAL ULUSOY CD.SHT, 34730, ISTANBUL|||Non-EU|
+221780|Unterer GesmbH|AT0000000000||original|AT||||Luna 32, 6250, Kundl|||Unresolved|No VAT: placeholder
+246963|NOLAN TRANSPORT|IE4571931W|IE4571931W|original|IE|Yes|ROADTEAM LOGISTICS SOLUTIONS UNLIMITED COMPANY|NOLAN TRANSPORT, OAKLANDS, NEW ROSS, CO WEXFORD|OAKLANDS, NEW ROSS, 51, CO WEXFORD|||Confirmed|
+233377|Magnus Logistics, UAB|LT10001806917|LT10001806917|original|LT||||Naugarduko str. 55A, 3204, Vilnius|||Unresolved|
+234594|Trans-Logistic Dębica|PL8722095735|PL8722095735|original|PL|Yes|PIOTR SZCZERBIŃSKI|ZAWIERZBIE 21E, 39-204|Fabryczna 12, 39-200, Debica|||Confirmed|
+283841|VISLINE Sp.zo.o|PL5862232082|PL5862232082|original|PL|Yes|VISLINE SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|RDESTOWA 160, 81-577 GDYNIA|Siewna 7, 81-574, Gdynia|||Confirmed|
+235220|STALKO Przybysz i Wspólnicy Spółka Jawna|PL0000000000||original|PL||||PONIATOWSKIEGO, 05-220, ZIELONKA|||Unresolved|No VAT: placeholder
+235149|BTG Feldberg & Sohn GmbH & Co. KG|DE 170014163|DE170014163|original|DE|Yes|N/A|N/A|Wüppings Weide 1, 46395, Bocholt|||Confirmed|
+247138|Codognotto Austria GmbH|||original|AT||||Lederergasse 35/12, 1080, Wien|||Unresolved|No VAT: missing
+244718|TRANS ITALIA SRL|IT02032300655|IT02032300655|original|IT|Yes|TRANS ITALIA S.P.A.|PIAZZA MARTINEZ 5 , 84085 MERCATO SAN SEVERINO SA|PIAZZA MARTINEZ ,05, 84085, MERCATO S.SEVERINO|||Confirmed|
+251312|Gefco United Kingdom|GB 272369149|GB272369149|original|GB|Yes|STELLANTIS UK LIMITED|PINLEY HOUSE, 2 SUNBEAM WAY, COVENTRY, WEST MIDLANDS, CV3 1ND, GB|376-378 Chiswick High Road, Chiswick,, W4 5TF, London|||Confirmed|
+305901|Transport Gapiński Sp. z o.o. Sp. k.|PL7661997146|PL7661997146|original|PL|Yes|TRANSPORT GAPIŃSKI SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ SPÓŁKA KOMANDYTOWA|SKOCKA 20, 62-100 WĄGROWIEC|Skocka 20, 62-100, Wągrowiec|||Confirmed|
+235502|XPO LOGISTICS (NORBERT DENTRESSANGLE) HIGH CUBE|FR0000000000||original|FR||||Z.I.  Rue des Moines, 2203, SOISSONS|||Unresolved|No VAT: placeholder
+291017|Borusan Lojistik|||original|TR||||YALÇIN KOREŞ CAD. NO:22, 34303, İSTANBUL|||Non-EU|No VAT: missing
+238008|J&S Speed Kft|HU 12939848|HU12939848|original|HU|Yes|J & S SPEED FUVAROZÓ KORLÁTOLT FELELŐSSÉGŰ TÁRSASÁG|AGOSTYANI ÚT 91 2890 TATA|Agostyáni út 91., 2890, Tata|||Confirmed|
+234090|Euroafrica Shipping Lines Cyprus Limited|CY10109723K|CY10109723K|original|CY|Yes|EUROAFRICA SHIPPING LINES CYPRUS LIMITED|ΛΕΩΦ. ΜΑΚΑΡΙΟΥ ΙΙΙ 229 MELIZA,FLOOR 4, 3105 ΛΕΜΕΣΟΣ|Arch.Makariou III,229, MELIZA COURT , 4th floor, 3105, Limassol , Cyprus|||Confirmed|
+302996|Geodis Logistics Netherlands B.V.|||original|NL||||Transportcentrum 24, 7547RX, Enschede|||Unresolved|No VAT: missing
+285150|TRANSMEJA JSC|LT451301917|LT451301917|original|LT|Yes|UŽDAROJI AKCINĖ BENDROVĖ "TRANSMĖJA"|Metalistų g. 3, Šiaulių m., Šiaulių m. sav.|Metalistu str. 3, 78109, Siauliai|||Confirmed|
+252367|AGROLOGISTIKA|LT100001123912|LT100001123912|original|LT|Yes|UAB "Agrologistika"|Tilžės g. 60, Klaipėdos m., Klaipėdos m. sav.|Tilžės g. 60T, 91108, Klaipėda|||Confirmed|
+240173|VLANTANA UAB|||original|LT||||Dvaro 1, Gobergiškės k., 96173, Klaipedos raj.|||Unresolved|No VAT: missing
+243440|Hecny Express LLC|7715679440|RU7715679440|original|RU|N/A (non-EU)|||Prishvina, 8, build. 2, 127549, Moscow|||Non-EU|
+306335|Zammler Ukraine Ltd|||original|UA||||Hryhoriia Andriushchenka str.,  4-H (G), 1135, Kyiv|||Non-EU|No VAT: missing
+270154|DHL Global Forwarding Sp. z o.o.|7280257292|PL7280257292|original|PL|Yes|'DHL GLOBAL FORWARDING' SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|KRAKOWIAKÓW 44, 02-255 WARSZAWA|ul. Krakowiaków 44, 02-255, Warszawa|||Confirmed|
+300793|SIA GEFCO BALTIC|LV50003993021|LV50003993021|original|LV|Yes|SIA "CEVA Logistics Baltic"|Vesetas iela 7, Rīga, LV-1013|P. BRIEZA 15, 1010, Riga|||Confirmed|
+260916|Alba-Zöchling|HU0000000000||original|HU||||Holland Fasor 9, 8000, Székesfehérvár|||Unresolved|No VAT: placeholder
+319704|CMA CGM UK|GB802298146|GB802298146|original|GB|Yes|MACANDREWS & CO LTD|6TH FLOOR, 75 KING WILLIAM STREET, LONDON, EC4N 7BE, GB|Princes Parade, L3 1BG, liverpool|||Confirmed|
+243478|Fracht FWO Polska Sp. z o.o.|PL7542735115|PL7542735115|original|PL|Yes|FRACHT FWO POLSKA SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|INFLANCKA 4A, 00-189 WARSZAWA|ul. Inflancka 4C, 00-189, Warszawa|||Confirmed|
+306324|GEFCO PORTUGAL TRANSITÁRIOS LDA|||original|PT||||Rua Dr.ºAntónio Loureiro Borges, Edifício Arquiparque I, 1º Piso, 1499 -016, Miraflores|||Unresolved|No VAT: missing
+231033|GEFCO Magyarorszag Kft.|||original|HU||||Bocskai út 134-146, 1113, Budapest|||Unresolved|No VAT: missing
+303710|WEC Lines|||original|NL||||Albert Plesmanweg 59, 3088 GB, Rotterdam|||Unresolved|No VAT: missing
+230849|Waberer's Polska Sp. z o.o.|PL7772306116|PL7772306116|original|PL|No|||Kijowska 1, 03-738, Warszawa|||Unresolved|
+294768|LOGİTRANS LOJISTİK VE TAŞIMACILIK ORG.LTD.ŞTİ|||original|TR||||ORHANLI MAH. DERVIS CADDESI NO:24 FLOOR:1 OFFICE:4A-B, TUZLA-İSTANBUL, 34000, İSTANBUL|||Non-EU|No VAT: missing
+242853|A.M.P. Wieczorek Sp. z o.o.|||original|PL||||Mazowiecka, 79, 05-311, Dębe Wielkie|||Unresolved|No VAT: missing
+241368|SPEDPARTNER|||original|PL||||Leszcze 15, 28-400, PINCZOW|||Unresolved|No VAT: missing
+304435|Bollore Logistics UK Ltd.|GB 432 3813 73|GB432381373|original|GB|Yes|CEVA AIR & OCEAN UK LIMITED|CEVA HOUSE, EXCELSIOR ROAD, ASHBY DE LA ZOUCH, LEICESTERSHIRE, LE65 9BA, GB|Unit 1 Skyline, Great South West Road, TW14 8NT, London Heathrow|||Confirmed|
+280887|Stellar-Logistic|36591814|UA36591814|original|UA|N/A (non-EU)|||48 Degtyarivs`ka Str., 4112, Kyiv|||Non-EU|
+308952|ID LOGISTICS POLSKA S.A.|5252425204|PL5252425204|original|PL|Yes|ID LOGISTICS POLSKA SPÓŁKA AKCYJNA|WALENTEGO ROŹDZIEŃSKIEGO 91, 40-203 KATOWICE|Al. Roździeńskiego 91, 40-203, Katowice|||Confirmed|
+229071|GONDRAND|||original|FR||||13 RUE CURIE, BP 71339, 68013, COLMAR CEDEX|||Unresolved|No VAT: missing
+247108|Croome LTD|||original|GB||||Cullet Drive, ME11 5JS, Queenborough, Kent|||Unresolved|No VAT: missing
+268421|Yusen Logistics UK Ltd|||original|GB||||Grange Park 3, Cheaney Road, NN4 5FB, Northampton|||Unresolved|No VAT: missing
+268784|Codognotto Polska Sp. Z.o.o.|PL7251959614|PL7251959614|original|PL|Yes|CODOGNOTTO POLSKA SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|AL. TADEUSZA KOŚCIUSZKI 80/82 MP.VII, 90-437 ŁÓDŹ|Kościuszki 80/82, 90-437, Lodz|||Confirmed|
+270644|smet srl|IT00316190651|IT00316190651|original|IT|Yes|SMET - S.P.A.|VIA VELLETRI 49 , 00198 ROMA RM|via tiberio claudio felice 48, 84131, salerno|||Confirmed|
+258486|DHL FREIGHT SPAIN SL|||original|ES||||C/ Rumania, 4, Poligono Industrial de Coslada (PAL), 28221, Madrid|||Unresolved|No VAT: missing
+251083|Okura Uluslararası Tasımacılık Iletisim Tic. ve San. A.Ş|6400108811|TR6400108811|original|TR|N/A (non-EU)|||Talatpaşa Cad., Menekşe sokak no:15/1, 34590, Istanbul|||Non-EU|
+246337|Friday Spółka z ograniczoną odpowiedzialnością  Spółka komandytowa|PL0000000000||original|PL||||ul. Ryżowa 33A, 02-495, Warszawa|||Unresolved|No VAT: placeholder
+306978|PCC Intermodal|PL7491968481|PL7491968481|original|PL|Yes|PCC INTERMODAL SPÓŁKA AKCYJNA|HUTNICZA 16, 81-061 GDYNIA|ul. Hutnicza 16, 81-061, Gdynia|||Confirmed|
+286095|Borchard Lines Ltd|||original|GB||||10 Chiswell Street, EC1Y4XY, London|||Unresolved|No VAT: missing
+337986|Transcurbel-2 S.A.|A58869470|ESA58869470|original|ES|No|||Ronda Guinardó, nº 52, 8025, Barcelona|||Unresolved|
+251488|ARBA SP. Z O.O.|PL7611452717|PL7611452717|original|PL|Yes|"ARBA" SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|SIERAKOWO 55, 06-300 PRZASNYSZ|SIERAKOWO 55, 06-300, PRZASNYSZ|||Confirmed|
+260906|Marcotran Polska Sp. z o.o.|9691579265|PL9691579265|original|PL|Yes|MARCOTRAN POLSKA SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|POZNAŃSKA 9, 44-120 PYSKOWICE|ul. Poznańska 9, 44-120, Pyskowice|||Confirmed|
+243238|F.lli Dissegna Srl|IT01838650248|IT01838650248|original|IT|Yes|F.LLI DISSEGNA S.R.L.|VIA CA VICO 29 , 36028 ROSSANO VENETO VI|Via Ca' Vico 29, 36028, Rossano Veneto VI|||Confirmed|
+266476|GEFCO Ukraine|UA358940826599|UA358940826599|original|UA|N/A (non-EU)|||110, Zhylyanska, 1032, Kyiv|||Non-EU|
+240088|Luis Simoes Logistica Integrada,s.a.|||original|ES||||Parque Empresarial San Fernando, Av. de Castilla, 28830, San Fernando de Henares, Madrid|||Unresolved|No VAT: missing
+337193|DHL Global Forwarding  Hellas S.A.|||original|GR||||41, Agiou Dimitriou str., 18546, Pireaus|||Unresolved|No VAT: missing
+273352|Scantek LTD Sp. z o. o.|PL1080005217|PL1080005217|original|PL|Yes|'SCANTEK LTD' SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|ŁACIARSKA 28, 50-146 WROCŁAW|Braniborska 38/40, 53-680, Wrocław|||Confirmed|
+261289|Charter Sp. z .o.o.|812-17-66-337|PL8121766337|original|PL|Yes|'CHARTER' SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|GUZOWSKA 35, 96-315 WISKITKI|Urszulin 8, 05-825, Grodzisk Mazowiecki|||Confirmed|
+258750|MGT Transport Krajowy i Międzynarodowy Grycz Mariusz|7621904664|PL7621904664|original|PL|Yes|MARIUSZ GRYCZ|WYSZKÓW , MONTE CASSINO 3, 07-200|Monte Cassino 3, 07-200, Wyszków|||Confirmed|
+258627|Europejskie Centrum Logistyczne Sp. z o.o.|||original|PL||||Ul. Przemysłowa 13B, 35-105, Rzeszów|||Unresolved|No VAT: missing
+258650|NORBERT DENTRESSANGLE LOGISTICS POLAND|||original|PL||||SZYSZKOWA 35/37, 02-285, WARSZAWA|||Unresolved|No VAT: missing
+258985|NTG Road Sp.zo.o.|5272674838|PL5272674838|original|PL|Yes|NTG ROAD SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|MEBLOWA 7, 04-460 WARSZAWA|Chełmżyńska 180, NTG Marki, Katowice, Gdynia, Goleniow, 04-464, Warszawa|||Confirmed|
+300245|LOCKWOOD HAULAGE LTD.|||original|GB||||RIPLEY ROAD, DE56 2JR, AMBERGATE|||Unresolved|No VAT: missing
+262830|LOTOS BALTICA|LT0000000000||original|LT||||Pramones str. 2, 17102, Sacininkai|||Unresolved|No VAT: placeholder
+339552|GEFCO (Suisse) SA|||original|CH||||6 Route des Jeunes, Case postale 1767, 1211, GENEVE|||Non-EU|No VAT: missing
+262730|The Overland Transport & Trading Co Ltd|UK0000000000||original|GB||||High Street, Billinghay, LN4 4BU, Lincoln|||Unresolved|No VAT: placeholder
+272106|AEROTRANS PIOTR CYRSON|||original|PL||||WRZOSOWA 12, 5101, NOWY DWÓR MAZOWIECKI|||Unresolved|No VAT: missing
+283525|C.H.ROBINSON PL-Warsaw 2|NL|NL|original|PL||||Aleja Jana Pawła II 29, 00-867, Warszawa|||Unresolved|
+230638|Simple Way Sp z o.o sp.k|||original|PL||||Wigury 20, 64-400, Miedzychod|||Unresolved|No VAT: missing
+260208|TRANSINTERTOP LTD|HU11475165|HU11475165|original|HU|No|||TOPART 1, 2851, KÖRNYE|||Unresolved|
+334308|XPO LOGISTICS_ Transport Solution FTL PACKED France|||original|FR||||1208, ROUTE DES PIERRELLES - BP 93 - BEAUSEMBLANT, 26240, BEAUSEMBLANT|||Unresolved|No VAT: missing
+272915|Hart Logistics sp. z o. o. sp. k.|7792413387|PL7792413387|original|PL|Yes|HART LOGISTICS SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ SPÓŁKA KOMANDYTOWA|ŚWIERZAWSKA 10, 60-321 POZNAŃ|Świerzawska 10, 60-321, Poznań|||Confirmed|
+244904|GEFCO France|||original|FR||||Rue des Lilas d Espagne, 92402, Courbevoie Cedex|||Unresolved|No VAT: missing
+262232|Geis PL Sp. z o.o.|||original|PL||||Pieńki 7, 95-010, Stryków|||Unresolved|No VAT: missing
+368458|Locotranssped Sp. Z O.O.|7831682017|PL7831682017|original|PL|Yes|LOCOTRANSSPED SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ W UPADŁOŚCI|BÓŻNICZA 15 M6, 61-751 POZNAŃ|Ul.Arcybiskupa A. Baraniaka 88c Bud.B, 61-131, Poznan|||Confirmed|
+265297|Express Logistic Sp.z o.o.|PL1231277587|PL1231277587|original|PL|Yes|EXPRESS LOGISTIC SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|EUGENIUSZA ROMERA 10 MB4, 02-784 WARSZAWA|Dunikowskiego 24, 5501, Piaseczno|||Confirmed|
+273747|Aro-Trans Rafał Bartosz Kosztowny Spedycja i Produkcja Mebli|||original|PL||||Ogrody 29/32, 85-870, Bydgoszcz|||Unresolved|No VAT: missing
+269078|C&T, a.s.|2022259723|SK2022259723|original|SK|Yes|C&T, a.s.|Hurbanova 5777/14, 97401 Banská Bystrica, Slovensko|Partizanska cesta 2733/97, 97401, Banska Bystrica|||Confirmed|
+292757|KLog Logística SA|PT0000000000||original|PT||||Rua de Castelões Centro, 260 - Fajozes, 4485-065, Vila do Conde|||Unresolved|No VAT: placeholder
+236276|FIRMA TRANSPORTOWO-HANDLOWA EDWARD OSICA|PL8221005023|PL8221005023|original|PL|Yes|EDWARD OSICA|ZACHODNIA 34, 05-300 MIŃSK MAZOWIECKI|ZACHODNIA 34, 05-300, MIŃSK MAZOWIECKI|||Confirmed|
+234132|CMA CGM Polska Sp. z o.o.|GB802298146|GB802298146|original|PL|Yes|MACANDREWS & CO LTD|6TH FLOOR, 75 KING WILLIAM STREET, LONDON, EC4N 7BE, GB|Polska 13 A, 81-339, Gdynia|||Confirmed|
+276509|Sokołów-Logistyka|PL0000000000||original|PL||||Aleja 550-lecia 2, 08-300, Sokołów Podlaski|||Unresolved|No VAT: placeholder
+275463|NOSTA Logistik Sp. z.o.o.|5981632563|PL5981632563|original|PL|Yes|NOSTA LOGISTIK SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|AL. NIEPODLEGŁOŚCI 781, 81-805 SOPOT|Hynka 32, 80-465, Gdańsk|||Confirmed|
+500975|P&O Ferrymasters Ltd.|NL809172811B01|NL809172811B01|original|NL|See suggestions|||PO Box 1036, 3180 AA, Rozenburg|||Unresolved|
+264024|Orange Logistics Sp. z o.o.|PL6342773808|PL6342773808|original|PL|No|||Roździeńskiego 205, 40-203, Katowice|||Unresolved|
+287378|Rosteka UAB|LT100004761617|LT100004761617|original|LT|Yes|UAB "ROSTEKA"|Darbo g. 9, Kauno m., Kauno m. sav.|Darbo str 9, 52102, Kaunas|||Confirmed|
+335085|Ekol Spain|||original|ES||||Pol. Ind. Modula – Coslada II Avda de la Cañada, 62 Nave 1 Modulo, 28820, Madrid|||Unresolved|No VAT: missing
+293151|PORTMANN LOGISTICS POLSKA SP. Z.O.O|PL 7811775773|PL7811775773|original|PL|Yes|PORTMANN LOGISTIC POLSKA SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|JASNA 14/16A, 00-041 WARSZAWA|DERENIOWA 2 LOK 7, 02-776, WARSZAWA|||Confirmed|
+257579|Rail Cargo Logistics - Poland Sp. z o.o.|||original|PL||||Wąwozowa 11, 02-796, Warszawa|||Unresolved|No VAT: missing
+260701|VGL Road Sp. z o.o.|||original|PL||||Al. Zwycięstwa 237/7, 81-521, Gdynia|||Unresolved|No VAT: missing
+227584|GEFCO Deutschland GmbH|DE811122082|DE811122082|original|DE|Yes|N/A|N/A|Industriestr. 80, 42327, Wuppertal|||Confirmed|
+254299|GEFCO Deutschland GmbH|DE811122082|DE811122082|original|DE|Yes|N/A|N/A|Märkische Allee 65, 14979, Großbeeren|||Confirmed|
+281136|BRAXSTONE KRAWCZYK, RENE SP. JAWNA|PL1182095709|PL1182095709|original|PL|No|||KOLEJOWA 204A, KIEŁPIN, 05-092, ŁOMIANKI|||Unresolved|
+272701|F.H.P. MAG-MAR ALICJA MATUSIK|PL8240000989|PL8240000989|original|PL|No|||ALEJA SOLIDARNOŚCI 3, 07-100, WĘGRÓW|||Unresolved|
+332116|Antrans Bis Ireneusz Pacia Sp. k.|6372190299|PL6372190299|original|PL|Yes|"ANTRANS BIS" IRENEUSZ PACIA SPÓŁKA KOMANDYTOWA|WSPÓLNA 1C, 32-300 OLKUSZ|Wspólna 1c, 32-300, Olkusz|||Confirmed|
+261803|DEVEGA SRL|RO26244980|RO26244980|original|RO|Yes|DEVEGA SRL|MUN. ORADEA 410151 STR. BERZEI Nr. 4|4, BERZEI, 410151, ORADEA|||Confirmed|
+227422|ND Polska Sp. z o.o.|PL725-00-13-591|PL7250013591|original|PL|Yes|XPO TRANSPORT SOLUTIONS POLAND SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|CHEMICZNA 5, 65-713 ZIELONA GÓRA|Wólczańska 53, 90-608, Łódź|||Confirmed|
+321388|Frigo-trans|8252102129   8250004747|82521021298250004747|original|PL||||Miedzyrzecka186, 21-400, Łuków|||Unresolved|
+334679|Ekol Logistics Sp. z o.o.|972-125-38-94|PL9721253894|original|PL|Yes|DFDS LOGISTICS SERVICES SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|SKŁADOWA 4, 62-023 KONINKO|Inwestycyjna 8, 41-208, Sosnowiec|||Confirmed|
+286782|Speedbergx Sp. z o.o. Spółka komandytowa|7732475775|PL7732475775|original|PL|No|||P.O.W. 17/216, 97-200, Tomaszów Mazowiecki|||Unresolved|
+284914|ATL EUROPE s.r.o.|CZ25925865|CZ25925865|original|CZ|Yes|ATL EUROPE s.r.o.|Pražská třída 320/8, KUKLENY, 500 04  HRADEC KRÁLOVÉ 4|Hořická 283/22, 500 02, Hradec Králové|||Confirmed|
+287492|BOMAR SP. Z O.O.|PL5342491222|PL5342491222|original|PL|Yes|BOMAR SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|SIEDLIN , WINCENTEGO WITOSA 19, 09-100 PŁOŃSK|UL.WINCENTEGO WITOSA 19, SIEDLIN, 09-100, PŁOŃSK|||Confirmed|
+320606|DHL Global Forwarding|||original|RO||||Costache Negri, 50552, Bucuresti|||Unresolved|No VAT: missing
+374769|BARSAN Global Logistics|||original|PL||||Wita Stwosza 7/427, 40-040, Katowice|||Unresolved|No VAT: missing
+281425|Grupa Transportowa Sp. z o.o.|||original|PL||||Łódzka 30 ab, 97-300, Piotrków Trybunalski|||Unresolved|No VAT: missing
+325764|DHL GLOBAL FORWARDING TASIMACILIK A.S.|TR0000000000||original|TR||||KIBRIS SEHITLERI CAD., no 135/5, 35221, IZMIR|||Non-EU|No VAT: placeholder
+323836|Uniserve Ltd|||original|GB||||Thurrock Park Way, RM187HD, Tilbury|||Unresolved|No VAT: missing
+321472|BEI-TRANS POLSKA Sp. z.o.o|5252549320|PL5252549320|original|PL|Yes|BEI - TRANS POLSKA SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|ALEJA "SOLIDARNOŚCI" 117 M207, 00-140 WARSZAWA|ul.Aleja Solidanosci 117 nr loc207, 00-140, Warszawa|||Confirmed|
+298847|Range-Trans OU|EE202200221063094214|EE202200221063094214|original|EE||||Mustamae tee 5-703, Harju maakond, 10616, Tallinn|||Unresolved|
+302185|Cargo Line/ГК Карго Лайн|||original|BY||||Витебский р-н, М-8, 89-й км, 1А, 211319, Vitebskaya oblast/Витебская область|||Non-EU|No VAT: missing
+262215|DHL FREIGHT SPAIN, S.L|||original|ES||||AVDA. DE ESPIOCA, 64, 46460, VALENCIA|||Unresolved|No VAT: missing
+260692|JASTIM Sp z o.o.|5262499368|PL5262499368|original|PL|Yes|"JASTIM" SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|ALEJE JEROZOLIMSKIE 144, 02-305 WARSZAWA|Al. Jerozlimskie 144, 02-305, Warszawa|||Confirmed|
+296223|AKTRANS TASIMACILIK TİC.SAN.LTD.STİ|420165084|TR420165084|original|TR|N/A (non-EU)|||ATATÜRK CAD.SIDALI İŞHANI  KAT:3/9, 33070, mersin|||Non-EU|
+288977|BFI SP. Z O.O. SP.K.|5862323399|PL5862323399|original|PL|Yes|BFI SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|AL. ZWYCIĘSTWA 173, 81-521 GDYNIA|Aleja Zwycięstwa 173, 81-521, Gdynia|||Confirmed|
+313765|Arsenal Logistic Sp. z o.o.|||original|PL||||Alley Jerozolimskie 85, 02-001, Warsaw|||Unresolved|No VAT: missing
+300152|FERTRANS SPAGNA SL|||original|ES||||Av. Ports D'Europa, 100, 8040, Barcelona|||Unresolved|No VAT: missing
+230460|ECS European Containers NV|BE0435131508|BE0435131508|original|BE|Yes|NV ECS EUROPEAN CONTAINERS|Baron de Maerelaan 155, 8380 Brugge|Karveelstraat 3, 8380, Zeebrugge|||Confirmed|
+251427|MacAndrews & Co Ltd|GB802298146|GB802298146|original|GB|Yes|MACANDREWS & CO LTD|6TH FLOOR, 75 KING WILLIAM STREET, LONDON, EC4N 7BE, GB|12 Princes Parade, Princes Dock, L3 1BG, Liverpool|||Confirmed|
+318021|BARSAN GLOBAL LOGISTIC KFT|||original|HU||||ARADI VERTANUK UTJA 13 FST 5, 9021, GYOR|||Unresolved|No VAT: missing
+282622|TBX SP. Z O.O.|||original|PL||||Szyszkowa 35/37, 02-285, Warszawa|||Unresolved|No VAT: missing
+280700|NAPOLITRANS SRL|||original|IT||||Loc. Pezzagrande, 84025, EBOLI|||Unresolved|No VAT: missing
+290599|ZAMMLER Polska Sp. z o.o.|PL 5252582464|PL5252582464|original|PL|Yes|ZAMMLER POLSKA SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|3 MAJA 8, 05-800 PRUSZKÓW|3 Maja Nr. 8, Millenium Logistic Park, building C7, 05-800, PRUSZKOW|||Confirmed|
+305312|DHL FREIGHT|||original|FR||||28 rue Eugène Hénaff, 69200, Vénissieux|||Unresolved|No VAT: missing
+236381|P.U.T.H. TRANS-POL SP.JAWNA S. KLASZTORNY, Z.DĄBROWSKI|||original|PL||||ul. Kozietulskiego 4a, 96-100, Skierniewice|||Unresolved|No VAT: missing
+286632|FM LOGISTIC IBERICA, S.L.|||original|ES||||C/ BERRIOBIDE, 34, 31013, ANSOAIN|||Unresolved|No VAT: missing
+327392|Linktis sp. z o.o.|PL9512373803|PL9512373803|original|PL|Yes|LINKTIS SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|CZERNIAKOWSKA 87A, 00-718 WARSZAWA|Stępińska 22/30, 00-739, warszawa|||Confirmed|
+308710|VIRADO TRANSPORT LTD|||original|GB||||Lankaster Approach, North Killingholme Industrial Estate, DN40 3JZ, Immingham|||Unresolved|No VAT: missing
+328811|MAERSK LINE|||original|DK||||Esplanaden 50, DK1263, Copenhagen|||Unresolved|No VAT: missing
+334648|BATUINTERNATİONAL LOJİSTİK İÇ VE DIŞ TİCARET ANONİM ŞİRKETİ|150 057 6603 – Atışalanı VD|1500576603–AtışalanıVD|original|TR|N/A (non-EU)|||Oruçreis Mh. Tekstilkent Cd., No:12/A İç Kapı No: 022-023 Atışalanı/Esenler, 34235, İstanbul|||Non-EU|
+312643|Overis Sp.z,o.o.|||original|PL||||Łapiguz 91, 21-400, Łuków|||Unresolved|No VAT: missing
+311846|YILMAZ ULUSLARARASI NAKLİYAT İTH. İHR. SAN. VE TİC. LTD. ŞTİ|||original|TR||||İstiklal Cad., 5204 sok, 33060, Mersin|||Non-EU|No VAT: missing
+313261|ALCOR LOGISTICS Sp. z o.o.|PL5291820117|PL5291820117|original|PL|Yes|ALCOR LOGISTICS SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|T. BAIRDA 36 M60, 05-825 GRODZISK MAZOWIECKI|T. Bairda 36/60, 36/60, 05-825, Grodzisk Mazowiecki|||Confirmed|
+343126|EVEROAD|||original|FR||||24 rue Petrelle, 75002, Paris|||Unresolved|No VAT: missing
+348059|SARP INTERMODAL|||original|TR||||DEREBOYU NO 56, TURKOBA MAH.KAYALAR CAD. NO.10/1, 34356, ISTANBUL|||Non-EU|No VAT: missing
+346723|EXPEDITORS INTERNATIONAL UK LTD|||original|GB||||UNIT 4, SHINE KNOWLEDGE PARK, HU8 7FB, HULL|||Unresolved|No VAT: missing
+305812|GEFCO Greece|||original|GR||||Lampsakou 2, 11528, Athens|||Unresolved|No VAT: missing
+351096|H.Essers & Zonen Internationaal Transport NV (Pharma)|BE 0401 296 720|BE0401296720|original|BE|Yes|NV HENRI ESSERS EN ZONEN INTERNATIONAAL TRANSPORT|Transportlaan 4, 3600 Genk|Transportlaan 4, 3600, Genk|||Confirmed|
+352386|Hopi PL sp z o.o.|5272681413|PL5272681413|original|PL|Yes|HOPI PL POLAND SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|MARCINA KASPRZAKA 29A M917, 01-234 WARSZAWA|Przyokopowa 33, 01-208, Warszawa|||Confirmed|
+354554|ATOM ULUSLARARASI NAKLİYAT VE LOJİSTİK HİZMETLERİ TİC.A.S.|||original|TR||||1476/1 SOKAK KATİPOGLU İS MERKEZİ NO:2 K:2 D:2 ALSANCAK, 35220, İZMİR|||Non-EU|No VAT: missing
+362880|F.H.U Łuczkowski|||original|PL||||Kościelna 5, 34-400, Nowy Targ|||Unresolved|No VAT: missing
+357479|Marvicon SRL|RO34957399|RO34957399|original|RO|Yes|MARVICON SRL|MUN. ORADEA 410554 STR. OGORULUI Nr. 258 Et. 2|Strada Ogorului 258, Et. 2, 410554, Oradea|||Confirmed|
+365199|Containerships - CMA CGM GmbH|||original|DE||||Chilehaus A, Fischertwiete 2, 20095, Hamburg|||Unresolved|No VAT: missing
+365019|RANGE-TRANS SPOLKA Z OGRANICZANA ODPOWIEDZIALNOSCIA|||original|PL||||Matki Teresy z Kalkuty 18, lok.8, 20-538, Lublin|||Unresolved|No VAT: missing
+366132|Uber Freight B.V.|||original|NL||||Mr.Treublaan 7, 1097 DP, Amsterdam|||Unresolved|No VAT: missing
+366806|TRANSPIL-SPEDITION LOGISTICS GROUP SP. Z O.O. SP. KOMANDYTOWA|||original|PL||||Brzozowa 2, 64-917, Skorka|||Unresolved|No VAT: missing
+374048|GT-Trans Faktoring Sp. z o.o.|PL5223051994|PL5223051994|original|PL|No|||85 Al. Jerozolimskie, Unit 21, 02-001, Warsaw|||Unresolved|
+375326|Blackbuck Poland Sp. Z o.o.|PL7010943304|PL7010943304|original|PL|Yes|TRUKKER EUROPE SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ W LIKWIDACJI|KALEŃSKA 5, 04-367 WARSZAWA|Mokotowska 49, 00-542, Warszawa|||Confirmed|
+377350|Range Trans Group OÜ|EE 102138294|EE102138294|original|EE|No|||Pärnu mnt 76-7,, Harju maakond,  Kesklinna linnaosa,, 10131, Tallinn|||Unresolved|
+379056|Luk-Trans Łukasz Bloch|||original|PL||||26A, BLOCHY, 07-210, Długosiodło|||Unresolved|No VAT: missing
+387692|KRAFTTRANS Taurus Sp. z o.o.|5213880950|PL5213880950|original|PL|Yes|KRAFTTRANS TAURUS SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|RADZYMIŃSKA 326 M218, 05-091 ZĄBKI|ul. BARTYCKA, nr 22B, lok. 21A, 00-716, WARSZAWA|||Confirmed|
+391494|DHL Parcel (Switzerland) AG|||original|CH||||Güterstrasse 107, 4133, Pratteln|||Non-EU|No VAT: missing
+302920|F&O Agnieszka Osica-Foltyn|||original|PL||||F&O Agnieszka Osica-Foltyn, 05-300, Mińsk Mazowiecki|||Unresolved|No VAT: missing
+400030|DBK LOGISTICS SP. Z O.O. SP.K.|||original|PL||||Zajęcza 15, 00-351, Warszawa|||Unresolved|No VAT: missing
+400421|Broekman Logistics Sp. z o.o.|||original|PL||||Piekary 6/8, 61-823, Poznań|||Unresolved|No VAT: missing
+400691|sennder Benelux B.V._TC|||original|NL||||Keizersgracht 62-64, 1015 CS, Amsterdam|||Unresolved|No VAT: missing
+399723|LOPEZ & RYDER LOGISTIC S.L.U.|ESB01729920|ESB01729920|original|ES|Yes|N/A|N/A|Miquel Roca i Junyent nº7, local 212, 50011, Zaragoza|||Confirmed|
+313610|SA TORELLO TRASPORTI SRL|||original|FR||||5 RUE DE MALACOMBE, BP 54, 38070, LYON|||Unresolved|No VAT: missing
+412708|FM Logistic - Crépy-en-Valois (FR60)|||original|FR||||rue du Bois de Tillet, BP60224, 60802, Crépy-en-Valois|||Unresolved|No VAT: missing
+413540|Quality Trans Sp.z o.o.|||original|PL||||Tadeusza Kościuszki 38/24, 40-048, Katowice|||Unresolved|No VAT: missing
+423233|GRAMIX Sp. z .o.o.|PL1182153482|PL1182153482|original|PL|Yes|GRAMIX SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ|KOMORÓW 20, 05-085 KOMORÓW|Komorów, 05-085, Kampinos|||Confirmed|
+434944|TSL Wiolmar Marcin Osiński|PL5311529716|PL5311529716|original|PL|Yes|MARCIN OSIŃSKI|BRONINEK 4, 05-190 NASIELSK|Broninek 4, 05-190, Nasielsk|||Confirmed|
+441173|UAB Girteka Europe West|||original|LT||||Laisvės pr. 36, 4340, Vilnius|||Unresolved|No VAT: missing
+442297|Ellerman City Liners|GB398523059|GB398523059|original|GB|Yes|ELLERMAN CITY LINERS LIMITED|8 LLOYD&#x27;S AVENUE, LONDON, EC3N 3EL, GB|133 Hall Lane, RM141AL, Upminster|||Confirmed|
+460334|SAFE SHIPPING SP. Z O.O.|||original|PL||||JANUSZA KORCZAKA 13, 81-473, GDYNIA|||Unresolved|No VAT: missing
+601754|AKBULUT NAK TUR LTD ŞTİ|||original|TR||||içerenköy mah prof dr necmettin erbakan cad no 83 K:2 D:7, 34752, İSTANBUL|||Non-EU|No VAT: missing
+459342|Damco Germany GmbH|||original|DE||||Katharinenstraße 5, 20457, Hamburg|||Unresolved|No VAT: missing
+226386|Unifeeder Germany|||original|DE||||Neuer Dovenhof, Brandstwiete 1, 20457, Hamburg|||Unresolved|No VAT: missing

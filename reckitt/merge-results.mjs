@@ -107,10 +107,11 @@ function mergeResults(sidecarPath, resultsPath, suggestionsPath) {
     merged.push(row);
   }
 
-  // Write enriched TSV
+  // Write enriched TSV to output/
   const dir = dirname(sidecarPath);
   const base = basename(sidecarPath, "-sidecar.json");
-  const outPath = join(dir, `${base}-enriched.tsv`);
+  const outDir = join(dir, "..", "output");
+  const outPath = join(outDir, `${base}-enriched.tsv`);
 
   const esc = (s) => (s ?? "").toString().replace(/\t/g, " ");
   const header = [
