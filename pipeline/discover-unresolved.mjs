@@ -97,12 +97,13 @@ function applyDiscovery(enrichedPath, discoveredPath, jobDir, idColumn) {
 
   console.log(`\n  Apply Discovery`);
   console.log(`  ────────────────`);
-  console.log(`  Updated:    ${updated} rows (VAT discovered, High/Medium confidence)`);
-  console.log(`  Not found:  ${notFound} rows (noted in file)`);
-  console.log(`  Output:     ${outPath}`);
+  console.log(`  Updated:         ${updated} rows (VAT discovered, High/Medium confidence)`);
+  console.log(`  Low confidence:  ${lowConfidence} rows (noted in file, not applied — manual review needed)`);
+  console.log(`  Not found:       ${notFound} rows (noted in file)`);
+  console.log(`  Output:          ${outPath}`);
   console.log();
 
-  return { outPath, updated, notFound };
+  return { outPath, updated, lowConfidence, notFound };
 }
 
 // ─── CLI ────────────────────────────────────────────────────
