@@ -1,0 +1,10 @@
+{
+  "id": "TRANSPOREON ID",
+  "carrier": "Name",
+  "vat": "VAT",
+  "country": "CountryId",
+  "street1": "Street_1",
+  "street2": "Street_2",
+  "zip": "Zip",
+  "city": "Location"
+}
